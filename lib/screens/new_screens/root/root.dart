@@ -1,7 +1,13 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:async';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/cli_commands.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fundz_app/widgets/snackbars.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../controllers/utl_controllers.dart';
 import '../../../helpers/functions.dart';
@@ -23,14 +29,44 @@ class RootHome extends ConsumerStatefulWidget {
 }
 
 class _RootHomeState extends ConsumerState<RootHome> {
+  late StreamSubscription<ConnectivityResult> subscription;
   @override
   void initState() {
     changeBottomBarColor(ref.read(isDarkModeProvider));
     WidgetsBinding.instance.addPostFrameCallback((_) {
-        UtitlityController().loadNotifications(context, ref);
-      initializeData();
+      final transH = AppLocalizations.of(context)!;
+      UtitlityController().loadNotifications(context, ref);
+      subscription = Connectivity()
+          .onConnectivityChanged
+          .listen((ConnectivityResult result) async {
+        if (result == ConnectivityResult.mobile ||
+            result == ConnectivityResult.wifi ||
+            result == ConnectivityResult.ethernet ||
+            result == ConnectivityResult.vpn) {
+          if (await isOnline()) {
+            successSnackBar(
+                title: transH.internet.capitalize(),
+                message: transH.userOnline.capitalize());
+            initializeData();
+          } else {
+            errorSnackBar(
+                title: transH.internet.capitalize(),
+                message: transH.userOffline.capitalize());
+          }
+        } else {
+          errorSnackBar(
+              title: transH.internet.capitalize(),
+              message: transH.userOffline.capitalize());
+        }
+      });
     });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    subscription.cancel();
+    super.dispose();
   }
 
   void initializeData() async {

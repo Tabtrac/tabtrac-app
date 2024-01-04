@@ -3,11 +3,11 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:fundz_app/providers/providers.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -528,26 +528,8 @@ class Debouncer {
 }
 
 Future<bool> isOnline() async {
-  final connectivityResult = await (Connectivity().checkConnectivity());
-  if (connectivityResult == ConnectivityResult.mobile) {
-    // I am connected to a mobile network.
-    return true;
-  } else if (connectivityResult == ConnectivityResult.wifi) {
-    // I am connected to a wifi network.
-    return true;
-  } else if (connectivityResult == ConnectivityResult.ethernet) {
-    // I am connected to a ethernet network.
-    return true;
-  } else if (connectivityResult == ConnectivityResult.vpn) {
-    // I am connected to a vpn network.
-    // Note for iOS and macOS:
-    // There is no separate network interface type for [vpn].
-    // It returns [other] on any device (also simulator)
-    return true;
-  } else {
-    // I am not connected to any network.
-    return false;
-  }
+  bool result = await InternetConnectionChecker().hasConnection;
+  return result;
 }
 
 PageRouteBuilder slideUpPageRoute(Widget page) {

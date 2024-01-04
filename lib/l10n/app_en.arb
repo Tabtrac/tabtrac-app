@@ -287,5 +287,8 @@
   "toBePaidBefore": "to be paid before",
   "wasTobePaid": "was to be paid before",
   "needsToBePaid": "needs to be paid",
-  "stillHasSomeTime": "still has some time left"
+  "stillHasSomeTime": "still has some time left",
+  "internet": "internet",
+  "userOffline": "you're currently offline",
+  "userOnline": "online"
 }
