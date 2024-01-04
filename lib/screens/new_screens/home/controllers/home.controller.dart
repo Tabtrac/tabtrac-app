@@ -25,40 +25,44 @@ class HomeController {
   HomeController({required this.ref, required this.context});
   UtitlityController utitlityController = UtitlityController();
   Future getOverviewData() async {
-    final transH = AppLocalizations.of(context)!;
-    try {
-      // Code Area
-      final accessToken = await utitlityController.getData('access_token');
-      final response = await http.get(
-        Uri.parse('$domainPortion/api/record/overview/'),
-        headers: {
-          HttpHeaders.authorizationHeader: 'Bearer $accessToken',
-        },
-      );
-      var responseData = json.decode(response.body);
+    if (await isOnline()) {
+      final transH = AppLocalizations.of(context)!;
+      try {
+        // Code Area
+        final accessToken = await utitlityController.getData('access_token');
+        final response = await http.get(
+          Uri.parse('$domainPortion/api/record/overview/'),
+          headers: {
+            HttpHeaders.authorizationHeader: 'Bearer $accessToken',
+          },
+        );
+        var responseData = json.decode(response.body);
 
-      var statusCode = response.statusCode;
-      if (statusCode == 401) {
-        utitlityController.writeData('needsLogOut', 'true');
-        navigateReplacementNamed(context, AppRoutes.loginRoute);
-        // return CurrentState.none;
-      } else if (statusCode == 200 || statusCode == 201) {
-        OverviewData data = OverviewData.fromJson(responseData);
-        ref.read(overviewDataProvider.notifier).setData(data);
-        ref.read(overviewDataProvider.notifier).setData(data);
-        // return CurrentState.done;
-      } else {
+        var statusCode = response.statusCode;
+        if (statusCode == 401) {
+          utitlityController.writeData('needsLogOut', 'true');
+          navigateReplacementNamed(context, AppRoutes.loginRoute);
+          // return CurrentState.none;
+        } else if (statusCode == 200 || statusCode == 201) {
+          OverviewData data = OverviewData.fromJson(responseData);
+          ref.read(overviewDataProvider.notifier).setData(data);
+          ref.read(overviewDataProvider.notifier).setData(data);
+          // return CurrentState.done;
+        } else {
+          errorSnackBar(
+              context: context,
+              title: transH.error,
+              message: transH.unkownError);
+        }
+      } catch (e) {
+        if (e.toString().contains('SocketException')) {
+          // return CurrentState.network;
+          errorSnackBar(
+              context: context, title: transH.error, message: transH.network);
+        }
         errorSnackBar(
             context: context, title: transH.error, message: transH.unkownError);
       }
-    } catch (e) {
-      if (e.toString().contains('SocketException')) {
-        // return CurrentState.network;
-        errorSnackBar(
-            context: context, title: transH.error, message: transH.network);
-      }
-      errorSnackBar(
-          context: context, title: transH.error, message: transH.unkownError);
     }
   }
 
@@ -274,5 +278,4 @@ class HomeController {
     }
     return heroWidgets;
   }
-
 }

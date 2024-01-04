@@ -37,63 +37,67 @@ class ActionController {
     required String paymentDate,
     required String type,
   }) async {
-    final transH = AppLocalizations.of(context)!;
+    if (await isOnline()) {
+      final transH = AppLocalizations.of(context)!;
 
-    try {
-      // Code Area
-      final accessToken = await utitlityController.getData('access_token');
-      String date = DateFormat('yyyy-MM-dd H:mm:ss').format(DateTime.now());
-      final response = await http.post(
-        Uri.parse('$domainPortion/api/record/$type/'),
-        body: {
-          "client": client.id.toString(),
-          "description": description,
-          "amount": amount,
-          "currency": currency,
-          "payment_date": paymentDate,
-          "created_date": date,
-          "updated_date": date
-        },
-        headers: {
-          HttpHeaders.authorizationHeader: 'Bearer $accessToken',
-        },
-      );
+      try {
+        // Code Area
+        final accessToken = await utitlityController.getData('access_token');
+        String date = DateFormat('yyyy-MM-dd H:mm:ss').format(DateTime.now());
+        final response = await http.post(
+          Uri.parse('$domainPortion/api/record/$type/'),
+          body: {
+            "client": client.id.toString(),
+            "description": description,
+            "amount": amount,
+            "currency": currency,
+            "payment_date": paymentDate,
+            "created_date": date,
+            "updated_date": date
+          },
+          headers: {
+            HttpHeaders.authorizationHeader: 'Bearer $accessToken',
+          },
+        );
 
-      var statusCode = response.statusCode;
-      if (statusCode == 401) {
-        utitlityController.writeData('needsLogOut', 'true');
-        navigateReplacementNamed(context, AppRoutes.loginRoute);
-        ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
-        return true;
-      } else if (statusCode == 201) {
-        final recordController = RecordController(ref: ref, context: context);
-        await recordController.onLoadData();
-        ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
+        var statusCode = response.statusCode;
+        if (statusCode == 401) {
+          utitlityController.writeData('needsLogOut', 'true');
+          navigateReplacementNamed(context, AppRoutes.loginRoute);
+          ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
+          return true;
+        } else if (statusCode == 201) {
+          final recordController = RecordController(ref: ref, context: context);
+          await recordController.onLoadData();
+          ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
 
-        LocalNotifications.showNotification(
-            title: transH.success.capitalize(),
-            body: transH.recordAdded.capitalize(),
-            payload: '');
-        return true;
-      } else {
+          LocalNotifications.showNotification(
+              title: transH.success.capitalize(),
+              body: transH.recordAdded.capitalize(),
+              payload: '');
+          return true;
+        } else {
+          errorSnackBar(
+              title: transH.error.capitalize(),
+              message: transH.unkownError.capitalize());
+          ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
+          return false;
+        }
+      } catch (e) {
+        if (e.toString().contains('SocketException')) {
+          errorSnackBar(
+              title: transH.error.capitalize(),
+              message: transH.network.capitalize());
+        }
         errorSnackBar(
+            context: context,
             title: transH.error.capitalize(),
             message: transH.unkownError.capitalize());
+
         ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
         return false;
       }
-    } catch (e) {
-      if (e.toString().contains('SocketException')) {
-        errorSnackBar(
-            title: transH.error.capitalize(),
-            message: transH.network.capitalize());
-      }
-      errorSnackBar(
-          context: context,
-          title: transH.error.capitalize(),
-          message: transH.unkownError.capitalize());
-
-      ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
+    } else {
       return false;
     }
   }
@@ -106,63 +110,67 @@ class ActionController {
     required String type,
     required String recordId,
   }) async {
-    final transH = AppLocalizations.of(context)!;
-    try {
-      // Code Area
-      final accessToken = await utitlityController.getData('access_token');
-      String date = DateFormat('yyyy-MM-dd H:mm:ss').format(DateTime.now());
-      final response = await http.put(
-        Uri.parse('$domainPortion/api/record/$type/$recordId/'),
-        body: {
-          "description": description,
-          "amount": amount,
-          "currency": currency,
-          "payment_date": paymentDate,
-          "deposited_date": date
-        },
-        headers: {
-          HttpHeaders.authorizationHeader: 'Bearer $accessToken',
-        },
-      );
-
-      var statusCode = response.statusCode;
-      var responseData = json.decode(response.body);
-      if (statusCode == 401) {
-        utitlityController.writeData('needsLogOut', 'true');
-        navigateReplacementNamed(context, AppRoutes.loginRoute);
-        ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
-        return true;
-      } else if (statusCode == 201) {
-        ref
-            .read(currentRecordProvider.notifier)
-            .change(UserRecord.fromJson(responseData['record']));
-        final recordController = RecordController(ref: ref, context: context);
-        await recordController.onLoadData();
-        ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
-        successSnackBar(
-          title: transH.success.capitalize(),
-          message: transH.depositSuccess.capitalize(),
+    if (await isOnline()) {
+      final transH = AppLocalizations.of(context)!;
+      try {
+        // Code Area
+        final accessToken = await utitlityController.getData('access_token');
+        String date = DateFormat('yyyy-MM-dd H:mm:ss').format(DateTime.now());
+        final response = await http.put(
+          Uri.parse('$domainPortion/api/record/$type/$recordId/'),
+          body: {
+            "description": description,
+            "amount": amount,
+            "currency": currency,
+            "payment_date": paymentDate,
+            "deposited_date": date
+          },
+          headers: {
+            HttpHeaders.authorizationHeader: 'Bearer $accessToken',
+          },
         );
-        return true;
-      } else {
+
+        var statusCode = response.statusCode;
+        var responseData = json.decode(response.body);
+        if (statusCode == 401) {
+          utitlityController.writeData('needsLogOut', 'true');
+          navigateReplacementNamed(context, AppRoutes.loginRoute);
+          ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
+          return true;
+        } else if (statusCode == 201) {
+          ref
+              .read(currentRecordProvider.notifier)
+              .change(UserRecord.fromJson(responseData['record']));
+          final recordController = RecordController(ref: ref, context: context);
+          await recordController.onLoadData();
+          ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
+          successSnackBar(
+            title: transH.success.capitalize(),
+            message: transH.depositSuccess.capitalize(),
+          );
+          return true;
+        } else {
+          errorSnackBar(
+              title: transH.error.capitalize(),
+              message: transH.unkownError.capitalize());
+          ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
+          return false;
+        }
+      } catch (e) {
+        if (e.toString().contains('SocketException')) {
+          errorSnackBar(
+              title: transH.error.capitalize(),
+              message: transH.network.capitalize());
+        }
         errorSnackBar(
+            context: context,
             title: transH.error.capitalize(),
             message: transH.unkownError.capitalize());
+
         ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
         return false;
       }
-    } catch (e) {
-      if (e.toString().contains('SocketException')) {
-        errorSnackBar(
-            title: transH.error.capitalize(),
-            message: transH.network.capitalize());
-      }
-      errorSnackBar(
-          context: context,
-          title: transH.error.capitalize(),
-          message: transH.unkownError.capitalize());
-
-      ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
+    }else{
       return false;
     }
   }
