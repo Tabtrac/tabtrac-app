@@ -5,7 +5,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:workmanager/workmanager.dart';
 import 'constants/app_routes.dart';
 import 'constants/theme.dart';
-import 'controllers/utl_controllers.dart';
 import 'helpers/notification_helpers.dart';
 import 'l10n/l10n.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

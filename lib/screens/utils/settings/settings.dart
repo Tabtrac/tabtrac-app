@@ -232,6 +232,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   ref
                       .read(isDarkModeProvider.notifier)
                       .changeTheme(!isDarkMode);
+                    changeBottomBarColor(ref.read(isDarkModeProvider));
                 },
               ),
               SizedBox(height: height * .02),

@@ -9,7 +9,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fundz_app/widgets/snackbars.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../controllers/utl_controllers.dart';
 import '../../../helpers/functions.dart';
 import '../../../providers/providers.dart';
 import '../../../widgets/bottom.nav.widgets.dart';
@@ -35,7 +34,7 @@ class _RootHomeState extends ConsumerState<RootHome> {
     changeBottomBarColor(ref.read(isDarkModeProvider));
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final transH = AppLocalizations.of(context)!;
-      UtitlityController().loadNotifications(context, ref);
+      // UtitlityController().loadNotifications(context, ref);
       subscription = Connectivity()
           .onConnectivityChanged
           .listen((ConnectivityResult result) async {

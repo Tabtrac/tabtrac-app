@@ -13,7 +13,6 @@ import '../../constants/colors.dart';
 import '../../controllers/utl_controllers.dart';
 import '../../helpers/functions.dart';
 import '../../providers/providers.dart';
-import '../new_screens/root/root.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
@@ -35,7 +34,14 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
         systemNavigationBarIconBrightness: Brightness.dark,
       ),
     );
-   
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final utlController = ref.read(utlControllerProvider.notifier);
+      String? loggedIn = await utlController.getData('isLoggedIn');
+      String? isVerified = await utlController.getData('isVerified');
+      if (loggedIn == 'yes' && isVerified == 'yes') {
+        UtitlityController().loadNotifications(context, ref);
+      }
+    });
     Future.delayed(
       const Duration(seconds: 2),
       () {

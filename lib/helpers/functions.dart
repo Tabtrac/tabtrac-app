@@ -34,6 +34,13 @@ bool validatePhoneNumber(String phoneNumber) {
   }
   return false;
 }
+void launchUrlNow(String url) async {
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    // 
+  }
+}
 
 void logout(ref, context) async {
   await Hive.deleteFromDisk();
