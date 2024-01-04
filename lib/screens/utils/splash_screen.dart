@@ -29,20 +29,13 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   void initState() {
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
-        statusBarColor: AppColors.blackColor,
-        statusBarIconBrightness: Brightness.light,
-        systemNavigationBarColor: AppColors.blackTheme,
-        systemNavigationBarIconBrightness: Brightness.light,
+        statusBarColor: AppColors.whiteColor,
+        statusBarIconBrightness: Brightness.dark,
+        systemNavigationBarColor: AppColors.whiteColor,
+        systemNavigationBarIconBrightness: Brightness.dark,
       ),
     );
-    // WidgetsBinding.instance.addPostFrameCallback((_) async {
-    //   final utlController = ref.read(utlControllerProvider.notifier);
-    //   String? loggedIn = await utlController.getData('isLoggedIn');
-    //   String? isVerified = await utlController.getData('isVerified');
-    //   if (loggedIn == 'yes' && isVerified == 'yes') {
-    //     UtitlityController().loadNotifications(context, ref);
-    //   }
-    // });
+   
     Future.delayed(
       const Duration(seconds: 2),
       () {
@@ -110,7 +103,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: AppColors.darkThemeBg,
+      backgroundColor: AppColors.whiteColor,
       body: SizedBox(
         width: width,
         height: height,

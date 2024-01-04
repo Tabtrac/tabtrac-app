@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
@@ -462,6 +463,11 @@ String dateFormatter(DateTime dateTime, {bool? removeTime}) {
     }
   }
   return formattedDate;
+}
+
+int randomInRange(int min, int max) {
+  Random random = Random();
+  return min + random.nextInt(max - min + 1);
 }
 
 void launchEmail(String to, String subject, String body) async {

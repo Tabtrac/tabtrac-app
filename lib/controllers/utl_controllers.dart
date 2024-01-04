@@ -127,48 +127,55 @@ class UtitlityController {
       if (statusCode == 401) {
       } else if (statusCode == 200) {
         var data = json.decode(response.body);
-        print(data);
         if (data['response'] == 'OK') {
           if (data['type'] == 'pending') {
             var creditRecords = data['data']['credit'];
             creditRecords.forEach((value) async {
+              int id = randomInRange(0, 4);
               await LocalNotifications.showNotification(
+                id: id,
                 title:
-                    "${transH.youOwe.capitalize()} ${value['client_name']} ${moneyComma(value['amount'], value['currency'])}",
+                    "${transH.youOwe.capitalize()} ${value['client_name'].toString().capitalizeAll()} ${moneyComma(value['amount'], value['currency'])}",
                 body:
-                    '${transH.toBePaidBefore.capitalize()} ${regularDateFormat(value['payment_date'], currentLocale)}',
-                payload: value['id'],
+                    '${transH.toBePaidBefore.capitalize()} ${regularDateFormat(DateTime.parse(value['payment_date']), currentLocale)}',
+                payload: value['id'].toString(),
               );
             });
             var debtRecords = data['data']['debt'];
             debtRecords.forEach((value) async {
+              int id = randomInRange(0, 5);
               await LocalNotifications.showNotification(
+                id: id,
                 title:
-                    "${value['client_name'].toString().capitalize()} ${transH.owesYou}  ${moneyComma(value['amount'], value['currency'])}",
+                    "${value['client_name'].toString().capitalizeAll()} ${transH.owesYou}  ${moneyComma(value['amount'], value['currency'])}",
                 body:
-                    '${transH.toBePaidBefore.capitalize()} ${regularDateFormat(value['payment_date'], currentLocale)}',
-                payload: value['id'],
+                    '${transH.toBePaidBefore.capitalize()} ${regularDateFormat(DateTime.parse(value['payment_date']), currentLocale)}',
+                payload: value['id'].toString(),
               );
             });
           } else {
             var creditRecords = data['data']['credit'];
             creditRecords.forEach((value) async {
+              int id = randomInRange(0, 7);
               await LocalNotifications.showNotification(
+                id: id,
                 title:
-                    "${transH.youOwe.capitalize()} ${value['client_name']} ${moneyComma(value['amount'], value['currency'])}",
+                    "${transH.youOwe.capitalize()} ${value['client_name'].toString().capitalizeAll()} ${moneyComma(value['amount'], value['currency'])}",
                 body:
-                    '${transH.toBePaidBefore.capitalize()} ${regularDateFormat(value['payment_date'], currentLocale)}',
-                payload: value['id'],
+                    '${transH.toBePaidBefore.capitalize()} ${regularDateFormat(DateTime.parse(value['payment_date']), currentLocale)}',
+                payload: value['id'].toString(),
               );
             });
             var debtRecords = data['data']['debt'];
             debtRecords.forEach((value) async {
+              int id = randomInRange(0, 9);
               await LocalNotifications.showNotification(
+                id: id,
                 title:
-                    "${value['client_name'].toString().capitalize()} ${transH.owesYou}  ${moneyComma(value['amount'], value['currency'])}",
+                    "${value['client_name'].toString().capitalizeAll()} ${transH.owesYou}  ${moneyComma(value['amount'], value['currency'])}",
                 body:
-                    '${transH.toBePaidBefore.capitalize()} ${regularDateFormat(value['payment_date'], currentLocale)}',
-                payload: value['id'],
+                    '${transH.toBePaidBefore.capitalize()} ${regularDateFormat(DateTime.parse(value['payment_date']), currentLocale)}',
+                payload: value['id'].toString(),
               );
             });
           }
