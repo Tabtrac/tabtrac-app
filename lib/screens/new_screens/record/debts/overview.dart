@@ -25,7 +25,6 @@ class OverViewDebt extends ConsumerWidget {
     final dueDebtRecords = ref.watch(dueDebtRecordsProvider);
     final pendingDebtRecords = ref.watch(pendingDebtRecordsProvider);
     final paidDebtRecords = ref.watch(paidDebtRecordsProvider);
-    print(dueDebtRecords.length);
     return Column(
       children: <Widget>[
         Row(

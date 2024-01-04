@@ -225,19 +225,16 @@ class _ForgottenPasswordResetScreenState
       String code, String password, AppLocalizations transH) async {
     if (code.isEmpty || password.isEmpty || code.length < 4) {
       errorSnackBar(
-        context: context,
         title: transH.error.capitalize(),
         message: transH.fieldsRequired.capitalize(),
       );
     } else if (!code.isNum) {
       errorSnackBar(
-        context: context,
         title: transH.error.capitalize(),
         message: transH.inValidEmail.capitalize(),
       );
     } else if (password.length < 8) {
       errorSnackBar(
-        context: context,
         title: transH.error.capitalize(),
         message: transH.passwordinvalid.capitalize(),
       );
@@ -250,7 +247,6 @@ class _ForgottenPasswordResetScreenState
           data['response'] == 'new otp created check email') {
         ref.read(currentPageProvider.notifier).changePage(0);
         errorSnackBar(
-          context: context,
           title: transH.error.capitalize(),
           message: transH.checkEmailForNewOTP.capitalize(),
         );
@@ -258,7 +254,6 @@ class _ForgottenPasswordResetScreenState
           'otp expired, new otp created check email') {
         ref.read(currentPageProvider.notifier).changePage(0);
         errorSnackBar(
-          context: context,
           title: transH.error.capitalize(),
           message: transH.otpExpiredcheckEmailForNewOTP.capitalize(),
         );
@@ -266,20 +261,17 @@ class _ForgottenPasswordResetScreenState
         navigateToPage(context, const PasswordResetSuccess());
       } else if (data['error'][0] == 'This password is too common.') {
         errorSnackBar(
-          context: context,
           title: transH.error.capitalize(),
           message: transH.pTooCommon.capitalize(),
         );
       } else if (data['error'][0] ==
           'This password is too short. It must contain at least 8 characters.') {
         errorSnackBar(
-          context: context,
           title: transH.error.capitalize(),
           message: transH.pTooShort.capitalize(),
         );
       } else if (data['error'] == 'network') {
         errorSnackBar(
-          context: context,
           title: transH.error.capitalize(),
           message: transH.network.capitalize(),
         );
@@ -287,14 +279,12 @@ class _ForgottenPasswordResetScreenState
       } else if (data['error'] == 'invalid OTP code') {
         ref.read(currentPageProvider.notifier).changePage(0);
         errorSnackBar(
-          context: context,
           title: transH.error.capitalize(),
           message: transH.invalidOTPCode.capitalize(),
         );
         ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
       } else {
         errorSnackBar(
-          context: context,
           title: transH.error.capitalize(),
           message: transH.unkownError.capitalize(),
         );

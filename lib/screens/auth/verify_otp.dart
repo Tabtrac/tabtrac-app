@@ -143,7 +143,8 @@ class _OTPVerificationPageState extends ConsumerState<OTPVerificationPage> {
                               : Text(
                                   transH.resend.capitalizeAll(),
                                   style: TextStyle(
-                                    color: AppColors.primaryColor.withOpacity(.7),
+                                    color:
+                                        AppColors.primaryColor.withOpacity(.7),
                                     fontSize: 16.sp,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -209,48 +210,44 @@ class _OTPVerificationPageState extends ConsumerState<OTPVerificationPage> {
           await ref.read(dataFetchControllerProvider.notifier).verifyOTP(code);
       if (data['error'] == 'invalid OTP code') {
         errorSnackBar(
-          context: context,
           title: transH.error.capitalize(),
           message: transH.invalidOTPCode.capitalize(),
         );
       } else if (data['response'] == 'otp already verified') {
-        AnimatedSnackBar.material(
-          "${transH.error}, ${transH.otpAlreadyVerified}".capitalize(),
-          type: AnimatedSnackBarType.error,
-        ).show(context);
+        errorSnackBar(
+          title: transH.error.capitalize(),
+          message: transH.otpAlreadyVerified.capitalize(),
+        );
       } else if (data['response'] ==
           'otp expired, new otp created check email') {
-        AnimatedSnackBar.material(
-          "${transH.error}, ${transH.otpAlreadyExpired}".capitalize(),
-          type: AnimatedSnackBarType.error,
-        ).show(context);
+        errorSnackBar(
+          title: transH.error.capitalize(),
+          message: transH.otpAlreadyExpired.capitalize(),
+        );
       } else if (data['response'] == 'new otp created check email') {
-        AnimatedSnackBar.material(
-          "${transH.error}, ${transH.newOTPSent}".capitalize(),
-          type: AnimatedSnackBarType.error,
-        ).show(context);
+        errorSnackBar(
+          title: transH.error.capitalize(),
+          message: transH.newOTPSent.capitalize(),
+        );
       } else if (data['error'] == 'unknown') {
         errorSnackBar(
-          context: context,
           title: transH.error.capitalize(),
           message: transH.unkownError.capitalize(),
         );
       } else if (data['error'] == 'network') {
         errorSnackBar(
-          context: context,
           title: transH.error.capitalize(),
           message: transH.network.capitalize(),
         );
       } else if (data['response'] == 'otp verification successful') {
         utlController.writeData('isVerified', 'yes');
-        AnimatedSnackBar.material(
-          "${transH.success}, ${transH.otpVerified}".capitalize(),
-          type: AnimatedSnackBarType.success,
-        ).show(context);
+        successSnackBar(
+          title: transH.success.capitalize(),
+          message: transH.otpVerified.capitalize(),
+        );
         navigateReplacementNamed(context, AppRoutes.home);
       } else {
         errorSnackBar(
-          context: context,
           title: transH.error.capitalize(),
           message: transH.unkownError.capitalize(),
         );

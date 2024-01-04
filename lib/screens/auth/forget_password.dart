@@ -200,7 +200,6 @@ class _ForgottenPasswordState extends ConsumerState<ForgottenPassword> {
       final utilityController = UtitlityController();
       if (data['error'] == 'email not found') {
         errorSnackBar(
-          context: context,
           title: transH.error.capitalize(),
           message: transH.inValidEmail.capitalize(),
         );
@@ -208,21 +207,18 @@ class _ForgottenPasswordState extends ConsumerState<ForgottenPassword> {
         utilityController.writeData('access_token', data['access_token']);
         utilityController.writeData('refresh_token', data['refresh_token']);
         successSnackBar(
-          context: context,
           title: transH.success.capitalize(),
           message: transH.otpCodeSentToMail.capitalize(),
         );
         navigateNamed(context, AppRoutes.forgottenPasswordResetRoute);
       } else if (data['error'] == 'network') {
         errorSnackBar(
-          context: context,
           title: transH.error.capitalize(),
           message: transH.network.capitalize(),
         );
         ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
       } else {
         errorSnackBar(
-          context: context,
           title: transH.error.capitalize(),
           message: transH.unkownError.capitalize(),
         );

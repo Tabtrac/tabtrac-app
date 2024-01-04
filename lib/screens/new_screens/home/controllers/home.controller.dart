@@ -38,7 +38,6 @@ class HomeController {
       var responseData = json.decode(response.body);
 
       var statusCode = response.statusCode;
-      print(responseData);
       if (statusCode == 401) {
         utitlityController.writeData('needsLogOut', 'true');
         navigateReplacementNamed(context, AppRoutes.loginRoute);

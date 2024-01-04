@@ -73,7 +73,6 @@ class ClientController {
   Future<void> searchClients() async {
     final transH = AppLocalizations.of(context)!;
     final searchString = ref.read(searchStringProvider);
-    print(searchString);
     try {
       // Code Area
       final accessToken = await utitlityController.getData('access_token');

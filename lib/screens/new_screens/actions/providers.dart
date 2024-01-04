@@ -87,8 +87,6 @@ class CurrentStageNotifier extends StateNotifier<int> {
           ActionController actionController =
               ActionController(context: context, ref: ref);
           bool data;
-          // print(currentPage);
-          String paymentDateNew = ref.watch(paymentDateProvider);
           if (currentPage == 'debt') {
             data = await actionController.createRecord(
               client: client!,

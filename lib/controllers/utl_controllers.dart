@@ -181,22 +181,11 @@ class UtitlityController {
           }
         }
       } else {
-        print(statusCode);
-        // errorSnackBar(
-        //     title: transH.error.capitalize(),
-        //     message: transH.unkownError.capitalize());
+        // pass
       }
       // Code Area End
     } catch (e) {
-      print(e);
-      if (e.toString().contains('SocketException')) {
-        // errorSnackBar(
-        //     title: transH.error.capitalize(),
-        //     message: transH.network.capitalize());
-      }
-      // errorSnackBar(
-      //     title: transH.error.capitalize(),
-      //     message: transH.unkownError.capitalize());
+      debugPrint(e.toString());
     }
   }
 }

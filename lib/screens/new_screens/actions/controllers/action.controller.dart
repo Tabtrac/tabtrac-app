@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously, avoid_print
+// ignore_for_file: use_build_context_synchronously
 
 import 'dart:convert';
 import 'dart:io';
@@ -18,7 +18,6 @@ import '../../../../helpers/notification_helpers.dart';
 import '../../../../models/record.model.dart';
 import '../../../../providers/providers.dart';
 import '../../../../widgets/snackbars.dart';
-import '../../actions/providers/actions.provider.dart';
 import '../../client/models/client.model.dart';
 import '../../record/controller/record.controller.dart';
 import '../../record/providers/record.provider.dart';
@@ -112,8 +111,6 @@ class ActionController {
       // Code Area
       final accessToken = await utitlityController.getData('access_token');
       String date = DateFormat('yyyy-MM-dd H:mm:ss').format(DateTime.now());
-      // String date = DateTime.now().toString();
-      print(paymentDate);
       final response = await http.put(
         Uri.parse('$domainPortion/api/record/$type/$recordId/'),
         body: {
@@ -148,8 +145,6 @@ class ActionController {
         );
         return true;
       } else {
-        print(statusCode);
-        print(responseData);
         errorSnackBar(
             title: transH.error.capitalize(),
             message: transH.unkownError.capitalize());

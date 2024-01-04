@@ -214,40 +214,36 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
           utlController.writeData('access_token', data['access_token']);
           utlController.writeData('refresh_token', data['refresh_token']);
           utlController.writeData('isLoggedIn', "yes");
-          AnimatedSnackBar.material(
-            "${transH.success}, ${transH.registSuccess}".capitalize(),
-            type: AnimatedSnackBarType.success,
-          ).show(context);
+
+          successSnackBar(
+              title: transH.success.capitalize(),
+              message: transH.registSuccess.capitalize());
           navigateReplacementNamed(context, AppRoutes.otpRoute);
         }
       } else if (data['error'] == 'Email already exists.') {
-        AnimatedSnackBar.material(
-          "${transH.error}, ${transH.mailExists}".capitalize(),
-          type: AnimatedSnackBarType.error,
-        ).show(context);
+        errorSnackBar(
+          title: transH.error.capitalize(),
+          message: transH.mailExists.capitalize(),
+        );
       } else if (data['error'][0] == 'This password is too common.') {
         errorSnackBar(
-          context: context,
           title: transH.error.capitalize(),
           message: transH.pTooCommon.capitalize(),
         );
       } else if (data['error'][0] ==
           'This password is too short. It must contain at least 8 characters.') {
         errorSnackBar(
-          context: context,
           title: transH.error.capitalize(),
           message: transH.pTooShort.capitalize(),
         );
       } else if (data['error'] == 'network') {
         errorSnackBar(
-          context: context,
           title: transH.error.capitalize(),
           message: transH.network.capitalize(),
         );
         ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
       } else {
         errorSnackBar(
-          context: context,
           title: transH.error.capitalize(),
           message: transH.unkownError.capitalize(),
         );

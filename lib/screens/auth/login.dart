@@ -71,22 +71,24 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(height: height * .02),
-                        Navigator.canPop(context) ? IconButton(
-                          onPressed: () {
-                            if (Navigator.canPop(context)) {
-                              Navigator.pop(context);
-                            } else {
-                              navigateReplacementNamed(
-                                  context, AppRoutes.splashRoute);
-                            }
-                          },
-                          padding: const EdgeInsets.all(0),
-                          icon: Icon(
-                            Icons.arrow_back_ios,
-                            color: AppColors.primaryColor,
-                            size: 24.sp,
-                          ),
-                        ) : const SizedBox(),
+                        Navigator.canPop(context)
+                            ? IconButton(
+                                onPressed: () {
+                                  if (Navigator.canPop(context)) {
+                                    Navigator.pop(context);
+                                  } else {
+                                    navigateReplacementNamed(
+                                        context, AppRoutes.splashRoute);
+                                  }
+                                },
+                                padding: const EdgeInsets.all(0),
+                                icon: Icon(
+                                  Icons.arrow_back_ios,
+                                  color: AppColors.primaryColor,
+                                  size: 24.sp,
+                                ),
+                              )
+                            : const SizedBox(),
                         SizedBox(height: height * .02),
                         Text(
                           transH.welcomeBack,
@@ -117,7 +119,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           alignment: Alignment.centerRight,
                           child: TextButton(
                             onPressed: () {
-                              navigateNamed(context, AppRoutes.forgottenPasswordRoute);
+                              navigateNamed(
+                                  context, AppRoutes.forgottenPasswordRoute);
                             },
                             child: Text(
                               "${transH.forgetPass.capitalize()}?",
@@ -223,39 +226,35 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           utlController.writeData('refresh_token', data['refresh_token']);
           utlController.writeData('isLoggedIn', "yes");
           utlController.writeData('isVerified', "yes");
-          AnimatedSnackBar.material(
-            "${transH.success}, ${transH.loginSuccess}".capitalize(),
-            type: AnimatedSnackBarType.success,
-          ).show(context);
+          successSnackBar(
+              title: transH.success.capitalize(),
+              message: transH.loginSuccess.capitalize());
           navigateReplacementNamed(context, AppRoutes.home);
         } else if (data['response'] == "not verified" ||
             data['response'] == "otp sent to email") {
           utlController.writeData('access_token', data['access_token']);
           utlController.writeData('refresh_token', data['refresh_token']);
           utlController.writeData('isLoggedIn', "yes");
-          AnimatedSnackBar.material(
-            "${transH.success}, ${transH.loginSuccess}".capitalize(),
-            type: AnimatedSnackBarType.success,
-          ).show(context);
+          successSnackBar(
+              title: transH.success.capitalize(),
+              message: transH.loginSuccess.capitalize());
           navigateNamed(context, AppRoutes.otpRoute);
         }
         ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
       } else if (data['error'] == 'Invalid email') {
         errorSnackBar(
-          context: context,
           title: transH.error.capitalize(),
           message: transH.inValidEmail.capitalize(),
         );
         ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
       } else if (data['error'] == 'Invalid password') {
-        AnimatedSnackBar.material(
-          "${transH.error}, ${transH.invalidPass}".capitalize(),
-          type: AnimatedSnackBarType.error,
-        ).show(context);
+        errorSnackBar(
+          title: transH.error.capitalize(),
+          message: transH.invalidPass.capitalize(),
+        );
         ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
       } else if (data['error'][0] == 'This password is too common.') {
         errorSnackBar(
-          context: context,
           title: transH.error.capitalize(),
           message: transH.pTooCommon.capitalize(),
         );
@@ -264,21 +263,18 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       } else if (data['error'][0] ==
           'This password is too short. It must contain at least 8 characters.') {
         errorSnackBar(
-          context: context,
           title: transH.error.capitalize(),
           message: transH.pTooShort.capitalize(),
         );
         ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
       } else if (data['error'] == 'network') {
         errorSnackBar(
-          context: context,
           title: transH.error.capitalize(),
           message: transH.network.capitalize(),
         );
         ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
       } else {
         errorSnackBar(
-          context: context,
           title: transH.error.capitalize(),
           message: transH.unkownError.capitalize(),
         );
