@@ -1,0 +1,1 @@
+enum Currencies { naira, dollar }

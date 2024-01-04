@@ -1,0 +1,116 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../../controllers/utl_controllers.dart';
+import '../../../helpers/functions.dart';
+import '../../../providers/providers.dart';
+import '../../../widgets/bottom.nav.widgets.dart';
+import '../../../widgets/widgets.utils.dart';
+import '../client/client.widget.dart';
+import '../client/controller/client.controller.dart';
+import '../home/controllers/home.controller.dart';
+import '../home/home.widget.dart';
+import '../record/controller/record.controller.dart';
+import '../record/record.widget.dart';
+
+class RootHome extends ConsumerStatefulWidget {
+  const RootHome({super.key});
+
+  @override
+  ConsumerState<ConsumerStatefulWidget> createState() => _RootHomeState();
+}
+
+class _RootHomeState extends ConsumerState<RootHome> {
+  @override
+  void initState() {
+    changeBottomBarColor(ref.read(isDarkModeProvider));
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+        UtitlityController().loadNotifications(context, ref);
+      initializeData();
+    });
+    super.initState();
+  }
+
+  void initializeData() async {
+    final homeController = HomeController(ref: ref, context: context);
+    final clientController = ClientController(ref: ref, context: context);
+    final recordController = RecordController(ref: ref, context: context);
+
+    homeController.getOverviewData();
+    clientController.getAllClients();
+    recordController.onLoadData();
+  }
+
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+
+    List<Widget> screens = [
+      HomeWidget(
+        width: width,
+        height: height,
+      ),
+      ClientWidget(
+        width: width,
+        height: height,
+        mainContext: _scaffoldKey.currentContext,
+      ),
+      RecordWidget(
+        width: width,
+        height: height,
+      ),
+      RecordWidget(
+        width: width,
+        height: height,
+      ),
+      // AnalyticWidget(
+      //   width: width,
+      //   height: height,
+      // ),
+    ];
+
+    final viewController = ref.watch(viewControllerProvider);
+    return Scaffold(
+      key: _scaffoldKey,
+      body: SafeArea(
+        child: IndexedStack(
+          index: viewController,
+          children: screens,
+        ),
+      ),
+      bottomNavigationBar: CustomBottomNav(
+        height: height,
+        width: width,
+        initialIndex: viewController,
+        onDoubleTap: (index) {
+          final homeController = HomeController(ref: ref, context: context);
+          final clientController = ClientController(ref: ref, context: context);
+          final recordController = RecordController(ref: ref, context: context);
+
+          if (index == 0) {
+            homeController.getOverviewData();
+            recordController.getRecentActivity();
+          } else if (index == 1) {
+            clientController.getAllClients();
+          } else if (index == 3) {
+            recordController.onLoadData();
+          }
+        },
+        onTap: (index) {
+          if (index == 2) {
+            AppWidgetsUtlis.showRecordCreateBottomSheet(context);
+          } else {
+            ref
+                .read(viewControllerProvider.notifier)
+                .changeCurrentViewIndex(index);
+          }
+        },
+      ),
+    );
+  }
+}

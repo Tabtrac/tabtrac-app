@@ -1,0 +1,9 @@
+{
+  "cmake.sourceDirectory": "/home/kelly-daniel/Documents/flutter/project/fundz_app_mobile/linux",
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/*/**": true,
+    "**/.hg/store/**": true
+  }
+}

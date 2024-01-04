@@ -1,0 +1,1 @@
+// TODO: Don't forget to fixe the error of the screen going to home when back button is pressed after splash screen shows
