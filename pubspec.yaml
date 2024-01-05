@@ -70,6 +70,7 @@ dependencies:
   custom_sliding_segmented_control: ^1.8.1
   connectivity_plus: ^5.0.2
   flutter_background_service: ^5.0.5
+  # google_sign_in: ^6.2.1
   webview_flutter: ^4.4.3
   # syncfusion_flutter_charts: ^24.1.41
   # fl_chart: ^0.41.0
@@ -92,10 +93,10 @@ dev_dependencies:
 
 flutter_native_splash:
   color: "#FFFFFF"
-  image: "assets/images/splash.png"
+  image: "assets/images/splash2.png"
   android_12:
     color: "#FFFFFF"
-    image: "assets/images/logo12.png"
+    image: "assets/images/splash2.png"
     icon_background_color: "#FFFFFF"
 
 # For information on the generic Dart part of this file, see the
