@@ -71,12 +71,18 @@ class UserController extends StateNotifier<AsyncValue> {
   Future<bool> changePassword(BuildContext context, String oldPassword,
       String newPassword, AppLocalizations transH) async {
     bool isConnected = await utilityController.isConnected();
-
-    if (oldPassword.length < 8 || newPassword.length < 8) {
+    if (oldPassword.isEmpty || newPassword.isEmpty) {
       errorSnackBar(
         context: context,
         title: transH.error.capitalize(),
         message: transH.fieldsRequired.capitalize(),
+      );
+      return true;
+    } else if (oldPassword.length < 8 || newPassword.length < 8) {
+      errorSnackBar(
+        context: context,
+        title: transH.error.capitalize(),
+        message: transH.pTooShort.capitalize(),
       );
       return true;
     } else {
@@ -92,15 +98,14 @@ class UserController extends StateNotifier<AsyncValue> {
         try {
           final accessToken = await utilityController.getData('access_token');
           final response = await http.patch(
-            Uri.parse('$domainPortion/user/change-password/'),
-            headers: {
-              HttpHeaders.authorizationHeader: 'Bearer $accessToken',
-            },
-            body: {
-              'old_password': oldPassword,
-              'new_password': newPassword
-            }
-          );
+              Uri.parse('$domainPortion/user/change-password/'),
+              headers: {
+                HttpHeaders.authorizationHeader: 'Bearer $accessToken',
+              },
+              body: {
+                'old_password': oldPassword,
+                'new_password': newPassword
+              });
           int status = response.statusCode;
           if (status == 401) {
             utilityController.writeData('needsLogOut', 'true');

@@ -37,6 +37,7 @@ class _ChangePasswordState extends ConsumerState<ChangePassword> {
     final obSecure = ref.watch(obSecureProvider);
     final isDarkMode = ref.watch(isDarkModeProvider);
     Color? bodyColor = Theme.of(context).textTheme.bodyMedium!.color;
+    final buttonLoading = ref.watch(buttonLoadingNotifierProvider);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -208,23 +209,25 @@ class _ChangePasswordState extends ConsumerState<ChangePassword> {
             Center(
               child: CustomBtn(
                 onPressed: () async {
-                  ref
-                      .read(buttonLoadingNotifierProvider.notifier)
-                      .changeIndex(true);
-
-                  var data = await ref
-                      .read(userControllerProvider.notifier)
-                      .changePassword(
-                        context,
-                        oldPassword.value.text,
-                        newPassword.value.text,
-                        transH,
-                      );
-
-                  if (data) {
+                  if (!buttonLoading) {
                     ref
                         .read(buttonLoadingNotifierProvider.notifier)
-                        .changeIndex(false);
+                        .changeIndex(true);
+
+                    var data = await ref
+                        .read(userControllerProvider.notifier)
+                        .changePassword(
+                          context,
+                          oldPassword.value.text,
+                          newPassword.value.text,
+                          transH,
+                        );
+
+                    if (data) {
+                      ref
+                          .read(buttonLoadingNotifierProvider.notifier)
+                          .changeIndex(false);
+                    }
                   }
                 },
                 width: width * .5,
