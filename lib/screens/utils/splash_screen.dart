@@ -120,7 +120,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
             SizedBox(
               width: width * .5,
               child: Image.asset(
-                'assets/images/logo.png',
+                'assets/images/splash.png',
                 fit: BoxFit.cover,
               ),
             ).animate().fadeIn(),
