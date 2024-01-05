@@ -123,7 +123,33 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                           isPassword: true,
                           isLast: true,
                         ),
-                        SizedBox(height: 20.h),
+                        Row(
+                          children: <Widget>[
+                            FittedBox(
+                              child: Text(
+                                'By registering you accept our',
+                                style: TextStyle(
+                                  color: AppColors.blackColor,
+                                  fontSize: 14.sp,
+                                ),
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                navigateNamed(context, AppRoutes.termsRoute);
+                              },
+                              child: FittedBox(
+                                child: Text(
+                                  'Terms and Conditions',
+                                  style: TextStyle(
+                                    color: AppColors.primaryColor,
+                                    fontSize: 14.sp,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                         CustomBtn(
                           onPressed: () {
                             ref

@@ -229,7 +229,7 @@ class Menu extends StatelessWidget {
       onSelected: (value) async {
         switch (value) {
           case _MenuOptions.navigationDelegate:
-            launchUrlNow('https://tabtrac.vercel.app/about');
+            launchUrlNow('https://tabtrac.vercel.app/terms');
             break;
           case _MenuOptions.reload:
             controller.reload();
@@ -238,13 +238,21 @@ class Menu extends StatelessWidget {
       },
       color: Theme.of(context).scaffoldBackgroundColor,
       itemBuilder: (context) => [
-        const PopupMenuItem<_MenuOptions>(
+        PopupMenuItem<_MenuOptions>(
           value: _MenuOptions.navigationDelegate,
-          child: Text('Open in browser'),
+          child: Text(
+            'Open in browser',
+            style:
+                TextStyle(color: Theme.of(context).textTheme.bodyMedium!.color),
+          ),
         ),
-        const PopupMenuItem<_MenuOptions>(
+        PopupMenuItem<_MenuOptions>(
           value: _MenuOptions.reload,
-          child: Text('Reload'),
+          child: Text(
+            'Reload',
+            style:
+                TextStyle(color: Theme.of(context).textTheme.bodyMedium!.color),
+          ),
         ),
       ],
     );

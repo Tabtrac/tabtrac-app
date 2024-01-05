@@ -44,12 +44,14 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
             color: AppColors.primaryColor,
           ),
         ),
-        title: Text(
-          transH.about.capitalizeAll(),
-          style: TextStyle(
-            color: AppColors.primaryColor,
-            fontSize: 18.sp,
-            fontWeight: FontWeight.w600,
+        title: FittedBox(
+          child: Text(
+            transH.termsAndConditions.capitalizeAll(),
+            style: TextStyle(
+              color: AppColors.primaryColor,
+              fontSize: 18.sp,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
         actions: [
@@ -238,13 +240,21 @@ class Menu extends StatelessWidget {
       },
       color: Theme.of(context).scaffoldBackgroundColor,
       itemBuilder: (context) => [
-        const PopupMenuItem<_MenuOptions>(
+        PopupMenuItem<_MenuOptions>(
           value: _MenuOptions.navigationDelegate,
-          child: Text('Open in browser'),
+          child: Text(
+            'Open in browser',
+            style:
+                TextStyle(color: Theme.of(context).textTheme.bodyMedium!.color),
+          ),
         ),
-        const PopupMenuItem<_MenuOptions>(
+        PopupMenuItem<_MenuOptions>(
           value: _MenuOptions.reload,
-          child: Text('Reload'),
+          child: Text(
+            'Reload',
+            style:
+                TextStyle(color: Theme.of(context).textTheme.bodyMedium!.color),
+          ),
         ),
       ],
     );
