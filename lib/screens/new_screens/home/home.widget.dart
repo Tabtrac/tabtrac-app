@@ -149,16 +149,16 @@ class _HomeWidgetState extends ConsumerState<HomeWidget> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 5.h),
-                  Text(
-                    transH.actions.capitalizeAll(),
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  SizedBox(height: 10.h),
-                  ActionWidgets(width: widget.width),
+                  // SizedBox(height: 5.h),
+                  // Text(
+                  //   transH.actions.capitalizeAll(),
+                  //   style: TextStyle(
+                  //     fontSize: 16.sp,
+                  //     fontWeight: FontWeight.w600,
+                  //   ),
+                  // ),
+                  // SizedBox(height: 10.h),
+                  // ActionWidgets(width: widget.width),
                   SizedBox(height: 10.h),
                   Text(
                     transH.recentActivity.capitalizeAll(),

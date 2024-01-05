@@ -289,5 +289,6 @@
   "stillHasSomeTime": "a encore du temps",
   "internet": "internet",
   "userOffline": "vous êtes actuellement hors ligne",
-  "userOnline": "en ligne"
+  "userOnline": "en ligne",
+  "feedback": "retour"
 }

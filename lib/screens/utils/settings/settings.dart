@@ -351,6 +351,38 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   ),
                   alignment: Alignment.center,
                   child: const Icon(
+                    Icons.feedback_outlined,
+                    color: AppColors.primaryColor,
+                  ),
+                ),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios,
+                  color: AppColors.primaryColor,
+                ),
+                title: Text(
+                  transH.feedback.capitalizeAll(),
+                  style: TextStyle(
+                      color: AppColors.primaryColor,
+                      fontFamily: AppFonts.primaryFont,
+                      fontSize: width * .01 + 14,
+                      fontWeight: FontWeight.w500),
+                ),
+                contentPadding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                onTap: () {
+                  launchUrlNow('https://chat.whatsapp.com/BHFioceqPSf3yRlavRdNZS');
+                },
+              ),
+              ListTile(
+                leading: Container(
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: AppColors.primaryColor.withOpacity(.2),
+                    borderRadius: BorderRadius.circular(99),
+                  ),
+                  alignment: Alignment.center,
+                  child: const Icon(
                     Ionicons.log_out_outline,
                     color: AppColors.primaryColor,
                   ),

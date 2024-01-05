@@ -290,5 +290,6 @@
   "stillHasSomeTime": "still has some time left",
   "internet": "internet",
   "userOffline": "you're currently offline",
-  "userOnline": "online"
+  "userOnline": "online",
+  "feedback": "feedback"
 }
