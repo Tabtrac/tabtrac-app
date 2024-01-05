@@ -30,6 +30,7 @@ class ClientController {
 
   Future<void> getAllClients() async {
     if (await isOnline()) {
+      ref.read(allClientLoadingProvider.notifier).change(true);
       final transH = AppLocalizations.of(context)!;
       try {
         // Code Area
@@ -71,6 +72,7 @@ class ClientController {
             title: transH.error.capitalize(),
             message: transH.unkownError.capitalize());
       }
+      ref.read(allClientLoadingProvider.notifier).change(false);
     }
   }
 
@@ -298,6 +300,7 @@ class ClientController {
   Future<void> getDetailedClientData(String clientId) async {
     if (await isOnline()) {
       final transH = AppLocalizations.of(context)!;
+      ref.read(clientLoadingProvider.notifier).change(true);
 
       try {
         // Code Area
@@ -352,6 +355,7 @@ class ClientController {
             title: transH.error.capitalize(),
             message: transH.unkownError.capitalize());
       }
+      ref.read(clientLoadingProvider.notifier).change(false);
     }
   }
 

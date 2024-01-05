@@ -9,6 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fundz_app/helpers/app_extensions.dart';
 import 'package:fundz_app/helpers/functions.dart';
 import 'package:heroicons/heroicons.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../../../constants/app_routes.dart';
 import '../../../../constants/colors.dart';
@@ -19,6 +20,7 @@ import '../../../../providers/providers.dart';
 import '../../../../widgets/activity.widget.dart';
 import '../../../../widgets/no_activity.dart';
 import '../../../../widgets/placeholder.widgets.dart';
+import '../../../../widgets/shimmers.widget.dart';
 import '../../../../widgets/widgets.utils.dart';
 import '../../record/providers/record.provider.dart';
 import '../../record/widgets/tab.widget.dart';
@@ -58,6 +60,7 @@ class _ClientDetailsState extends ConsumerState<ClientDetails> {
     final currentTab = ref.watch(currentTabProvider);
     final currentCleintDetails = ref.watch(currentCleintDetailsProvider);
     final isDeleting = ref.watch(isDeletingProvider);
+    final clientLoading = ref.watch(clientLoadingProvider);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -128,9 +131,14 @@ class _ClientDetailsState extends ConsumerState<ClientDetails> {
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               width: width,
               height: height,
-              child: currentCleintDetails == null
-                  ? NoActivity(width: width)
-                  : SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  if (clientLoading)
+                    Expanded(child: CleintDetailsShimmer(width: width))
+                  else if (currentCleintDetails == null)
+                    NoActivity(width: width).animate().fadeIn(delay: 500.ms)
+                  else
+                    SingleChildScrollView(
                       physics: const ClampingScrollPhysics(),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -480,7 +488,8 @@ class _ClientDetailsState extends ConsumerState<ClientDetails> {
                         ],
                       ),
                     ).animate().fadeIn(),
-            ),
+                ],
+              )),
     );
   }
 }

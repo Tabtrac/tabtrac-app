@@ -56,3 +56,16 @@ final recentCreditRecordProvider =
     StateNotifierProvider<RecordListNotifier, List<UserRecord>>((ref) {
   return RecordListNotifier();
 });
+
+
+class BoolStateNotifier extends StateNotifier<bool> {
+  BoolStateNotifier(): super(true);
+  
+  void change(bool value){
+    state = value;
+  }
+}
+
+final recentLoadingProvider = StateNotifierProvider<BoolStateNotifier, bool>((ref) {
+  return BoolStateNotifier();
+});

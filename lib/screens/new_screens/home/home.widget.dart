@@ -5,10 +5,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fundz_app/constants/colors.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../../helpers/app_fonts.dart';
 import '../../../helpers/functions.dart';
 import '../../../widgets/no_activity.dart';
+import '../../../widgets/shimmers.widget.dart';
 import 'controllers/home.controller.dart';
 import 'providers/provider.dart';
 import 'widgets/actions.dart';
@@ -59,6 +61,7 @@ class _HomeWidgetState extends ConsumerState<HomeWidget> {
         homeController.getHeroWidgets(transH, widget.width);
     final recentDebtRecord = ref.watch(recentDebtRecordProvider);
     final recentCreditRecord = ref.watch(recentCreditRecordProvider);
+    final recentLoading = ref.watch(recentLoadingProvider);
     return Container(
       width: widget.width,
       height: widget.height * .9,
@@ -165,7 +168,19 @@ class _HomeWidgetState extends ConsumerState<HomeWidget> {
                     ),
                   ),
                   SizedBox(height: 10.h),
-                  if (recentCreditRecord.isEmpty && recentDebtRecord.isEmpty)
+                  if (recentLoading)
+                    Shimmer.fromColors(
+                      baseColor: AppColors.greyColor.withOpacity(.5),
+                      highlightColor: AppColors.primaryColor,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: 5,
+                        itemBuilder: (context, index) =>
+                            RecordActivityShimmer(width: widget.width),
+                      ),
+                    )
+                  else if (recentCreditRecord.isEmpty &&
+                      recentDebtRecord.isEmpty)
                     Container(
                       margin: EdgeInsets.only(top: 20.h),
                       child: NoActivity(

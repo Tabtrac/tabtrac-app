@@ -80,3 +80,20 @@ final isDeletingProvider =
     StateNotifierProvider.autoDispose<BoolStateNotifier, bool>((ref) {
   return BoolStateNotifier();
 });
+
+
+class ShimmerBoolStateNotifier extends StateNotifier<bool> {
+  ShimmerBoolStateNotifier(): super(true);
+  
+  void change(bool value){
+    state = value;
+  }
+}
+
+final clientLoadingProvider = StateNotifierProvider.autoDispose<ShimmerBoolStateNotifier, bool>((ref) {
+  return ShimmerBoolStateNotifier();
+});
+
+final allClientLoadingProvider = StateNotifierProvider<ShimmerBoolStateNotifier, bool>((ref) {
+  return ShimmerBoolStateNotifier();
+});

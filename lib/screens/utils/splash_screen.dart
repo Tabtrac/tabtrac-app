@@ -118,7 +118,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
-              width: width * .5,
+              width: width * .7,
               child: Image.asset(
                 'assets/images/splash.png',
                 fit: BoxFit.cover,

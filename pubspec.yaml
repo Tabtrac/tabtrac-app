@@ -70,6 +70,7 @@ dependencies:
   custom_sliding_segmented_control: ^1.8.1
   connectivity_plus: ^5.0.2
   flutter_background_service: ^5.0.5
+  shimmer: ^3.0.0
   # google_sign_in: ^6.2.1
   webview_flutter: ^4.4.3
   # syncfusion_flutter_charts: ^24.1.41

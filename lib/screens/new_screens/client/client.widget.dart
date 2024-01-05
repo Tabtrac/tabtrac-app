@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fundz_app/helpers/functions.dart';
 import 'package:heroicons/heroicons.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../../constants/colors.dart';
 import '../../../helpers/app_fonts.dart';
 import '../../../providers/providers.dart';
 import '../../../widgets/no_activity.dart';
+import '../../../widgets/shimmers.widget.dart';
 import '../../../widgets/widgets.utils.dart';
 import 'controller/client.controller.dart';
 import 'providers/provider.client.dart';
@@ -30,12 +33,12 @@ class ClientWidget extends ConsumerStatefulWidget {
 }
 
 class _ClientWidgetState extends ConsumerState<ClientWidget> {
-  
   @override
   Widget build(BuildContext context) {
     final transH = AppLocalizations.of(context)!;
     final isDarkMode = ref.watch(isDarkModeProvider);
     final clientList = ref.watch(clientListProvider);
+    final allClientLoading = ref.watch(allClientLoadingProvider);
     return Container(
       width: widget.width,
       height: widget.height * .9,
@@ -63,7 +66,8 @@ class _ClientWidgetState extends ConsumerState<ClientWidget> {
                 children: <Widget>[
                   InkWell(
                     onTap: () {
-                      AppWidgetsUtlis.searchClientList(widget.mainContext ?? context);
+                      AppWidgetsUtlis.searchClientList(
+                          widget.mainContext ?? context);
                     },
                     child: Container(
                       padding: const EdgeInsets.all(10),
@@ -108,13 +112,27 @@ class _ClientWidgetState extends ConsumerState<ClientWidget> {
             ],
           ),
           SizedBox(height: 20.h),
-          Flexible(
-            child: clientList.isEmpty
-                ? NoActivity(width: widget.width)
-                : SingleChildScrollView(
-                    child: ClientsWidget(width: widget.width),
-                  ),
-          ),
+          if (allClientLoading)
+            Flexible(
+              child: Shimmer.fromColors(
+                baseColor: AppColors.greyColor.withOpacity(.5),
+                highlightColor: AppColors.primaryColor,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: 10,
+                  itemBuilder: (context, index) =>
+                      RecordActivityShimmer(width: widget.width),
+                ),
+              ),
+            )
+          else
+            Flexible(
+              child: clientList.isEmpty
+                  ? NoActivity(width: widget.width)
+                  : SingleChildScrollView(
+                      child: ClientsWidget(width: widget.width),
+                    ),
+            ).animate().fade(),
         ],
       ),
     );

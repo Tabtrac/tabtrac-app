@@ -345,6 +345,7 @@ class RecordController {
   Future getRecentActivity() async {
     if (await isOnline()) {
       final transH = AppLocalizations.of(context)!;
+      ref.read(recentLoadingProvider.notifier).change(true);
       try {
         // Code Area
         final accessToken = await utitlityController.getData('access_token');
@@ -389,6 +390,7 @@ class RecordController {
         errorSnackBar(
             context: context, title: transH.error, message: transH.unkownError);
       }
+      ref.read(recentLoadingProvider.notifier).change(false);
     }
   }
 

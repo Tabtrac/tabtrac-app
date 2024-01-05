@@ -9,6 +9,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../constants/app_routes.dart';
 import '../../../../constants/colors.dart';
 import '../../../../widgets/activity.widget.dart';
+import '../../../../widgets/shimmers.widget.dart';
 import '../../record/providers/record.provider.dart';
 import '../providers/provider.dart';
 
