@@ -31,11 +31,13 @@ class _PrivacyPolicyState extends ConsumerState<PrivacyPolicy> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
-        title: Text(
-          transH.privacyPolicy.capitalizeAll(),
-          style: TextStyle(
-            color: Theme.of(context).textTheme.bodyMedium!.color,
-            fontFamily: AppFonts.actionFont,
+        title: FittedBox(
+          child: Text(
+            transH.privacyPolicy.capitalizeAll(),
+            style: TextStyle(
+              color: Theme.of(context).textTheme.bodyMedium!.color,
+              fontFamily: AppFonts.actionFont,
+            ),
           ),
         ),
       ),

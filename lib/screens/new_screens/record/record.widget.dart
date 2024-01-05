@@ -46,15 +46,17 @@ class _RecordWidgetState extends ConsumerState<RecordWidget> {
             children: <Widget>[
               ConstrainedBox(
                 constraints: BoxConstraints(maxWidth: widget.width * .6),
-                child: Text(
-                  transH.recordManagement.capitalizeAll(),
-                  style: TextStyle(
-                    color: AppColors.primaryColor,
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w600,
-                    fontFamily: AppFonts.actionFont,
+                child: FittedBox(
+                  child: Text(
+                    transH.recordManagement.capitalizeAll(),
+                    style: TextStyle(
+                      color: AppColors.primaryColor,
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: AppFonts.actionFont,
+                    ),
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  overflow: TextOverflow.ellipsis,
                 ),
               ),
             ],
