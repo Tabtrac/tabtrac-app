@@ -23,7 +23,7 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
     super.initState();
     controller = WebViewController()
       ..loadRequest(
-        Uri.parse('https://tabtrac.vercel.app/terms'),
+        Uri.parse('https://tabtrac.vercel.app/terms?type=app'),
       );
   }
 

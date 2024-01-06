@@ -23,7 +23,7 @@ class _AboutScreenState extends State<AboutScreen> {
     super.initState();
     controller = WebViewController()
       ..loadRequest(
-        Uri.parse('https://tabtrac.vercel.app/about'),
+        Uri.parse('https://tabtrac.vercel.app/about?type=app'),
       );
   }
 
@@ -229,7 +229,7 @@ class Menu extends StatelessWidget {
       onSelected: (value) async {
         switch (value) {
           case _MenuOptions.navigationDelegate:
-            launchUrlNow('https://tabtrac.vercel.app/terms');
+            launchUrlNow('https://tabtrac.vercel.app/about');
             break;
           case _MenuOptions.reload:
             controller.reload();
