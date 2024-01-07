@@ -131,16 +131,15 @@ class _ClientDetailsState extends ConsumerState<ClientDetails> {
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               width: width,
               height: height,
-              child: Column(
-                children: <Widget>[
-                  if (clientLoading)
-                    Expanded(child: CleintDetailsShimmer(width: width))
-                  else if (currentCleintDetails == null)
-                    NoActivity(width: width).animate().fadeIn(delay: 500.ms)
-                  else
-                    SingleChildScrollView(
-                      physics: const ClampingScrollPhysics(),
-                      child: Column(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                    if (clientLoading)
+                      Expanded(child: CleintDetailsShimmer(width: width))
+                    else if (currentCleintDetails == null)
+                      NoActivity(width: width).animate().fadeIn(delay: 500.ms)
+                    else
+                      Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           SizedBox(height: 20.h),
@@ -486,9 +485,9 @@ class _ClientDetailsState extends ConsumerState<ClientDetails> {
                             ],
                           )
                         ],
-                      ),
-                    ).animate().fadeIn(),
-                ],
+                      ).animate().fadeIn(),
+                  ],
+                ),
               )),
     );
   }
