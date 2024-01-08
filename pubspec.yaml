@@ -94,10 +94,10 @@ dev_dependencies:
 
 flutter_native_splash:
   color: "#FFFFFF"
-  image: "assets/images/splash2.png"
+  image: "assets/images/logo.png"
   android_12:
     color: "#FFFFFF"
-    image: "assets/images/splash2.png"
+    image: "assets/images/logo.png"
     icon_background_color: "#FFFFFF"
 
 # For information on the generic Dart part of this file, see the
