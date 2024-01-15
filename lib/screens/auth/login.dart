@@ -98,6 +98,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                             fontSize: 24.sp,
                             fontFamily: AppFonts.actionFont,
                           ),
+                          textScaleFactor: 1,
                         ),
                         SizedBox(height: 30.h),
                         FormInput(
