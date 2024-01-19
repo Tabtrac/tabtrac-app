@@ -34,11 +34,12 @@ bool validatePhoneNumber(String phoneNumber) {
   }
   return false;
 }
+
 void launchUrlNow(String url) async {
   if (await canLaunch(url)) {
     await launch(url);
   } else {
-    // 
+    //
   }
 }
 
@@ -379,8 +380,10 @@ extension StringExtension on String {
     List<String> exploded = split(' ');
     List<String> emptyParam = [];
     for (var element in exploded) {
-      emptyParam.add(
-          "${element[0].toUpperCase()}${element.substring(1).toLowerCase()}");
+      if (element.isNotEmpty) {
+        emptyParam.add(
+            "${element[0].toUpperCase()}${element.substring(1).toLowerCase()}");
+      }
     }
     return emptyParam.join(' ');
   }
