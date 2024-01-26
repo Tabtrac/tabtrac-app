@@ -16,7 +16,6 @@ import '../../../widgets/bottom.nav.widgets.dart';
 import '../../../widgets/widgets.utils.dart';
 import '../client/client.widget.dart';
 import '../client/controller/client.controller.dart';
-import '../home/controllers/home.controller.dart';
 import '../home/home.widget.dart';
 import '../record/controller/record.controller.dart';
 import '../record/record.widget.dart';
