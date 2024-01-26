@@ -1,11 +1,9 @@
 // ignore_for_file: use_build_context_synchronously, avoid_print
 
-import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_native_splash/cli_commands.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:fundz_app/helpers/app_extensions.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -178,7 +176,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text(
-                          "${transH.allHaveAcc.capitalize()}?",
+                          "${transH.allHaveAcc.capitalizeFirst.toString()}?",
                           style: TextStyle(
                             color: AppColors.primaryColor,
                             fontSize: 16.sp,
@@ -215,20 +213,20 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
     if (name.isEmpty || email.isEmpty || password.isEmpty) {
       errorSnackBar(
         context: context,
-        title: transH.error.capitalize(),
-        message: transH.fieldsRequired.capitalize(),
+        title: transH.error.capitalizeFirst.toString(),
+        message: transH.fieldsRequired.capitalizeFirst.toString(),
       );
     } else if (!isEmail(email)) {
       errorSnackBar(
         context: context,
-        title: transH.error.capitalize(),
-        message: transH.inValidEmail.capitalize(),
+        title: transH.error.capitalizeFirst.toString(),
+        message: transH.inValidEmail.capitalizeFirst.toString(),
       );
     } else if (password.length < 8) {
       errorSnackBar(
         context: context,
-        title: transH.error.capitalize(),
-        message: transH.passwordinvalid.capitalize(),
+        title: transH.error.capitalizeFirst.toString(),
+        message: transH.passwordinvalid.capitalizeFirst.toString(),
       );
     } else {
       final utlController = ref.read(utlControllerProvider.notifier);
@@ -242,36 +240,36 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
           utlController.writeData('isLoggedIn', "yes");
 
           successSnackBar(
-              title: transH.success.capitalize(),
-              message: transH.registSuccess.capitalize());
+              title: transH.success.capitalizeFirst.toString(),
+              message: transH.registSuccess.capitalizeFirst.toString());
           navigateReplacementNamed(context, AppRoutes.otpRoute);
         }
       } else if (data['error'] == 'Email already exists.') {
         errorSnackBar(
-          title: transH.error.capitalize(),
-          message: transH.mailExists.capitalize(),
+          title: transH.error.capitalizeFirst.toString(),
+          message: transH.mailExists.capitalizeFirst.toString(),
         );
       } else if (data['error'][0] == 'This password is too common.') {
         errorSnackBar(
-          title: transH.error.capitalize(),
-          message: transH.pTooCommon.capitalize(),
+          title: transH.error.capitalizeFirst.toString(),
+          message: transH.pTooCommon.capitalizeFirst.toString(),
         );
       } else if (data['error'][0] ==
           'This password is too short. It must contain at least 8 characters.') {
         errorSnackBar(
-          title: transH.error.capitalize(),
-          message: transH.pTooShort.capitalize(),
+          title: transH.error.capitalizeFirst.toString(),
+          message: transH.pTooShort.capitalizeFirst.toString(),
         );
       } else if (data['error'] == 'network') {
         errorSnackBar(
-          title: transH.error.capitalize(),
-          message: transH.network.capitalize(),
+          title: transH.error.capitalizeFirst.toString(),
+          message: transH.network.capitalizeFirst.toString(),
         );
         ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
       } else {
         errorSnackBar(
-          title: transH.error.capitalize(),
-          message: transH.unkownError.capitalize(),
+          title: transH.error.capitalizeFirst.toString(),
+          message: transH.unkownError.capitalizeFirst.toString(),
         );
       }
     }

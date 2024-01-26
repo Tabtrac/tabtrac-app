@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_native_splash/cli_commands.dart';
+
+import 'package:fundz_app/helpers/app_extensions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,7 +14,6 @@ import '../../../widgets/no_activity.dart';
 import '../../../widgets/shimmers.widget.dart';
 import 'controllers/home.controller.dart';
 import 'providers/provider.dart';
-import 'widgets/actions.dart';
 import 'widgets/recent_activities.dart';
 
 // Providers
@@ -89,7 +89,7 @@ class _HomeWidgetState extends ConsumerState<HomeWidget> {
                       overflow: TextOverflow.ellipsis,
                     ),
                     Text(
-                      transH.anOverviewOfFinance.capitalize(),
+                      transH.anOverviewOfFinance.capitalizeFirst.toString(),
                       style: TextStyle(
                         color: AppColors.primaryColor,
                         fontFamily: AppFonts.actionFont,

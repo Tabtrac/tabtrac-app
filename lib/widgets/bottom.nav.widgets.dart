@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/cli_commands.dart';
+
+import 'package:fundz_app/helpers/app_extensions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fundz_app/constants/app_routes.dart';
@@ -42,7 +43,7 @@ class CustomBottomNav extends ConsumerWidget {
           color: AppColors.whiteColor,
           size: 24.sp,
         ),
-        label: transH.home.capitalize(),
+        label: transH.home.capitalizeFirst.toString(),
       ),
       NavItem(
         icon: HeroIcon(
@@ -57,7 +58,7 @@ class CustomBottomNav extends ConsumerWidget {
           color: AppColors.whiteColor,
           size: 24.sp,
         ),
-        label: transH.client.capitalize(),
+        label: transH.client.capitalizeFirst.toString(),
       ),
       NavItem(
         icon: HeroIcon(
@@ -72,7 +73,7 @@ class CustomBottomNav extends ConsumerWidget {
           color: AppColors.whiteColor,
           size: 24.sp,
         ),
-        label: transH.create.capitalize(),
+        label: transH.create.capitalizeFirst.toString(),
       ),
       NavItem(
         icon: HeroIcon(
@@ -87,7 +88,7 @@ class CustomBottomNav extends ConsumerWidget {
           color: AppColors.whiteColor,
           size: 24.sp,
         ),
-        label: transH.record.capitalize(),
+        label: transH.record.capitalizeFirst.toString(),
       ),
       // NavItem(
       //   icon: HeroIcon(
@@ -102,7 +103,7 @@ class CustomBottomNav extends ConsumerWidget {
       //     color: AppColors.whiteColor,
       //     size: 24.sp,
       //   ),
-      //   label: transH.analytic.capitalize(),
+      //   label: transH.analytic.capitalizeFirst.toString(),
       // ),
       NavItem(
         icon: HeroIcon(
@@ -117,7 +118,7 @@ class CustomBottomNav extends ConsumerWidget {
           color: AppColors.whiteColor,
           size: 24.sp,
         ),
-        label: transH.settings.capitalize(),
+        label: transH.settings.capitalizeFirst.toString(),
       ),
     ];
     return FittedBox(

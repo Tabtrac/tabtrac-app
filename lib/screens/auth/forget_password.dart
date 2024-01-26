@@ -1,11 +1,11 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/cli_commands.dart';
+
+import 'package:fundz_app/helpers/app_extensions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fundz_app/helpers/app_extensions.dart';
 
 import '../../constants/app_routes.dart';
 import '../../constants/colors.dart';
@@ -90,7 +90,7 @@ class _ForgottenPasswordState extends ConsumerState<ForgottenPassword> {
                         ),
                         SizedBox(height: height * .02),
                         Text(
-                          "${transH.forgetPass}?".capitalize(),
+                          "${transH.forgetPass}?".capitalizeFirst.toString(),
                           style: TextStyle(
                             color: AppColors.primaryColor,
                             fontSize: 24.sp,
@@ -110,7 +110,7 @@ class _ForgottenPasswordState extends ConsumerState<ForgottenPassword> {
                         FormInput(
                           width,
                           controller: email,
-                          hintText: transH.enterEmail.capitalize(),
+                          hintText: transH.enterEmail.capitalizeFirst.toString(),
                           isPassword: false,
                           isLast: true,
                         ),
@@ -143,7 +143,7 @@ class _ForgottenPasswordState extends ConsumerState<ForgottenPassword> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text(
-                          "${transH.rememberPass.capitalize()}?",
+                          "${transH.rememberPass.capitalizeFirst.toString()}?",
                           style: TextStyle(
                             color: AppColors.primaryColor,
                             fontSize: 16.sp,
@@ -184,14 +184,14 @@ class _ForgottenPasswordState extends ConsumerState<ForgottenPassword> {
     if (email.isEmpty) {
       errorSnackBar(
         context: context,
-        title: transH.error.capitalize(),
-        message: transH.fieldsRequired.capitalize(),
+        title: transH.error.capitalizeFirst.toString(),
+        message: transH.fieldsRequired.capitalizeFirst.toString(),
       );
     } else if (!email.isEmail) {
       errorSnackBar(
         context: context,
-        title: transH.inValidEmail.capitalize(),
-        message: transH.fieldsRequired.capitalize(),
+        title: transH.inValidEmail.capitalizeFirst.toString(),
+        message: transH.fieldsRequired.capitalizeFirst.toString(),
       );
     } else {
       final data = await ref
@@ -200,27 +200,27 @@ class _ForgottenPasswordState extends ConsumerState<ForgottenPassword> {
       final utilityController = UtitlityController();
       if (data['error'] == 'email not found') {
         errorSnackBar(
-          title: transH.error.capitalize(),
-          message: transH.inValidEmail.capitalize(),
+          title: transH.error.capitalizeFirst.toString(),
+          message: transH.inValidEmail.capitalizeFirst.toString(),
         );
       } else if (data['response'] == 'otp sent') {
         utilityController.writeData('access_token', data['access_token']);
         utilityController.writeData('refresh_token', data['refresh_token']);
         successSnackBar(
-          title: transH.success.capitalize(),
-          message: transH.otpCodeSentToMail.capitalize(),
+          title: transH.success.capitalizeFirst.toString(),
+          message: transH.otpCodeSentToMail.capitalizeFirst.toString(),
         );
         navigateNamed(context, AppRoutes.forgottenPasswordResetRoute);
       } else if (data['error'] == 'network') {
         errorSnackBar(
-          title: transH.error.capitalize(),
-          message: transH.network.capitalize(),
+          title: transH.error.capitalizeFirst.toString(),
+          message: transH.network.capitalizeFirst.toString(),
         );
         ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
       } else {
         errorSnackBar(
-          title: transH.error.capitalize(),
-          message: transH.unkownError.capitalize(),
+          title: transH.error.capitalizeFirst.toString(),
+          message: transH.unkownError.capitalizeFirst.toString(),
         );
         ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
       }

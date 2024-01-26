@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/cli_commands.dart';
+
+import 'package:fundz_app/helpers/app_extensions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -12,7 +13,6 @@ final currentTabProvider =
     StateNotifierProvider<CurrentTabNotifier, String>((ref) {
   return CurrentTabNotifier();
 });
-
 
 class CustomTabWidget extends ConsumerStatefulWidget {
   final double width;
@@ -40,7 +40,7 @@ class _CustomTabWidgetState extends ConsumerState<CustomTabWidget> {
         initialValue: 1,
         children: {
           1: Text(
-            transH.debt.capitalize(),
+            transH.debt.capitalizeFirst.toString(),
             style: TextStyle(
               color: currentTab == 'debt'
                   ? AppColors.whiteColor
@@ -49,7 +49,7 @@ class _CustomTabWidgetState extends ConsumerState<CustomTabWidget> {
             ),
           ),
           2: Text(
-            transH.credit.capitalize(),
+            transH.credit.capitalizeFirst.toString(),
             style: TextStyle(
               color: currentTab == 'credit'
                   ? AppColors.whiteColor

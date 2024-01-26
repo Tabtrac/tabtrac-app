@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/cli_commands.dart';
+
+import 'package:fundz_app/helpers/app_extensions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -71,7 +72,7 @@ class _SecondFormCreateState extends ConsumerState<SecondFormCreate> {
         ),
         SizedBox(height: 10.h),
         Text(
-          transH.paymentDate.capitalize(),
+          transH.paymentDate.capitalizeFirst.toString(),
           style: TextStyle(
             fontFamily: AppFonts.actionFont,
             fontSize: 14.sp,
@@ -109,7 +110,7 @@ class _SecondFormCreateState extends ConsumerState<SecondFormCreate> {
                     fontSize: 14.sp,
                   ),
                   decoration: InputDecoration(
-                    hintText: transH.paymentDate.capitalize(),
+                    hintText: transH.paymentDate.capitalizeFirst.toString(),
                     hintStyle: TextStyle(
                       color: isDarkMode
                           ? AppColors.darkThemeColor
@@ -137,7 +138,7 @@ class _SecondFormCreateState extends ConsumerState<SecondFormCreate> {
         ),
         SizedBox(height: 10.h),
         Text(
-          transH.price.capitalize(),
+          transH.price.capitalizeFirst.toString(),
           style: TextStyle(
             fontFamily: AppFonts.actionFont,
             fontSize: 14.sp,
@@ -198,7 +199,7 @@ class _SecondFormCreateState extends ConsumerState<SecondFormCreate> {
                   keyboardType: TextInputType.number,
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
-                    hintText: transH.amount.capitalize(),
+                    hintText: transH.amount.capitalizeFirst.toString(),
                     hintStyle: TextStyle(
                       color: isDarkMode
                           ? AppColors.darkThemeColor

@@ -4,7 +4,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/cli_commands.dart';
+
+import 'package:fundz_app/helpers/app_extensions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -136,9 +137,9 @@ class UtitlityController {
                 await LocalNotifications.showNotification(
                   id: id,
                   title:
-                      "${transH.youOwe.capitalize()} ${value['client_name'].toString().capitalizeAll()} ${moneyComma(value['amount'], value['currency'])}",
+                      "${transH.youOwe.capitalizeFirst.toString()} ${value['client_name'].toString().capitalizeAll()} ${moneyComma(value['amount'], value['currency'])}",
                   body:
-                      '${transH.toBePaidBefore.capitalize()} ${regularDateFormat(DateTime.parse(value['payment_date']), currentLocale)}',
+                      '${transH.toBePaidBefore.capitalizeFirst.toString()} ${regularDateFormat(DateTime.parse(value['payment_date']), currentLocale)}',
                   payload: value['id'].toString(),
                 );
               });
@@ -150,7 +151,7 @@ class UtitlityController {
                   title:
                       "${value['client_name'].toString().capitalizeAll()} ${transH.owesYou}  ${moneyComma(value['amount'], value['currency'])}",
                   body:
-                      '${transH.toBePaidBefore.capitalize()} ${regularDateFormat(DateTime.parse(value['payment_date']), currentLocale)}',
+                      '${transH.toBePaidBefore.capitalizeFirst.toString()} ${regularDateFormat(DateTime.parse(value['payment_date']), currentLocale)}',
                   payload: value['id'].toString(),
                 );
               });
@@ -161,9 +162,9 @@ class UtitlityController {
                 await LocalNotifications.showNotification(
                   id: id,
                   title:
-                      "${transH.youOwe.capitalize()} ${value['client_name'].toString().capitalizeAll()} ${moneyComma(value['amount'], value['currency'])}",
+                      "${transH.youOwe.capitalizeFirst.toString()} ${value['client_name'].toString().capitalizeAll()} ${moneyComma(value['amount'], value['currency'])}",
                   body:
-                      '${transH.toBePaidBefore.capitalize()} ${regularDateFormat(DateTime.parse(value['payment_date']), currentLocale)}',
+                      '${transH.toBePaidBefore.capitalizeFirst.toString()} ${regularDateFormat(DateTime.parse(value['payment_date']), currentLocale)}',
                   payload: value['id'].toString(),
                 );
               });
@@ -175,7 +176,7 @@ class UtitlityController {
                   title:
                       "${value['client_name'].toString().capitalizeAll()} ${transH.owesYou}  ${moneyComma(value['amount'], value['currency'])}",
                   body:
-                      '${transH.toBePaidBefore.capitalize()} ${regularDateFormat(DateTime.parse(value['payment_date']), currentLocale)}',
+                      '${transH.toBePaidBefore.capitalizeFirst.toString()} ${regularDateFormat(DateTime.parse(value['payment_date']), currentLocale)}',
                   payload: value['id'].toString(),
                 );
               });

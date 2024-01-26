@@ -17,7 +17,6 @@ import '../screens/liability/edit_screen.dart';
 import '../screens/liability/liability_detail.dart';
 import '../screens/main/about.dart';
 import '../screens/main/privacy_policy.dart';
-import '../screens/main/root.dart';
 import '../screens/main/statistics.dart';
 import '../screens/main/terms_and_conditions.dart';
 import '../screens/new_screens/actions/create.dart';

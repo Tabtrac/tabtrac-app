@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/cli_commands.dart';
+
+import 'package:fundz_app/helpers/app_extensions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:fundz_app/helpers/app_extensions.dart';
 import 'package:fundz_app/models/record.model.dart';
 
 import '../constants/colors.dart';
@@ -105,7 +105,7 @@ class AppWidgetsUtlis {
         return AlertDialog(
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           title: Text(
-            "${transH.delete} ${transH.client} ${transH.record}".capitalize(),
+            "${transH.delete} ${transH.client} ${transH.record}".capitalizeFirst.toString(),
             style: TextStyle(
               fontSize: 20.sp,
               fontFamily: AppFonts.actionFont,
@@ -116,7 +116,7 @@ class AppWidgetsUtlis {
             child: Column(
               children: <Widget>[
                 Text(
-                  transH.clientDeleteConfirmation.capitalize(),
+                  transH.clientDeleteConfirmation.capitalizeFirst.toString(),
                   style: TextStyle(
                     fontSize: 16.sp,
                     fontFamily: AppFonts.actionFont,
@@ -172,7 +172,7 @@ class AppWidgetsUtlis {
         return AlertDialog(
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           title: Text(
-            transH.notice.capitalize(),
+            transH.notice.capitalizeFirst.toString(),
             style: TextStyle(
               fontSize: 20.sp,
               fontFamily: AppFonts.actionFont,
@@ -183,7 +183,7 @@ class AppWidgetsUtlis {
             child: Column(
               children: <Widget>[
                 Text(
-                  transH.markAsPaidConfirmation.capitalize(),
+                  transH.markAsPaidConfirmation.capitalizeFirst.toString(),
                   style: TextStyle(
                     fontSize: 16.sp,
                     fontFamily: AppFonts.actionFont,
@@ -239,7 +239,7 @@ class AppWidgetsUtlis {
         return AlertDialog(
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           title: Text(
-            transH.notice.capitalize(),
+            transH.notice.capitalizeFirst.toString(),
             style: TextStyle(
               fontSize: 20.sp,
               fontFamily: AppFonts.actionFont,
@@ -250,7 +250,7 @@ class AppWidgetsUtlis {
             child: Column(
               children: <Widget>[
                 Text(
-                  transH.deleteConfirmation.capitalize(),
+                  transH.deleteConfirmation.capitalizeFirst.toString(),
                   style: TextStyle(
                     fontSize: 16.sp,
                     fontFamily: AppFonts.actionFont,

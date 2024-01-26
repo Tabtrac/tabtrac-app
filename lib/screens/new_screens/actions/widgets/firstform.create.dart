@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_native_splash/cli_commands.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fundz_app/helpers/functions.dart';
+
+import 'package:fundz_app/helpers/app_extensions.dart';
 
 import '../../../../constants/colors.dart';
 import '../../../../helpers/app_fonts.dart';
@@ -57,7 +58,7 @@ class _FirstFormCreateState extends ConsumerState<FirstFormCreate> {
         ),
         SizedBox(height: 10.h),
         Text(
-          transH.client.capitalize(),
+          transH.client.capitalizeFirst.toString(),
           style: TextStyle(
             fontFamily: AppFonts.actionFont,
             fontSize: 14.sp,
@@ -102,7 +103,7 @@ class _FirstFormCreateState extends ConsumerState<FirstFormCreate> {
                     textInputAction: TextInputAction.next,
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.all(0),
-                      hintText: transH.searchClientList.capitalize(),
+                      hintText: transH.searchClientList.capitalizeFirst.toString(),
                       enabledBorder: InputBorder.none,
                       disabledBorder: InputBorder.none,
                       focusedBorder: InputBorder.none,
@@ -124,7 +125,7 @@ class _FirstFormCreateState extends ConsumerState<FirstFormCreate> {
                   ),
                 ),
                 child: Text(
-                  transH.addNew.capitalize(),
+                  transH.addNew.capitalizeFirst.toString(),
                   style: TextStyle(
                     color: AppColors.primaryColor,
                     fontSize: 14.sp,
@@ -174,7 +175,7 @@ class _FirstFormCreateState extends ConsumerState<FirstFormCreate> {
             : const SizedBox(),
         SizedBox(height: 5.h),
         Text(
-          transH.clientEmail.capitalize(),
+          transH.clientEmail.capitalizeFirst.toString(),
           style: TextStyle(
             fontFamily: AppFonts.actionFont,
             fontSize: 14.sp,
@@ -194,7 +195,7 @@ class _FirstFormCreateState extends ConsumerState<FirstFormCreate> {
         ),
         SizedBox(height: 10.h),
         Text(
-          transH.clientPhonenumber.capitalize(),
+          transH.clientPhonenumber.capitalizeFirst.toString(),
           style: TextStyle(
             fontFamily: AppFonts.actionFont,
             fontSize: 14.sp,

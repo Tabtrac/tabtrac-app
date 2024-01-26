@@ -3,7 +3,8 @@
 import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/cli_commands.dart';
+
+import 'package:fundz_app/helpers/app_extensions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
@@ -15,7 +16,6 @@ import '../../constants/app_routes.dart';
 import '../../constants/colors.dart';
 import '../../helpers/app_fonts.dart';
 import '../../helpers/functions.dart';
-import '../../helpers/app_extensions.dart';
 import '../../helpers/notification_helpers.dart';
 import '../../providers/providers.dart';
 import '../../providers/textfield_providers.dart';
@@ -463,7 +463,7 @@ class _CreateDebtScreenState extends ConsumerState<CreateDebtScreen> {
                         minLines: 5,
                         keyboardType: TextInputType.multiline,
                         decoration: InputDecoration(
-                          hintText: '${transH.descriptionText.capitalize()}...',
+                          hintText: '${transH.descriptionText.capitalizeFirst.toString()}...',
                           hintStyle: TextStyle(
                             color: isDarkMode
                                 ? AppColors.darkThemeColor
@@ -647,24 +647,24 @@ class _CreateDebtScreenState extends ConsumerState<CreateDebtScreen> {
         description.isEmpty) {
       errorSnackBar(
         context: context,
-        title: transH.error.capitalize(),
-        message: transH.fieldsRequired.capitalize(),
+        title: transH.error.capitalizeFirst.toString(),
+        message: transH.fieldsRequired.capitalizeFirst.toString(),
       );
     } else if (emailAddress.isNotEmpty && !emailAddress.isEmail) {
       errorSnackBar(
         context: context,
-        title: transH.error.capitalize(),
-        message: transH.inValidEmail.capitalize(),
+        title: transH.error.capitalizeFirst.toString(),
+        message: transH.inValidEmail.capitalizeFirst.toString(),
       );
     } else if (phoneNumber.isNotEmpty && !phoneNumber.isPhoneNumber) {
       AnimatedSnackBar.material(
-        "${transH.error}, ${transH.inValidPhone}".capitalize(),
+        "${transH.error}, ${transH.inValidPhone}".capitalizeFirst.toString(),
         type: AnimatedSnackBarType.error,
       ).show(context);
     } else if (!price.isNumericOnly) {
       // TODO: there need to be a validation on price vairiable
       AnimatedSnackBar.material(
-        "${transH.error}, ${transH.unkownError}".capitalize(),
+        "${transH.error}, ${transH.unkownError}".capitalizeFirst.toString(),
         type: AnimatedSnackBarType.error,
       ).show(context);
     } else {
@@ -680,48 +680,48 @@ class _CreateDebtScreenState extends ConsumerState<CreateDebtScreen> {
 
       if (data['response'] == 'Validation error') {
         AnimatedSnackBar.material(
-          "${transH.error}, ${transH.invalidCredentials}".capitalize(),
+          "${transH.error}, ${transH.invalidCredentials}".capitalizeFirst.toString(),
           type: AnimatedSnackBarType.error,
         ).show(context);
       } else if (data['response'] == 'unexpected error') {
         errorSnackBar(
           context: context,
-          title: transH.error.capitalize(),
-          message: transH.unkownError.capitalize(),
+          title: transH.error.capitalizeFirst.toString(),
+          message: transH.unkownError.capitalizeFirst.toString(),
         );
       } else if (data['response'] == 'user does not exist') {
         AnimatedSnackBar.material(
-          "${transH.error}, ${transH.invalidUser}".capitalize(),
+          "${transH.error}, ${transH.invalidUser}".capitalizeFirst.toString(),
           type: AnimatedSnackBarType.error,
         ).show(context);
       } else if (data['response'] == 'error') {
         errorSnackBar(
           context: context,
-          title: transH.error.capitalize(),
-          message: transH.unkownError.capitalize(),
+          title: transH.error.capitalizeFirst.toString(),
+          message: transH.unkownError.capitalizeFirst.toString(),
         );
       } else if (data['error'] == 'network') {
         errorSnackBar(
           context: context,
-          title: transH.error.capitalize(),
-          message: transH.network.capitalize(),
+          title: transH.error.capitalizeFirst.toString(),
+          message: transH.network.capitalizeFirst.toString(),
         );
       } else if (data['response'] == "Debt Added Successfully") {
         AnimatedSnackBar.material(
-          "${transH.success}, ${transH.debtAdded}".capitalize(),
+          "${transH.success}, ${transH.debtAdded}".capitalizeFirst.toString(),
           type: AnimatedSnackBarType.success,
         ).show(context);
         LocalNotifications.showNotification(
-            title: transH.success.capitalize(),
-            body: transH.debtAdded.capitalize(),
+            title: transH.success.capitalizeFirst.toString(),
+            body: transH.debtAdded.capitalizeFirst.toString(),
             payload: '');
         ref.read(currentIndexProvider.notifier).changeIndex(0);
         navigateReplacementNamed(context, AppRoutes.home);
       } else {
         errorSnackBar(
           context: context,
-          title: transH.error.capitalize(),
-          message: transH.unkownError.capitalize(),
+          title: transH.error.capitalizeFirst.toString(),
+          message: transH.unkownError.capitalizeFirst.toString(),
         );
       }
     }

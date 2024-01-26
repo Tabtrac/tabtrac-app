@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/cli_commands.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fundz_app/helpers/app_extensions.dart';
 import 'package:fundz_app/helpers/app_fonts.dart';
 
 import '../../constants/app_routes.dart';
@@ -53,7 +53,7 @@ class _PasswordResetSuccessState extends ConsumerState<PasswordResetSuccess> {
             ),
             SizedBox(height: 10.h),
             Text(
-              transH.passwordChangedMessage.capitalize(),
+              transH.passwordChangedMessage.capitalizeFirst.toString(),
               style: TextStyle(
                 color: AppColors.blackColor,
                 fontSize: 16.sp,

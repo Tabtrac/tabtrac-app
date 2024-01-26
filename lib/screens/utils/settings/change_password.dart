@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/cli_commands.dart';
+
+import 'package:fundz_app/helpers/app_extensions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -58,7 +58,7 @@ class _ChangePasswordState extends ConsumerState<ChangePassword> {
             : null,
         centerTitle: true,
         title: Text(
-          transH.changePassword.capitalize(),
+          transH.changePassword.capitalizeFirst.toString(),
           style: TextStyle(
             color: AppColors.primaryColor,
             fontWeight: FontWeight.bold,
@@ -75,7 +75,7 @@ class _ChangePasswordState extends ConsumerState<ChangePassword> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              transH.changePassMessage.capitalize(),
+              transH.changePassMessage.capitalizeFirst.toString(),
               style: TextStyle(
                   fontFamily: AppFonts.primaryFont2,
                   fontSize: 14.sp,

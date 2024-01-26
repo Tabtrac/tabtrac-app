@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/cli_commands.dart';
+
+import 'package:fundz_app/helpers/app_extensions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fundz_app/helpers/functions.dart';
 
@@ -66,7 +66,8 @@ class _ThirdFormCreateState extends ConsumerState<ThirdFormCreate> {
             minLines: 5,
             keyboardType: TextInputType.multiline,
             decoration: InputDecoration(
-              hintText: '${transH.descriptionText.capitalize()}...',
+              hintText:
+                  '${transH.descriptionText.capitalizeFirst.toString()}...',
               hintStyle: TextStyle(
                 color: isDarkMode
                     ? AppColors.darkThemeColor

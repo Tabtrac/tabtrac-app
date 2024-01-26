@@ -4,7 +4,8 @@ import 'dart:async';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/cli_commands.dart';
+
+import 'package:fundz_app/helpers/app_extensions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fundz_app/widgets/snackbars.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -44,18 +45,18 @@ class _RootHomeState extends ConsumerState<RootHome> {
             result == ConnectivityResult.vpn) {
           if (await isOnline()) {
             successSnackBar(
-                title: transH.internet.capitalize(),
-                message: transH.userOnline.capitalize());
+                title: transH.internet.capitalizeFirst.toString(),
+                message: transH.userOnline.capitalizeFirst.toString());
             initializeData();
           } else {
             errorSnackBar(
-                title: transH.internet.capitalize(),
-                message: transH.userOffline.capitalize());
+                title: transH.internet.capitalizeFirst.toString(),
+                message: transH.userOffline.capitalizeFirst.toString());
           }
         } else {
           errorSnackBar(
-              title: transH.internet.capitalize(),
-              message: transH.userOffline.capitalize());
+              title: transH.internet.capitalizeFirst.toString(),
+              message: transH.userOffline.capitalizeFirst.toString());
         }
       });
     });

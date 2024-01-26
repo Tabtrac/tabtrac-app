@@ -3,7 +3,8 @@
 import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/cli_commands.dart';
+
+import 'package:fundz_app/helpers/app_extensions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
@@ -13,7 +14,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../constants/colors.dart';
 import '../../helpers/app_fonts.dart';
 import '../../helpers/functions.dart';
-import '../../helpers/app_extensions.dart';
 import '../../helpers/notification_helpers.dart';
 import '../../models/debt.dart';
 import '../../providers/providers.dart';
@@ -292,7 +292,7 @@ class _DepositeDebtScreenState extends ConsumerState<DepositeDebtScreen> {
                         minLines: 5,
                         keyboardType: TextInputType.multiline,
                         decoration: InputDecoration(
-                          hintText: '${transH.descriptionText.capitalize()}...',
+                          hintText: '${transH.descriptionText.capitalizeFirst.toString()}...',
                           hintStyle: TextStyle(
                             color: isDarkMode
                                 ? AppColors.darkThemeColor
@@ -373,13 +373,13 @@ class _DepositeDebtScreenState extends ConsumerState<DepositeDebtScreen> {
     if (paymentDate.isEmpty || price.isEmpty || description.isEmpty) {
       errorSnackBar(
         context: context,
-        title: transH.error.capitalize(),
-        message: transH.fieldsRequired.capitalize(),
+        title: transH.error.capitalizeFirst.toString(),
+        message: transH.fieldsRequired.capitalizeFirst.toString(),
       );
       ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
     } else if (!price.isNumericOnly) {
       AnimatedSnackBar.material(
-        "${transH.error}, ${transH.unkownError}".capitalize(),
+        "${transH.error}, ${transH.unkownError}".capitalizeFirst.toString(),
         type: AnimatedSnackBarType.error,
       ).show(context);
       ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
@@ -454,32 +454,32 @@ class _DepositeDebtScreenState extends ConsumerState<DepositeDebtScreen> {
 
       if (data['response'] == 'Validation error') {
         AnimatedSnackBar.material(
-          "${transH.error}, ${transH.invalidCredentials}".capitalize(),
+          "${transH.error}, ${transH.invalidCredentials}".capitalizeFirst.toString(),
           type: AnimatedSnackBarType.error,
         ).show(context);
       } else if (data['response'] == "Debt does not exists") {
         errorSnackBar(
           context: context,
-          title: transH.error.capitalize(),
-          message: transH.unkownError.capitalize(),
+          title: transH.error.capitalizeFirst.toString(),
+          message: transH.unkownError.capitalizeFirst.toString(),
         );
       } else if (data['response'] == "user does not exist") {
         Navigator.pop(context);
         AnimatedSnackBar.material(
-          "${transH.error}, ${transH.invalidUser}".capitalize(),
+          "${transH.error}, ${transH.invalidUser}".capitalizeFirst.toString(),
           type: AnimatedSnackBarType.error,
         ).show(context);
       } else if (data['response'] == 'error') {
         errorSnackBar(
           context: context,
-          title: transH.error.capitalize(),
-          message: transH.unkownError.capitalize(),
+          title: transH.error.capitalizeFirst.toString(),
+          message: transH.unkownError.capitalizeFirst.toString(),
         );
       } else if (data['error'] == 'network') {
         errorSnackBar(
           context: context,
-          title: transH.error.capitalize(),
-          message: transH.network.capitalize(),
+          title: transH.error.capitalizeFirst.toString(),
+          message: transH.network.capitalizeFirst.toString(),
         );
       } else if (data['response'] == "Deposit Successful") {
         Debt debtRecord = debt.copyWith(
@@ -487,18 +487,18 @@ class _DepositeDebtScreenState extends ConsumerState<DepositeDebtScreen> {
           depositedDate: depositedDate,
           description: description,
         );
-        LocalNotifications.showNotification(title: transH.success.capitalize(), body: transH.depositSuccess.capitalize(), payload: '');
+        LocalNotifications.showNotification(title: transH.success.capitalizeFirst.toString(), body: transH.depositSuccess.capitalizeFirst.toString(), payload: '');
         ref.read(debtNotifierProvider.notifier).changeValues(debtRecord);
         Navigator.pop(context);
         AnimatedSnackBar.material(
-          "${transH.success}, ${transH.depositSuccess}".capitalize(),
+          "${transH.success}, ${transH.depositSuccess}".capitalizeFirst.toString(),
           type: AnimatedSnackBarType.success,
         ).show(context);
       } else {
         errorSnackBar(
           context: context,
-          title: transH.error.capitalize(),
-          message: transH.unkownError.capitalize(),
+          title: transH.error.capitalizeFirst.toString(),
+          message: transH.unkownError.capitalizeFirst.toString(),
         );
       }
       ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);

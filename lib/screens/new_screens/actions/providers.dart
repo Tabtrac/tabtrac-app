@@ -1,9 +1,9 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/cli_commands.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:fundz_app/helpers/app_extensions.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fundz_app/widgets/snackbars.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -11,7 +11,6 @@ import '../../../providers/providers.dart';
 import '../../../providers/textfield_providers.dart';
 import '../client/models/client.model.dart';
 import 'controllers/action.controller.dart';
-import 'providers/actions.provider.dart';
 
 final currentStageProvider =
     StateNotifierProvider.autoDispose<CurrentStageNotifier, int>((ref) {
@@ -44,8 +43,8 @@ class CurrentStageNotifier extends StateNotifier<int> {
       if (client == null) {
         errorSnackBar(
           context: context,
-          title: transH.error.capitalize(),
-          message: transH.pleaseSelectClient.capitalize(),
+          title: transH.error.capitalizeFirst.toString(),
+          message: transH.pleaseSelectClient.capitalizeFirst.toString(),
         );
         return false;
       } else {
@@ -56,8 +55,8 @@ class CurrentStageNotifier extends StateNotifier<int> {
       if (paymentDate.isEmpty || amounth.isEmpty) {
         errorSnackBar(
           context: context,
-          title: transH.error.capitalize(),
-          message: transH.fieldsRequired.capitalize(),
+          title: transH.error.capitalizeFirst.toString(),
+          message: transH.fieldsRequired.capitalizeFirst.toString(),
         );
         return false;
       } else {
@@ -67,8 +66,8 @@ class CurrentStageNotifier extends StateNotifier<int> {
         } else {
           errorSnackBar(
             context: context,
-            title: transH.error.capitalize(),
-            message: transH.invalidPrice.capitalize(),
+            title: transH.error.capitalizeFirst.toString(),
+            message: transH.invalidPrice.capitalizeFirst.toString(),
           );
           return false;
         }
@@ -77,8 +76,8 @@ class CurrentStageNotifier extends StateNotifier<int> {
       if (description.isEmpty) {
         errorSnackBar(
           context: context,
-          title: transH.error.capitalize(),
-          message: transH.fieldsRequired.capitalize(),
+          title: transH.error.capitalizeFirst.toString(),
+          message: transH.fieldsRequired.capitalizeFirst.toString(),
         );
         return false;
       } else {

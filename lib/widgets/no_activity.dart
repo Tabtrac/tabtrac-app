@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/cli_commands.dart';
+
+import 'package:fundz_app/helpers/app_extensions.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -20,14 +21,14 @@ class NoActivity extends StatelessWidget {
           SvgPicture.asset('assets/svgs/sad.svg'),
           SizedBox(height: 10.h),
           Text(
-            transH.noActivity.capitalize(),
+            transH.noActivity.capitalizeFirst.toString(),
             style: TextStyle(
               fontSize: 22.sp,
               fontWeight: FontWeight.w600,
             ),
           ),
           Text(
-            transH.noActivityMessage.capitalize(),
+            transH.noActivityMessage.capitalizeFirst.toString(),
             style: TextStyle(
               fontSize: 14.sp,
             ),

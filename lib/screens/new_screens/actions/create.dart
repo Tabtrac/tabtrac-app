@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_native_splash/cli_commands.dart';
+
+import 'package:fundz_app/helpers/app_extensions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -119,7 +120,7 @@ class _CreateScreenState extends ConsumerState<CreateScreen> {
                 children: <Widget>[
                   currentStage > 1
                       ? CustomBtn(
-                          text: transH.back.capitalize(),
+                          text: transH.back.capitalizeFirst.toString(),
                           textColor: Theme.of(context)
                               .textTheme
                               .bodyMedium!
@@ -149,8 +150,8 @@ class _CreateScreenState extends ConsumerState<CreateScreen> {
                   SizedBox(height: 10.h),
                   CustomBtn(
                     text: currentStage >= 3
-                        ? transH.create.capitalize()
-                        : transH.next.capitalize(),
+                        ? transH.create.capitalizeFirst.toString()
+                        : transH.next.capitalizeFirst.toString(),
                     textColor: AppColors.whiteColor,
                     btnColor: AppColors.primaryColor,
                     fontSize: 16.sp,
@@ -158,20 +159,16 @@ class _CreateScreenState extends ConsumerState<CreateScreen> {
                     borderRadius: BorderRadius.circular(10.0),
                     onPressed: () {
                       ref.read(currentStageProvider.notifier).addStage(
-                            context,
-                            transH,
-                            ref,
-                            currentStage,
-                            client: client,
-                            name: nameController.value.text,
-                            description: descriptionController.value.text,
-                            amounth: priceController.value.text,
-                            currency: currency,
-                            email: emailController.value.text,
-                            paymentDate: paymentDateController.value.text,
-                            phoneNumber: phoneNumberController.value.text,
-                            currentPage: currentPage
-                          );
+                          context, transH, ref, currentStage,
+                          client: client,
+                          name: nameController.value.text,
+                          description: descriptionController.value.text,
+                          amounth: priceController.value.text,
+                          currency: currency,
+                          email: emailController.value.text,
+                          paymentDate: paymentDateController.value.text,
+                          phoneNumber: phoneNumberController.value.text,
+                          currentPage: currentPage);
                     },
                   ),
                 ],

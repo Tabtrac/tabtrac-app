@@ -3,13 +3,13 @@
 // TODO: Add persist state for users using phones with lesser RAM
 
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/cli_commands.dart';
+
+import 'package:fundz_app/helpers/app_extensions.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fundz_app/constants/app_routes.dart';
-import 'package:fundz_app/helpers/app_extensions.dart';
 import 'package:fundz_app/helpers/functions.dart';
 
 import '../../constants/colors.dart';
@@ -225,18 +225,18 @@ class _ForgottenPasswordResetScreenState
       String code, String password, AppLocalizations transH) async {
     if (code.isEmpty || password.isEmpty || code.length < 4) {
       errorSnackBar(
-        title: transH.error.capitalize(),
-        message: transH.fieldsRequired.capitalize(),
+        title: transH.error.capitalizeFirst.toString(),
+        message: transH.fieldsRequired.capitalizeFirst.toString(),
       );
     } else if (!code.isNum) {
       errorSnackBar(
-        title: transH.error.capitalize(),
-        message: transH.inValidEmail.capitalize(),
+        title: transH.error.capitalizeFirst.toString(),
+        message: transH.inValidEmail.capitalizeFirst.toString(),
       );
     } else if (password.length < 8) {
       errorSnackBar(
-        title: transH.error.capitalize(),
-        message: transH.passwordinvalid.capitalize(),
+        title: transH.error.capitalizeFirst.toString(),
+        message: transH.passwordinvalid.capitalizeFirst.toString(),
       );
     } else {
       final data = await ref
@@ -247,46 +247,46 @@ class _ForgottenPasswordResetScreenState
           data['response'] == 'new otp created check email') {
         ref.read(currentPageProvider.notifier).changePage(0);
         errorSnackBar(
-          title: transH.error.capitalize(),
-          message: transH.checkEmailForNewOTP.capitalize(),
+          title: transH.error.capitalizeFirst.toString(),
+          message: transH.checkEmailForNewOTP.capitalizeFirst.toString(),
         );
       } else if (data['response'] ==
           'otp expired, new otp created check email') {
         ref.read(currentPageProvider.notifier).changePage(0);
         errorSnackBar(
-          title: transH.error.capitalize(),
-          message: transH.otpExpiredcheckEmailForNewOTP.capitalize(),
+          title: transH.error.capitalizeFirst.toString(),
+          message: transH.otpExpiredcheckEmailForNewOTP.capitalizeFirst.toString(),
         );
       } else if (data['response'] == 'password reset successful') {
         navigateToPage(context, const PasswordResetSuccess());
       } else if (data['error'][0] == 'This password is too common.') {
         errorSnackBar(
-          title: transH.error.capitalize(),
-          message: transH.pTooCommon.capitalize(),
+          title: transH.error.capitalizeFirst.toString(),
+          message: transH.pTooCommon.capitalizeFirst.toString(),
         );
       } else if (data['error'][0] ==
           'This password is too short. It must contain at least 8 characters.') {
         errorSnackBar(
-          title: transH.error.capitalize(),
-          message: transH.pTooShort.capitalize(),
+          title: transH.error.capitalizeFirst.toString(),
+          message: transH.pTooShort.capitalizeFirst.toString(),
         );
       } else if (data['error'] == 'network') {
         errorSnackBar(
-          title: transH.error.capitalize(),
-          message: transH.network.capitalize(),
+          title: transH.error.capitalizeFirst.toString(),
+          message: transH.network.capitalizeFirst.toString(),
         );
         ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
       } else if (data['error'] == 'invalid OTP code') {
         ref.read(currentPageProvider.notifier).changePage(0);
         errorSnackBar(
-          title: transH.error.capitalize(),
-          message: transH.invalidOTPCode.capitalize(),
+          title: transH.error.capitalizeFirst.toString(),
+          message: transH.invalidOTPCode.capitalizeFirst.toString(),
         );
         ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
       } else {
         errorSnackBar(
-          title: transH.error.capitalize(),
-          message: transH.unkownError.capitalize(),
+          title: transH.error.capitalizeFirst.toString(),
+          message: transH.unkownError.capitalizeFirst.toString(),
         );
         ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
       }

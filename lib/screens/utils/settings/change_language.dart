@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_native_splash/cli_commands.dart';
+
+import 'package:fundz_app/helpers/app_extensions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -52,7 +52,7 @@ class _ChangelanguageState extends ConsumerState<Changelanguage> {
             : null,
         centerTitle: true,
         title: Text(
-          transH.changeLanguage.capitalize(),
+          transH.changeLanguage.capitalizeFirst.toString(),
           style: TextStyle(
             color: AppColors.primaryColor,
             fontWeight: FontWeight.bold,
@@ -69,7 +69,7 @@ class _ChangelanguageState extends ConsumerState<Changelanguage> {
           children: <Widget>[
             ListTile(
               title: Text(
-                transH.english.capitalize(),
+                transH.english.capitalizeFirst.toString(),
                 style: TextStyle(
                   color: bodyColor,
                 ),
@@ -87,7 +87,7 @@ class _ChangelanguageState extends ConsumerState<Changelanguage> {
             ),
             ListTile(
               title: Text(
-                transH.french.capitalize(),
+                transH.french.capitalizeFirst.toString(),
                 style: TextStyle(
                   color: bodyColor,
                 ),
@@ -105,7 +105,7 @@ class _ChangelanguageState extends ConsumerState<Changelanguage> {
             ),
             ListTile(
               title: Text(
-                transH.pidgin.capitalize(),
+                transH.pidgin.capitalizeFirst.toString(),
                 style: TextStyle(
                   color: bodyColor,
                 ),

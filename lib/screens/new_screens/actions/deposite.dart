@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/cli_commands.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -7,12 +6,13 @@ import 'package:fundz_app/helpers/functions.dart';
 import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
 
+import 'package:fundz_app/helpers/app_extensions.dart';
+
 import '../../../constants/colors.dart';
 import '../../../helpers/app_fonts.dart';
 import '../../../providers/providers.dart';
 import '../../../widgets/custom_btn.dart';
 import '../../../widgets/snackbars.dart';
-import '../../../widgets/widgets.utils.dart';
 import '../record/providers/record.provider.dart';
 import 'controllers/action.controller.dart';
 import 'providers.dart';
@@ -123,7 +123,7 @@ class _DepositeScreenState extends ConsumerState<DepositeScreen> {
                 children: <Widget>[
                   SizedBox(height: 10.h),
                   Text(
-                    transH.nextPaymentDate.capitalize(),
+                    transH.nextPaymentDate.capitalizeFirst.toString(),
                     style: TextStyle(
                       fontFamily: AppFonts.actionFont,
                       fontSize: 14.sp,
@@ -165,7 +165,8 @@ class _DepositeScreenState extends ConsumerState<DepositeScreen> {
                               fontSize: 14.sp,
                             ),
                             decoration: InputDecoration(
-                              hintText: transH.paymentDate.capitalize(),
+                              hintText:
+                                  transH.paymentDate.capitalizeFirst.toString(),
                               hintStyle: TextStyle(
                                 color: isDarkMode
                                     ? AppColors.darkThemeColor
@@ -193,7 +194,7 @@ class _DepositeScreenState extends ConsumerState<DepositeScreen> {
                   ),
                   SizedBox(height: 10.h),
                   Text(
-                    transH.currentAmount.capitalize(),
+                    transH.currentAmount.capitalizeFirst.toString(),
                     style: TextStyle(
                       fontFamily: AppFonts.actionFont,
                       fontSize: 14.sp,
@@ -228,7 +229,7 @@ class _DepositeScreenState extends ConsumerState<DepositeScreen> {
                   ),
                   SizedBox(height: 10.h),
                   Text(
-                    transH.amountDeposited.capitalize(),
+                    transH.amountDeposited.capitalizeFirst.toString(),
                     style: TextStyle(
                       fontFamily: AppFonts.actionFont,
                       fontSize: 14.sp,
@@ -283,7 +284,8 @@ class _DepositeScreenState extends ConsumerState<DepositeScreen> {
                               keyboardType: TextInputType.number,
                               textInputAction: TextInputAction.next,
                               decoration: InputDecoration(
-                                hintText: transH.amount.capitalize(),
+                                hintText:
+                                    transH.amount.capitalizeFirst.toString(),
                                 hintStyle: TextStyle(
                                   color: isDarkMode
                                       ? AppColors.darkThemeColor
@@ -300,7 +302,7 @@ class _DepositeScreenState extends ConsumerState<DepositeScreen> {
                   ),
                   SizedBox(height: 10.h),
                   Text(
-                    transH.description.capitalize(),
+                    transH.description.capitalizeFirst.toString(),
                     style: TextStyle(
                       fontFamily: AppFonts.actionFont,
                       fontSize: 14.sp,
@@ -336,7 +338,8 @@ class _DepositeScreenState extends ConsumerState<DepositeScreen> {
                       minLines: 5,
                       keyboardType: TextInputType.multiline,
                       decoration: InputDecoration(
-                        hintText: '${transH.descriptionText.capitalize()}...',
+                        hintText:
+                            '${transH.descriptionText.capitalizeFirst.toString()}...',
                         hintStyle: TextStyle(
                           color: isDarkMode
                               ? AppColors.darkThemeColor
@@ -350,7 +353,7 @@ class _DepositeScreenState extends ConsumerState<DepositeScreen> {
                 ],
               ),
               CustomBtn(
-                text: transH.deposite.capitalize(),
+                text: transH.deposite.capitalizeFirst.toString(),
                 textColor: AppColors.whiteColor,
                 btnColor: AppColors.primaryColor,
                 fontSize: 16.sp,
@@ -380,8 +383,8 @@ class _DepositeScreenState extends ConsumerState<DepositeScreen> {
                     }
                   } else {
                     errorSnackBar(
-                      title: transH.error.capitalize(),
-                      message: transH.fieldsRequired.capitalize(),
+                      title: transH.error.capitalizeFirst.toString(),
+                      message: transH.fieldsRequired.capitalizeFirst.toString(),
                     );
                   }
                 },

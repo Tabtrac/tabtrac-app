@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/cli_commands.dart';
+
+import 'package:fundz_app/helpers/app_extensions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -425,7 +426,7 @@ class _DetailedRecordViewState extends ConsumerState<DetailedRecordView> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
                                 Text(
-                                  transH.phoneNumber.capitalize(),
+                                  transH.phoneNumber.capitalizeFirst.toString(),
                                   style: TextStyle(
                                     color: AppColors.greyColor,
                                     fontSize: 12.sp,
@@ -453,7 +454,7 @@ class _DetailedRecordViewState extends ConsumerState<DetailedRecordView> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
                                 Text(
-                                  transH.email.capitalize(),
+                                  transH.email.capitalizeFirst.toString(),
                                   style: TextStyle(
                                     color: AppColors.greyColor,
                                     fontSize: 12.sp,
@@ -516,7 +517,7 @@ class _DetailedRecordViewState extends ConsumerState<DetailedRecordView> {
                                   size: 20.sp,
                                 ),
                                 label: Text(
-                                  transH.deposite.capitalize(),
+                                  transH.deposite.capitalizeFirst.toString(),
                                   style: TextStyle(
                                     color: AppColors.primaryColor,
                                     fontSize: 14.sp,
@@ -542,7 +543,7 @@ class _DetailedRecordViewState extends ConsumerState<DetailedRecordView> {
                                   size: 20.sp,
                                 ),
                                 label: Text(
-                                  transH.paid.capitalize(),
+                                  transH.paid.capitalizeFirst.toString(),
                                   style: TextStyle(
                                     color: AppColors.paidColor,
                                     fontSize: 14.sp,
@@ -567,7 +568,7 @@ class _DetailedRecordViewState extends ConsumerState<DetailedRecordView> {
                                 size: 20.sp,
                               ),
                               label: Text(
-                                transH.delete.capitalize(),
+                                transH.delete.capitalizeFirst.toString(),
                                 style: TextStyle(
                                   fontSize: 14.sp,
                                   color: AppColors.dangerColor,

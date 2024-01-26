@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/cli_commands.dart';
+import 'package:fundz_app/helpers/app_extensions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fundz_app/helpers/functions.dart';
 import 'package:http/http.dart' as http;
@@ -72,27 +72,27 @@ class ActionController {
           ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
 
           LocalNotifications.showNotification(
-              title: transH.success.capitalize(),
-              body: transH.recordAdded.capitalize(),
+              title: transH.success.capitalizeFirst.toString(),
+              body: transH.recordAdded.capitalizeFirst.toString(),
               payload: '');
           return true;
         } else {
           errorSnackBar(
-              title: transH.error.capitalize(),
-              message: transH.unkownError.capitalize());
+              title: transH.error.capitalizeFirst.toString(),
+              message: transH.unkownError.capitalizeFirst.toString());
           ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
           return false;
         }
       } catch (e) {
         if (e.toString().contains('SocketException')) {
           errorSnackBar(
-              title: transH.error.capitalize(),
-              message: transH.network.capitalize());
+              title: transH.error.capitalizeFirst.toString(),
+              message: transH.network.capitalizeFirst.toString());
         }
         errorSnackBar(
             context: context,
-            title: transH.error.capitalize(),
-            message: transH.unkownError.capitalize());
+            title: transH.error.capitalizeFirst.toString(),
+            message: transH.unkownError.capitalizeFirst.toString());
 
         ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
         return false;
@@ -145,27 +145,27 @@ class ActionController {
           await recordController.onLoadData();
           ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
           successSnackBar(
-            title: transH.success.capitalize(),
-            message: transH.depositSuccess.capitalize(),
+            title: transH.success.capitalizeFirst.toString(),
+            message: transH.depositSuccess.capitalizeFirst.toString(),
           );
           return true;
         } else {
           errorSnackBar(
-              title: transH.error.capitalize(),
-              message: transH.unkownError.capitalize());
+              title: transH.error.capitalizeFirst.toString(),
+              message: transH.unkownError.capitalizeFirst.toString());
           ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
           return false;
         }
       } catch (e) {
         if (e.toString().contains('SocketException')) {
           errorSnackBar(
-              title: transH.error.capitalize(),
-              message: transH.network.capitalize());
+              title: transH.error.capitalizeFirst.toString(),
+              message: transH.network.capitalizeFirst.toString());
         }
         errorSnackBar(
             context: context,
-            title: transH.error.capitalize(),
-            message: transH.unkownError.capitalize());
+            title: transH.error.capitalizeFirst.toString(),
+            message: transH.unkownError.capitalizeFirst.toString());
 
         ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
         return false;

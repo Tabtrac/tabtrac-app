@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/cli_commands.dart';
+
+import 'package:fundz_app/helpers/app_extensions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -72,7 +73,7 @@ class _CreateRecordPopUpState extends ConsumerState<CreateRecordPopUp> {
                     },
                     child: ListTile(
                       leading: Text(
-                        transH.debt.capitalize(),
+                        transH.debt.capitalizeFirst.toString(),
                         style: TextStyle(
                           color: Theme.of(context).textTheme.bodyMedium!.color,
                           fontSize: 16.sp,
@@ -94,7 +95,7 @@ class _CreateRecordPopUpState extends ConsumerState<CreateRecordPopUp> {
                     },
                     child: ListTile(
                       leading: Text(
-                        transH.credit.capitalize(),
+                        transH.credit.capitalizeFirst.toString(),
                         style: TextStyle(
                           color: Theme.of(context).textTheme.bodyMedium!.color,
                           fontSize: 16.sp,

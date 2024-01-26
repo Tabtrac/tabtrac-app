@@ -4,7 +4,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/cli_commands.dart';
+
+import 'package:fundz_app/helpers/app_extensions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fundz_app/helpers/functions.dart';
 import 'package:fundz_app/helpers/notification_helpers.dart';
@@ -74,15 +75,15 @@ class UserController extends StateNotifier<AsyncValue> {
     if (oldPassword.isEmpty || newPassword.isEmpty) {
       errorSnackBar(
         context: context,
-        title: transH.error.capitalize(),
-        message: transH.fieldsRequired.capitalize(),
+        title: transH.error.capitalizeFirst.toString(),
+        message: transH.fieldsRequired.capitalizeFirst.toString(),
       );
       return true;
     } else if (oldPassword.length < 8 || newPassword.length < 8) {
       errorSnackBar(
         context: context,
-        title: transH.error.capitalize(),
-        message: transH.pTooShort.capitalize(),
+        title: transH.error.capitalizeFirst.toString(),
+        message: transH.pTooShort.capitalizeFirst.toString(),
       );
       return true;
     } else {
@@ -90,8 +91,8 @@ class UserController extends StateNotifier<AsyncValue> {
       if (!isConnected) {
         errorSnackBar(
           context: context,
-          title: transH.error.capitalize(),
-          message: transH.network.capitalize(),
+          title: transH.error.capitalizeFirst.toString(),
+          message: transH.network.capitalizeFirst.toString(),
         );
         return true;
       } else {
@@ -111,8 +112,8 @@ class UserController extends StateNotifier<AsyncValue> {
             utilityController.writeData('needsLogOut', 'true');
             errorSnackBar(
               context: context,
-              title: transH.error.capitalize(),
-              message: transH.unkownError.capitalize(),
+              title: transH.error.capitalizeFirst.toString(),
+              message: transH.unkownError.capitalizeFirst.toString(),
             );
             navigateReplacementNamed(context, AppRoutes.splashRoute);
             return true;
@@ -121,38 +122,38 @@ class UserController extends StateNotifier<AsyncValue> {
               case 200:
                 successSnackBar(
                   context: context,
-                  title: transH.success.capitalize(),
-                  message: transH.passwordChanged.capitalize(),
+                  title: transH.success.capitalizeFirst.toString(),
+                  message: transH.passwordChanged.capitalizeFirst.toString(),
                 );
                 LocalNotifications.showNotification(
-                  title: transH.success.capitalize(),
-                  body: transH.passwordChanged.capitalize(),
+                  title: transH.success.capitalizeFirst.toString(),
+                  body: transH.passwordChanged.capitalizeFirst.toString(),
                   payload: '',
                 );
                 Navigator.of(context).pop();
               case 400:
                 errorSnackBar(
                   context: context,
-                  title: transH.error.capitalize(),
-                  message: transH.invalidPass.capitalize(),
+                  title: transH.error.capitalizeFirst.toString(),
+                  message: transH.invalidPass.capitalizeFirst.toString(),
                 );
               case 405:
                 errorSnackBar(
                   context: context,
-                  title: transH.error.capitalize(),
-                  message: transH.pTooCommon.capitalize(),
+                  title: transH.error.capitalizeFirst.toString(),
+                  message: transH.pTooCommon.capitalizeFirst.toString(),
                 );
               case 409:
                 errorSnackBar(
                   context: context,
-                  title: transH.error.capitalize(),
-                  message: transH.incorrectPassword.capitalize(),
+                  title: transH.error.capitalizeFirst.toString(),
+                  message: transH.incorrectPassword.capitalizeFirst.toString(),
                 );
               default:
                 errorSnackBar(
                   context: context,
-                  title: transH.error.capitalize(),
-                  message: transH.unkownError.capitalize(),
+                  title: transH.error.capitalizeFirst.toString(),
+                  message: transH.unkownError.capitalizeFirst.toString(),
                 );
             }
             return true;
@@ -161,14 +162,14 @@ class UserController extends StateNotifier<AsyncValue> {
           if (e.toString().contains('SocketException')) {
             errorSnackBar(
               context: context,
-              title: transH.error.capitalize(),
-              message: transH.unkownError.capitalize(),
+              title: transH.error.capitalizeFirst.toString(),
+              message: transH.unkownError.capitalizeFirst.toString(),
             );
           }
           errorSnackBar(
             context: context,
-            title: transH.error.capitalize(),
-            message: transH.network.capitalize(),
+            title: transH.error.capitalizeFirst.toString(),
+            message: transH.network.capitalizeFirst.toString(),
           );
           return true;
         }

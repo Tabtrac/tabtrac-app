@@ -4,7 +4,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/cli_commands.dart';
+
+import 'package:fundz_app/helpers/app_extensions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fundz_app/helpers/functions.dart';
 import 'package:http/http.dart' as http;
@@ -69,8 +70,8 @@ class ClientController {
         }
         errorSnackBar(
             context: context,
-            title: transH.error.capitalize(),
-            message: transH.unkownError.capitalize());
+            title: transH.error.capitalizeFirst.toString(),
+            message: transH.unkownError.capitalizeFirst.toString());
       }
       ref.read(allClientLoadingProvider.notifier).change(false);
     }
@@ -109,20 +110,20 @@ class ClientController {
         } else {
           errorSnackBar(
               context: context,
-              title: transH.error.capitalize(),
-              message: transH.unkownError.capitalize());
+              title: transH.error.capitalizeFirst.toString(),
+              message: transH.unkownError.capitalizeFirst.toString());
         }
       } catch (e) {
         if (e.toString().contains('SocketException')) {
           errorSnackBar(
               context: context,
-              title: transH.error.capitalize(),
-              message: transH.network.capitalize());
+              title: transH.error.capitalizeFirst.toString(),
+              message: transH.network.capitalizeFirst.toString());
         }
         errorSnackBar(
             context: context,
-            title: transH.error.capitalize(),
-            message: transH.unkownError.capitalize());
+            title: transH.error.capitalizeFirst.toString(),
+            message: transH.unkownError.capitalizeFirst.toString());
       }
     }
   }
@@ -139,8 +140,8 @@ class ClientController {
       if (name.isEmpty) {
         errorSnackBar(
             context: context,
-            title: transH.error.capitalize(),
-            message: transH.clientNameExists.capitalize());
+            title: transH.error.capitalizeFirst.toString(),
+            message: transH.clientNameExists.capitalizeFirst.toString());
         ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
         return false;
       } else {
@@ -169,8 +170,8 @@ class ClientController {
             return true;
           } else if (statusCode == 201) {
             LocalNotifications.showNotification(
-                title: transH.success.capitalize(),
-                body: transH.clientCreated.capitalize(),
+                title: transH.success.capitalizeFirst.toString(),
+                body: transH.clientCreated.capitalizeFirst.toString(),
                 payload: '');
             Client client = Client.fromJson(responseData['client']);
             if (saveData != null) {
@@ -182,16 +183,16 @@ class ClientController {
           } else if (statusCode == 409) {
             errorSnackBar(
                 context: context,
-                title: transH.error.capitalize(),
-                message: transH.clientNameExists.capitalize());
+                title: transH.error.capitalizeFirst.toString(),
+                message: transH.clientNameExists.capitalizeFirst.toString());
             ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
 
             return false;
           } else {
             errorSnackBar(
                 context: context,
-                title: transH.error.capitalize(),
-                message: transH.unkownError.capitalize());
+                title: transH.error.capitalizeFirst.toString(),
+                message: transH.unkownError.capitalizeFirst.toString());
             ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
             return false;
           }
@@ -199,13 +200,13 @@ class ClientController {
           if (e.toString().contains('SocketException')) {
             errorSnackBar(
                 context: context,
-                title: transH.error.capitalize(),
-                message: transH.network.capitalize());
+                title: transH.error.capitalizeFirst.toString(),
+                message: transH.network.capitalizeFirst.toString());
           }
           errorSnackBar(
               context: context,
-              title: transH.error.capitalize(),
-              message: transH.unkownError.capitalize());
+              title: transH.error.capitalizeFirst.toString(),
+              message: transH.unkownError.capitalizeFirst.toString());
 
           ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
           return false;
@@ -229,8 +230,8 @@ class ClientController {
       if (name.isEmpty) {
         errorSnackBar(
             context: context,
-            title: transH.error.capitalize(),
-            message: transH.clientNameExists.capitalize());
+            title: transH.error.capitalizeFirst.toString(),
+            message: transH.clientNameExists.capitalizeFirst.toString());
         ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
         return false;
       } else {
@@ -259,8 +260,8 @@ class ClientController {
             return true;
           } else if (statusCode == 201) {
             LocalNotifications.showNotification(
-              title: transH.success.capitalize(),
-              body: transH.clientUpdated.capitalize(),
+              title: transH.success.capitalizeFirst.toString(),
+              body: transH.clientUpdated.capitalizeFirst.toString(),
               payload: '',
             );
             Client client = Client.fromJson(responseData['client']);
@@ -271,8 +272,8 @@ class ClientController {
           } else {
             errorSnackBar(
                 context: context,
-                title: transH.error.capitalize(),
-                message: transH.unkownError.capitalize());
+                title: transH.error.capitalizeFirst.toString(),
+                message: transH.unkownError.capitalizeFirst.toString());
             ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
             return false;
           }
@@ -280,13 +281,13 @@ class ClientController {
           if (e.toString().contains('SocketException')) {
             errorSnackBar(
                 context: context,
-                title: transH.error.capitalize(),
-                message: transH.network.capitalize());
+                title: transH.error.capitalizeFirst.toString(),
+                message: transH.network.capitalizeFirst.toString());
           }
           errorSnackBar(
               context: context,
-              title: transH.error.capitalize(),
-              message: transH.unkownError.capitalize());
+              title: transH.error.capitalizeFirst.toString(),
+              message: transH.unkownError.capitalizeFirst.toString());
 
           ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
           return false;
@@ -340,20 +341,20 @@ class ClientController {
         } else {
           errorSnackBar(
               context: context,
-              title: transH.error.capitalize(),
-              message: transH.unkownError.capitalize());
+              title: transH.error.capitalizeFirst.toString(),
+              message: transH.unkownError.capitalizeFirst.toString());
         }
       } catch (e) {
         if (e.toString().contains('SocketException')) {
           errorSnackBar(
               context: context,
-              title: transH.error.capitalize(),
-              message: transH.network.capitalize());
+              title: transH.error.capitalizeFirst.toString(),
+              message: transH.network.capitalizeFirst.toString());
         }
         errorSnackBar(
             context: context,
-            title: transH.error.capitalize(),
-            message: transH.unkownError.capitalize());
+            title: transH.error.capitalizeFirst.toString(),
+            message: transH.unkownError.capitalizeFirst.toString());
       }
       ref.read(clientLoadingProvider.notifier).change(false);
     }
@@ -383,20 +384,20 @@ class ClientController {
         } else {
           errorSnackBar(
               context: context,
-              title: transH.error.capitalize(),
-              message: transH.unkownError.capitalize());
+              title: transH.error.capitalizeFirst.toString(),
+              message: transH.unkownError.capitalizeFirst.toString());
         }
       } catch (e) {
         if (e.toString().contains('SocketException')) {
           errorSnackBar(
               context: context,
-              title: transH.error.capitalize(),
-              message: transH.network.capitalize());
+              title: transH.error.capitalizeFirst.toString(),
+              message: transH.network.capitalizeFirst.toString());
         }
         errorSnackBar(
             context: context,
-            title: transH.error.capitalize(),
-            message: transH.unkownError.capitalize());
+            title: transH.error.capitalizeFirst.toString(),
+            message: transH.unkownError.capitalizeFirst.toString());
       }
     }
   }

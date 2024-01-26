@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/cli_commands.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:heroicons/heroicons.dart';
 
+import 'package:fundz_app/helpers/app_extensions.dart';
 import '../../../constants/colors.dart';
 import '../../../helpers/app_fonts.dart';
 
@@ -39,7 +38,7 @@ class _AnalyticWidgetState extends ConsumerState<AnalyticWidget> {
               ConstrainedBox(
                 constraints: BoxConstraints(maxWidth: widget.width * .6),
                 child: Text(
-                  transH.analytic.capitalize(),
+                  transH.analytic.capitalizeFirst.toString(),
                   style: TextStyle(
                     color: AppColors.primaryColor,
                     fontSize: 16.sp,
@@ -66,7 +65,7 @@ class _AnalyticWidgetState extends ConsumerState<AnalyticWidget> {
                 ),
                 SizedBox(height: 20.h),
                 Text(
-                  transH.stillUnderDevelopment.capitalize(),
+                  transH.stillUnderDevelopment.capitalizeFirst.toString(),
                   style: TextStyle(
                     color: AppColors.primaryColor,
                     fontSize: 18.sp,

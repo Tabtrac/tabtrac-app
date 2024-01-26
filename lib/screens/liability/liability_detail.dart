@@ -4,11 +4,11 @@ import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_native_splash/cli_commands.dart';
+
+import 'package:fundz_app/helpers/app_extensions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fundz_app/helpers/app_extensions.dart';
 import 'package:fundz_app/helpers/notification_helpers.dart';
 import 'package:fundz_app/widgets/snackbars.dart';
 import 'package:intl/intl.dart';
@@ -183,23 +183,23 @@ class _LiabilityDetailedScreenState
             if (data['response'] == 'Liability deleted Successfully') {
               successSnackBar(
                 context: context,
-                title: transH.success.capitalize(),
-                message: transH.deleted.capitalize(),
+                title: transH.success.capitalizeFirst.toString(),
+                message: transH.deleted.capitalizeFirst.toString(),
               );
               LocalNotifications.showNotification(
-                title: transH.success.capitalize(),
-                body: transH.deleted.capitalize(),
+                title: transH.success.capitalizeFirst.toString(),
+                body: transH.deleted.capitalizeFirst.toString(),
                 payload: '',
               );
               navigateReplacementNamed(context, AppRoutes.home);
             } else if (data['error'] == 'network') {
               AnimatedSnackBar.material(
-                "${transH.error}, ${transH.network}".capitalize(),
+                "${transH.error}, ${transH.network}".capitalizeFirst.toString(),
                 type: AnimatedSnackBarType.error,
               ).show(context);
             } else {
               AnimatedSnackBar.material(
-                "${transH.error}, ${transH.unkownError}".capitalize(),
+                "${transH.error}, ${transH.unkownError}".capitalizeFirst.toString(),
                 type: AnimatedSnackBarType.error,
               ).show(context);
             }
@@ -278,27 +278,27 @@ class _LiabilityDetailedScreenState
                       if (data['response'] == 'Validation error') {
                         AnimatedSnackBar.material(
                           "${transH.error}, ${transH.invalidCredentials}"
-                              .capitalize(),
+                              .capitalizeFirst.toString(),
                           type: AnimatedSnackBarType.error,
                         ).show(context);
                       } else if (data['response'] == "Debt does not exists") {
                         AnimatedSnackBar.material(
-                          "${transH.error}, ${transH.unkownError}".capitalize(),
+                          "${transH.error}, ${transH.unkownError}".capitalizeFirst.toString(),
                           type: AnimatedSnackBarType.error,
                         ).show(context);
                       } else if (data['response'] == "user does not exist") {
                         AnimatedSnackBar.material(
-                          "${transH.error}, ${transH.invalidUser}".capitalize(),
+                          "${transH.error}, ${transH.invalidUser}".capitalizeFirst.toString(),
                           type: AnimatedSnackBarType.error,
                         ).show(context);
                       } else if (data['response'] == 'error') {
                         AnimatedSnackBar.material(
-                          "${transH.error}, ${transH.unkownError}".capitalize(),
+                          "${transH.error}, ${transH.unkownError}".capitalizeFirst.toString(),
                           type: AnimatedSnackBarType.error,
                         ).show(context);
                       } else if (data['error'] == 'network') {
                         AnimatedSnackBar.material(
-                          "${transH.error}, ${transH.network}".capitalize(),
+                          "${transH.error}, ${transH.network}".capitalizeFirst.toString(),
                           type: AnimatedSnackBarType.error,
                         ).show(context);
                       } else if (data['response'] ==
@@ -311,12 +311,12 @@ class _LiabilityDetailedScreenState
 
                         AnimatedSnackBar.material(
                           "${transH.success}, ${transH.markedAsPaidSuccess}"
-                              .capitalize(),
+                              .capitalizeFirst.toString(),
                           type: AnimatedSnackBarType.success,
                         ).show(context);
                       } else {
                         AnimatedSnackBar.material(
-                          "${transH.error}, ${transH.unkownError}".capitalize(),
+                          "${transH.error}, ${transH.unkownError}".capitalizeFirst.toString(),
                           type: AnimatedSnackBarType.error,
                         ).show(context);
                       }
@@ -553,7 +553,7 @@ class _LiabilityDetailedScreenState
           text: TextSpan(
             children: <InlineSpan>[
               TextSpan(
-                text: '${transH.description}: '.capitalize(),
+                text: '${transH.description}: '.capitalizeFirst.toString(),
                 style: TextStyle(
                   fontSize: 12.sp,
                   color: Theme.of(context).textTheme.bodyMedium!.color,
@@ -583,7 +583,7 @@ class _LiabilityDetailedScreenState
         ),
         SizedBox(height: height * .005),
         Text(
-          transH.details.capitalize(),
+          transH.details.capitalizeFirst.toString(),
           style: TextStyle(
             fontSize: 18.sp,
             fontFamily: AppFonts.actionFont,
@@ -600,7 +600,7 @@ class _LiabilityDetailedScreenState
                 text: TextSpan(
                   children: <InlineSpan>[
                     TextSpan(
-                      text: '${transH.status}: '.capitalize(),
+                      text: '${transH.status}: '.capitalizeFirst.toString(),
                       style: TextStyle(
                         fontSize: 14.sp,
                         fontStyle: FontStyle.italic,

@@ -12,7 +12,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../constants/app_routes.dart';
 import '../../../../constants/urls.dart';
 import '../../../../controllers/utl_controllers.dart';
-import '../../../../models/record.model.dart';
 import '../../../../widgets/snackbars.dart';
 import '../models/overview.model.dart';
 import '../providers/provider.dart';

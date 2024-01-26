@@ -1,10 +1,10 @@
 // ignore_for_file: avoid_print, invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member, use_build_context_synchronously
 
 import 'package:animated_snack_bar/animated_snack_bar.dart';
-import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/cli_commands.dart';
+
+import 'package:fundz_app/helpers/app_extensions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -19,9 +19,7 @@ import '../../constants/colors.dart';
 import '../../controllers/utl_controllers.dart';
 import '../../helpers/app_fonts.dart';
 import '../../helpers/functions.dart';
-import '../../helpers/app_extensions.dart';
 import '../../helpers/notification_helpers.dart';
-import '../../models/currency.dart';
 import '../../providers/providers.dart';
 import '../../providers/textfield_providers.dart';
 import '../../widgets/custom_btn.dart';
@@ -471,7 +469,7 @@ class _CreateLiabilityScreenState extends ConsumerState<CreateLiabilityScreen> {
                         minLines: 5,
                         keyboardType: TextInputType.multiline,
                         decoration: InputDecoration(
-                          hintText: '${transH.descriptionText.capitalize()}...',
+                          hintText: '${transH.descriptionText.capitalizeFirst.toString()}...',
                           hintStyle: TextStyle(
                             color: isDarkMode
                                 ? AppColors.darkThemeColor
@@ -673,23 +671,23 @@ class _CreateLiabilityScreenState extends ConsumerState<CreateLiabilityScreen> {
         description.isEmpty) {
       errorSnackBar(
         context: context,
-        title: transH.error.capitalize(),
-        message: transH.fieldsRequired.capitalize(),
+        title: transH.error.capitalizeFirst.toString(),
+        message: transH.fieldsRequired.capitalizeFirst.toString(),
       );
     } else if (emailAddress.isNotEmpty && !emailAddress.isEmail) {
       errorSnackBar(
         context: context,
-        title: transH.error.capitalize(),
-        message: transH.inValidEmail.capitalize(),
+        title: transH.error.capitalizeFirst.toString(),
+        message: transH.inValidEmail.capitalizeFirst.toString(),
       );
     } else if (phoneNumber.isNotEmpty && !phoneNumber.isPhoneNumber) {
       AnimatedSnackBar.material(
-        "${transH.error}, ${transH.inValidPhone}".capitalize(),
+        "${transH.error}, ${transH.inValidPhone}".capitalizeFirst.toString(),
         type: AnimatedSnackBarType.error,
       ).show(context);
     } else if (!price.isNumericOnly) {
       AnimatedSnackBar.material(
-        "${transH.error}, ${transH.unkownError}".capitalize(),
+        "${transH.error}, ${transH.unkownError}".capitalizeFirst.toString(),
         type: AnimatedSnackBarType.error,
       ).show(context);
     } else {
@@ -762,12 +760,12 @@ class _CreateLiabilityScreenState extends ConsumerState<CreateLiabilityScreen> {
     }
 
     AnimatedSnackBar.material(
-      "${transH.success}, ${transH.liabilityAdded}".capitalize(),
+      "${transH.success}, ${transH.liabilityAdded}".capitalizeFirst.toString(),
       type: AnimatedSnackBarType.success,
     ).show(context);
     LocalNotifications.showNotification(
-      title: transH.success.capitalize(),
-      body: transH.liabilityAdded.capitalize(),
+      title: transH.success.capitalizeFirst.toString(),
+      body: transH.liabilityAdded.capitalizeFirst.toString(),
       payload: '',
     );
     ref.read(currentIndexProvider.notifier).changeIndex(1);
@@ -799,44 +797,44 @@ class _CreateLiabilityScreenState extends ConsumerState<CreateLiabilityScreen> {
 
     if (data['response'] == 'Validation error') {
       AnimatedSnackBar.material(
-        "${transH.error}, ${transH.invalidCredentials}".capitalize(),
+        "${transH.error}, ${transH.invalidCredentials}".capitalizeFirst.toString(),
         type: AnimatedSnackBarType.error,
       ).show(context);
     } else if (data['response'] == 'unexpected error') {
       AnimatedSnackBar.material(
-        "${transH.error}, ${transH.unkownError}".capitalize(),
+        "${transH.error}, ${transH.unkownError}".capitalizeFirst.toString(),
         type: AnimatedSnackBarType.error,
       ).show(context);
     } else if (data['response'] == 'user does not exist') {
       AnimatedSnackBar.material(
-        "${transH.error}, ${transH.invalidUser}".capitalize(),
+        "${transH.error}, ${transH.invalidUser}".capitalizeFirst.toString(),
         type: AnimatedSnackBarType.error,
       ).show(context);
     } else if (data['response'] == 'error') {
       AnimatedSnackBar.material(
-        "${transH.error}, ${transH.unkownError}".capitalize(),
+        "${transH.error}, ${transH.unkownError}".capitalizeFirst.toString(),
         type: AnimatedSnackBarType.error,
       ).show(context);
     } else if (data['error'] == 'network') {
       AnimatedSnackBar.material(
-        "${transH.error}, ${transH.network}".capitalize(),
+        "${transH.error}, ${transH.network}".capitalizeFirst.toString(),
         type: AnimatedSnackBarType.error,
       ).show(context);
     } else if (data['response'] == "Liability Added Successfully") {
       AnimatedSnackBar.material(
-        "${transH.success}, ${transH.liabilityAdded}".capitalize(),
+        "${transH.success}, ${transH.liabilityAdded}".capitalizeFirst.toString(),
         type: AnimatedSnackBarType.success,
       ).show(context);
       LocalNotifications.showNotification(
-        title: transH.success.capitalize(),
-        body: transH.liabilityAdded.capitalize(),
+        title: transH.success.capitalizeFirst.toString(),
+        body: transH.liabilityAdded.capitalizeFirst.toString(),
         payload: '',
       );
       ref.read(currentIndexProvider.notifier).changeIndex(1);
       navigateReplacementNamed(context, AppRoutes.home);
     } else {
       AnimatedSnackBar.material(
-        "${transH.error}, ${transH.unkownError}".capitalize(),
+        "${transH.error}, ${transH.unkownError}".capitalizeFirst.toString(),
         type: AnimatedSnackBarType.error,
       ).show(context);
     }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/cli_commands.dart';
+
+import 'package:fundz_app/helpers/app_extensions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fundz_app/constants/app_routes.dart';
 import 'package:fundz_app/constants/colors.dart';
@@ -155,7 +156,7 @@ class _AllWidgetState extends ConsumerState<AllWidget> {
               width: width * .7,
               alignment: Alignment.center,
               child: Text(
-                "${transH.error}, ${transH.network}".capitalize(),
+                "${transH.error}, ${transH.network}".capitalizeFirst.toString(),
                 style: TextStyle(
                   color: AppColors.dangerColor,
                   fontFamily: AppFonts.actionFont,
@@ -169,7 +170,9 @@ class _AllWidgetState extends ConsumerState<AllWidget> {
               width: width * .7,
               alignment: Alignment.center,
               child: Text(
-                "${transH.error}, ${transH.unkownError}".capitalize(),
+                "${transH.error}, ${transH.unkownError}"
+                    .capitalizeFirst
+                    .toString(),
                 style: TextStyle(
                   color: AppColors.dangerColor,
                   fontFamily: AppFonts.actionFont,
@@ -272,7 +275,7 @@ class _DueWidgetState extends ConsumerState<DueWidget> {
               width: width * .7,
               alignment: Alignment.center,
               child: Text(
-                "${transH.error}, ${transH.network}".capitalize(),
+                "${transH.error}, ${transH.network}".capitalizeFirst.toString(),
                 style: TextStyle(
                   color: AppColors.dangerColor,
                   fontFamily: AppFonts.actionFont,
@@ -286,7 +289,9 @@ class _DueWidgetState extends ConsumerState<DueWidget> {
               width: width * .7,
               alignment: Alignment.center,
               child: Text(
-                "${transH.error}, ${transH.unkownError}".capitalize(),
+                "${transH.error}, ${transH.unkownError}"
+                    .capitalizeFirst
+                    .toString(),
                 style: TextStyle(
                   color: AppColors.dangerColor,
                   fontFamily: AppFonts.actionFont,
@@ -389,7 +394,7 @@ class _PendingWidgetState extends ConsumerState<PendingWidget> {
               width: width * .7,
               alignment: Alignment.center,
               child: Text(
-                "${transH.error}, ${transH.network}".capitalize(),
+                "${transH.error}, ${transH.network}".capitalizeFirst.toString(),
                 style: TextStyle(
                   color: AppColors.dangerColor,
                   fontFamily: AppFonts.actionFont,
@@ -403,7 +408,9 @@ class _PendingWidgetState extends ConsumerState<PendingWidget> {
               width: width * .7,
               alignment: Alignment.center,
               child: Text(
-                "${transH.error}, ${transH.unkownError}".capitalize(),
+                "${transH.error}, ${transH.unkownError}"
+                    .capitalizeFirst
+                    .toString(),
                 style: TextStyle(
                   color: AppColors.dangerColor,
                   fontFamily: AppFonts.actionFont,
@@ -506,7 +513,7 @@ class _PaidWidgetState extends ConsumerState<PaidWidget> {
               width: width * .7,
               alignment: Alignment.center,
               child: Text(
-                "${transH.error}, ${transH.network}".capitalize(),
+                "${transH.error}, ${transH.network}".capitalizeFirst.toString(),
                 style: TextStyle(
                   color: AppColors.dangerColor,
                   fontFamily: AppFonts.actionFont,
@@ -520,7 +527,9 @@ class _PaidWidgetState extends ConsumerState<PaidWidget> {
               width: width * .7,
               alignment: Alignment.center,
               child: Text(
-                "${transH.error}, ${transH.unkownError}".capitalize(),
+                "${transH.error}, ${transH.unkownError}"
+                    .capitalizeFirst
+                    .toString(),
                 style: TextStyle(
                   color: AppColors.dangerColor,
                   fontFamily: AppFonts.actionFont,

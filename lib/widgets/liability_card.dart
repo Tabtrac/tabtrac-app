@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/cli_commands.dart';
+
+import 'package:fundz_app/helpers/app_extensions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fundz_app/helpers/app_extensions.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -66,7 +66,7 @@ class _LiabilityCardState extends ConsumerState<LiabilityCard> {
                 ConstrainedBox(
                   constraints: BoxConstraints(maxWidth: widget.width * .4),
                   child: Text(
-                    widget.name.toString().capitalize(),
+                    widget.name.toString().capitalizeFirst.toString(),
                     style: TextStyle(
                       fontSize: 22.sp,
                       fontWeight: FontWeight.w700,
@@ -155,7 +155,7 @@ class _LiabilityCardState extends ConsumerState<LiabilityCard> {
               width: widget.width,
               constraints: BoxConstraints(maxHeight: widget.height * .15),
               child: Text(
-                widget.description.capitalize(),
+                widget.description.capitalizeFirst.toString(),
                 style: TextStyle(
                   fontSize: 14.sp,
                 ),

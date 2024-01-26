@@ -3,12 +3,12 @@
 import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_native_splash/cli_commands.dart';
+
+import 'package:fundz_app/helpers/app_extensions.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fundz_app/constants/colors.dart';
-import 'package:fundz_app/helpers/app_extensions.dart';
 import 'package:fundz_app/helpers/functions.dart';
 
 import '../../constants/app_routes.dart';
@@ -123,7 +123,7 @@ class _OTPVerificationPageState extends ConsumerState<OTPVerificationPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text(
-                          "${transH.didRecieveCode.capitalize()}?",
+                          "${transH.didRecieveCode.capitalizeFirst.toString()}?",
                           style: TextStyle(
                             color: AppColors.primaryColor,
                             fontSize: 16.sp,
@@ -166,21 +166,21 @@ class _OTPVerificationPageState extends ConsumerState<OTPVerificationPage> {
     final data = await ref.read(dataFetchControllerProvider.notifier).getOTP();
     if (data['error'] == 'network') {
       AnimatedSnackBar.material(
-        "${transH.error}, ${transH.network}".capitalize(),
+        "${transH.error}, ${transH.network}".capitalizeFirst.toString(),
         type: AnimatedSnackBarType.error,
       ).show(context);
       ref.read(verifyLoadingProvider.notifier).changeIndex(false);
     } else if (data['error'] == 'none') {
       if (data['response'] == 'otp sent to email') {
         AnimatedSnackBar.material(
-          "${transH.success}, ${transH.otpSentToMail}".capitalize(),
+          "${transH.success}, ${transH.otpSentToMail}".capitalizeFirst.toString(),
           type: AnimatedSnackBarType.success,
         ).show(context);
         ref.read(verifyLoadingProvider.notifier).changeIndex(false);
       }
     } else {
       AnimatedSnackBar.material(
-        "${transH.error}, ${transH.unkownError}".capitalize(),
+        "${transH.error}, ${transH.unkownError}".capitalizeFirst.toString(),
         type: AnimatedSnackBarType.error,
       ).show(context);
       ref.read(verifyLoadingProvider.notifier).changeIndex(false);
@@ -191,17 +191,17 @@ class _OTPVerificationPageState extends ConsumerState<OTPVerificationPage> {
     if (code.isEmpty) {
       errorSnackBar(
         context: context,
-        title: transH.error.capitalize(),
-        message: transH.fieldsRequired.capitalize(),
+        title: transH.error.capitalizeFirst.toString(),
+        message: transH.fieldsRequired.capitalizeFirst.toString(),
       );
     } else if (!code.isNum) {
       AnimatedSnackBar.material(
-        "${transH.error}, ${transH.invalidOTPCode}".capitalize(),
+        "${transH.error}, ${transH.invalidOTPCode}".capitalizeFirst.toString(),
         type: AnimatedSnackBarType.error,
       ).show(context);
     } else if (code.length < 4) {
       AnimatedSnackBar.material(
-        "${transH.error}, ${transH.invalidOTPCode}".capitalize(),
+        "${transH.error}, ${transH.invalidOTPCode}".capitalizeFirst.toString(),
         type: AnimatedSnackBarType.error,
       ).show(context);
     } else {
@@ -210,46 +210,46 @@ class _OTPVerificationPageState extends ConsumerState<OTPVerificationPage> {
           await ref.read(dataFetchControllerProvider.notifier).verifyOTP(code);
       if (data['error'] == 'invalid OTP code') {
         errorSnackBar(
-          title: transH.error.capitalize(),
-          message: transH.invalidOTPCode.capitalize(),
+          title: transH.error.capitalizeFirst.toString(),
+          message: transH.invalidOTPCode.capitalizeFirst.toString(),
         );
       } else if (data['response'] == 'otp already verified') {
         errorSnackBar(
-          title: transH.error.capitalize(),
-          message: transH.otpAlreadyVerified.capitalize(),
+          title: transH.error.capitalizeFirst.toString(),
+          message: transH.otpAlreadyVerified.capitalizeFirst.toString(),
         );
       } else if (data['response'] ==
           'otp expired, new otp created check email') {
         errorSnackBar(
-          title: transH.error.capitalize(),
-          message: transH.otpAlreadyExpired.capitalize(),
+          title: transH.error.capitalizeFirst.toString(),
+          message: transH.otpAlreadyExpired.capitalizeFirst.toString(),
         );
       } else if (data['response'] == 'new otp created check email') {
         errorSnackBar(
-          title: transH.error.capitalize(),
-          message: transH.newOTPSent.capitalize(),
+          title: transH.error.capitalizeFirst.toString(),
+          message: transH.newOTPSent.capitalizeFirst.toString(),
         );
       } else if (data['error'] == 'unknown') {
         errorSnackBar(
-          title: transH.error.capitalize(),
-          message: transH.unkownError.capitalize(),
+          title: transH.error.capitalizeFirst.toString(),
+          message: transH.unkownError.capitalizeFirst.toString(),
         );
       } else if (data['error'] == 'network') {
         errorSnackBar(
-          title: transH.error.capitalize(),
-          message: transH.network.capitalize(),
+          title: transH.error.capitalizeFirst.toString(),
+          message: transH.network.capitalizeFirst.toString(),
         );
       } else if (data['response'] == 'otp verification successful') {
         utlController.writeData('isVerified', 'yes');
         successSnackBar(
-          title: transH.success.capitalize(),
-          message: transH.otpVerified.capitalize(),
+          title: transH.success.capitalizeFirst.toString(),
+          message: transH.otpVerified.capitalizeFirst.toString(),
         );
         navigateReplacementNamed(context, AppRoutes.home);
       } else {
         errorSnackBar(
-          title: transH.error.capitalize(),
-          message: transH.unkownError.capitalize(),
+          title: transH.error.capitalizeFirst.toString(),
+          message: transH.unkownError.capitalizeFirst.toString(),
         );
       }
     }

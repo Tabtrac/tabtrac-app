@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/cli_commands.dart';
+
+import 'package:fundz_app/helpers/app_extensions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -114,7 +115,7 @@ class HeroCard extends ConsumerWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Text(
-                            transH.overdue.capitalize(),
+                            transH.overdue.capitalizeFirst.toString(),
                             style: TextStyle(
                               color: AppColors.whiteColor,
                               fontSize: 14.sp,
@@ -136,7 +137,7 @@ class HeroCard extends ConsumerWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Text(
-                            transH.pending.capitalize(),
+                            transH.pending.capitalizeFirst.toString(),
                             style: TextStyle(
                               color: AppColors.whiteColor,
                               fontSize: 14.sp,

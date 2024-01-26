@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_native_splash/cli_commands.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fundz_app/helpers/functions.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'package:fundz_app/helpers/app_extensions.dart';
 import '../../../../constants/app_routes.dart';
 import '../../../../constants/colors.dart';
 import '../../../../widgets/activity.widget.dart';
-import '../../../../widgets/shimmers.widget.dart';
 import '../../record/providers/record.provider.dart';
 import '../providers/provider.dart';
 
@@ -37,7 +36,7 @@ class _RecentActivitiesState extends ConsumerState<RecentActivities> {
             const SizedBox()
           else
             Text(
-              transH.debt.capitalize(),
+              transH.debt.capitalizeFirst.toString(),
               style: TextStyle(
                 color: AppColors.greyColor,
                 fontSize: 14.sp,
@@ -82,7 +81,7 @@ class _RecentActivitiesState extends ConsumerState<RecentActivities> {
             const SizedBox()
           else
             Text(
-              transH.credit.capitalize(),
+              transH.credit.capitalizeFirst.toString(),
               style: TextStyle(
                 color: AppColors.greyColor,
                 fontSize: 14.sp,

@@ -4,7 +4,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/cli_commands.dart';
+
+import 'package:fundz_app/helpers/app_extensions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -471,20 +472,20 @@ class LiabilityController extends StateNotifier<AsyncValue> {
       offlineUser.delete(liability.id);
       successSnackBar(
         context: context,
-        title: transH.success.capitalize(),
-        message: transH.deleted.capitalize(),
+        title: transH.success.capitalizeFirst.toString(),
+        message: transH.deleted.capitalizeFirst.toString(),
       );
       LocalNotifications.showNotification(
-        title: transH.success.capitalize(),
-        body: transH.deleted.capitalize(),
+        title: transH.success.capitalizeFirst.toString(),
+        body: transH.deleted.capitalizeFirst.toString(),
         payload: '',
       );
       navigateReplacementNamed(context, AppRoutes.home);
     } else {
       errorSnackBar(
         context: context,
-        title: transH.error.capitalize(),
-        message: transH.unkownError.capitalize(),
+        title: transH.error.capitalizeFirst.toString(),
+        message: transH.unkownError.capitalizeFirst.toString(),
       );
     }
     return true;
@@ -518,8 +519,8 @@ class LiabilityController extends StateNotifier<AsyncValue> {
     offlineUser.put(liability.id, liabilityData);
 
     LocalNotifications.showNotification(
-      title: transH.success.capitalize(),
-      body: transH.liabilityUpdated.capitalize(),
+      title: transH.success.capitalizeFirst.toString(),
+      body: transH.liabilityUpdated.capitalizeFirst.toString(),
       payload: '',
     );
     Navigator.pop(context);

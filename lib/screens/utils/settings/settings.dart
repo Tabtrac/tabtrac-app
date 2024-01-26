@@ -1,10 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_native_splash/cli_commands.dart';
+
+import 'package:fundz_app/helpers/app_extensions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fundz_app/helpers/app_extensions.dart';
 import 'package:fundz_app/helpers/app_fonts.dart';
 import 'package:fundz_app/helpers/functions.dart';
 import 'package:ionicons/ionicons.dart';
@@ -54,7 +53,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             : null,
         centerTitle: true,
         title: Text(
-          transH.settings.capitalize(),
+          transH.settings.capitalizeFirst.toString(),
           style: TextStyle(
             color: AppColors.primaryColor,
             fontWeight: FontWeight.bold,

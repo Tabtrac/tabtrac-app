@@ -4,7 +4,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/cli_commands.dart';
+
+import 'package:fundz_app/helpers/app_extensions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fundz_app/helpers/functions.dart';
 import 'package:http/http.dart' as http;
@@ -83,8 +84,8 @@ class RecordController {
         }
         errorSnackBar(
             context: context,
-            title: transH.error.capitalize(),
-            message: transH.unkownError.capitalize());
+            title: transH.error.capitalizeFirst.toString(),
+            message: transH.unkownError.capitalizeFirst.toString());
       }
     }
   }
@@ -133,8 +134,8 @@ class RecordController {
         }
         errorSnackBar(
             context: context,
-            title: transH.error.capitalize(),
-            message: transH.unkownError.capitalize());
+            title: transH.error.capitalizeFirst.toString(),
+            message: transH.unkownError.capitalizeFirst.toString());
       }
     }
   }
@@ -226,8 +227,8 @@ class RecordController {
         }
         errorSnackBar(
             context: context,
-            title: transH.error.capitalize(),
-            message: transH.unkownError.capitalize());
+            title: transH.error.capitalizeFirst.toString(),
+            message: transH.unkownError.capitalizeFirst.toString());
       }
     }
   }
@@ -286,8 +287,8 @@ class RecordController {
           }
           errorSnackBar(
               context: context,
-              title: transH.error.capitalize(),
-              message: transH.unkownError.capitalize());
+              title: transH.error.capitalizeFirst.toString(),
+              message: transH.unkownError.capitalizeFirst.toString());
         }
       }
     }
@@ -319,8 +320,9 @@ class RecordController {
         } else if (statusCode == 200 || statusCode == 201) {
           record.status = 'paid';
           successSnackBar(
-            title: transH.success.capitalize(),
-            message: "${transH.record} ${transH.paid}".capitalize(),
+            title: transH.success.capitalizeFirst.toString(),
+            message:
+                "${transH.record} ${transH.paid}".capitalizeFirst.toString(),
           );
         } else {
           errorSnackBar(
@@ -335,8 +337,8 @@ class RecordController {
         }
         errorSnackBar(
             context: context,
-            title: transH.error.capitalize(),
-            message: transH.unkownError.capitalize());
+            title: transH.error.capitalizeFirst.toString(),
+            message: transH.unkownError.capitalizeFirst.toString());
       }
       ref.read(isLoadingProvider.notifier).change(false);
     }
@@ -420,8 +422,9 @@ class RecordController {
         } else if (statusCode == 200 || statusCode == 201) {
           await onLoadData();
           successSnackBar(
-            title: transH.success.capitalize(),
-            message: "${transH.record} ${transH.deleted}".capitalize(),
+            title: transH.success.capitalizeFirst.toString(),
+            message:
+                "${transH.record} ${transH.deleted}".capitalizeFirst.toString(),
           );
           Navigator.of(context).pop();
         } else {
@@ -437,8 +440,8 @@ class RecordController {
         }
         errorSnackBar(
             context: context,
-            title: transH.error.capitalize(),
-            message: transH.unkownError.capitalize());
+            title: transH.error.capitalizeFirst.toString(),
+            message: transH.unkownError.capitalizeFirst.toString());
       }
       ref.read(isLoadingProvider.notifier).change(false);
     }

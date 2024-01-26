@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/cli_commands.dart';
+
+import 'package:fundz_app/helpers/app_extensions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fundz_app/constants/colors.dart';
@@ -165,8 +166,8 @@ class ActivityWidget extends ConsumerWidget {
                               vertical: 5, horizontal: 15),
                           child: Text(
                             isDue
-                                ? transH.overdue.capitalize()
-                                : transH.pending.capitalize(),
+                                ? transH.overdue.capitalizeFirst.toString()
+                                : transH.pending.capitalizeFirst.toString(),
                             style: TextStyle(
                               color: AppColors.unpaidColor,
                               fontWeight: FontWeight.w600,
@@ -183,7 +184,7 @@ class ActivityWidget extends ConsumerWidget {
                           padding: const EdgeInsets.symmetric(
                               vertical: 5, horizontal: 15),
                           child: Text(
-                            transH.paid.capitalize(),
+                            transH.paid.capitalizeFirst.toString(),
                             style: TextStyle(
                               color: AppColors.paidColor,
                               fontSize: 12.sp,

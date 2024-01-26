@@ -13,7 +13,6 @@ import '../../../providers/providers.dart';
 import '../../../widgets/no_activity.dart';
 import '../../../widgets/shimmers.widget.dart';
 import '../../../widgets/widgets.utils.dart';
-import 'controller/client.controller.dart';
 import 'providers/provider.client.dart';
 import 'widgets/clients.dart';
 
@@ -112,6 +111,7 @@ class _ClientWidgetState extends ConsumerState<ClientWidget> {
             ],
           ),
           SizedBox(height: 20.h),
+          
           if (allClientLoading)
             Flexible(
               child: Shimmer.fromColors(
