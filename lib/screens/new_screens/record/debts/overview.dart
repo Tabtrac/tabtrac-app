@@ -27,149 +27,179 @@ class OverViewDebt extends ConsumerWidget {
     final paidDebtRecords = ref.watch(paidDebtRecordsProvider);
     return Column(
       children: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Text(
-              transH.all.capitalizeAll(),
-              style: TextStyle(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w600,
-                fontFamily: AppFonts.actionFont,
-              ),
-              overflow: TextOverflow.ellipsis,
-            ),
-            if (allDebtRecords.length < 3)
-              const SizedBox()
-            else
-              TextButton(
-                onPressed: () {
-                  navigateNamed(context, AppRoutes.infiniteRecord,
-                      {'type': 'debt', 'section': 'all'});
-                },
-                child: Text(
-                  transH.seeAll,
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    color: AppColors.greyColor,
-                    fontFamily: AppFonts.actionFont,
-                  ),
-                  overflow: TextOverflow.ellipsis,
+        Container(
+          margin: EdgeInsets.only(bottom: 10.h),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Text(
+                transH.all.capitalizeAll(),
+                style: TextStyle(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: AppFonts.actionFont,
                 ),
+                overflow: TextOverflow.ellipsis,
               ),
-          ],
+              if (allDebtRecords.length < 3)
+                const SizedBox()
+              else
+                TextButton(
+                  onPressed: () {
+                    navigateNamed(context, AppRoutes.infiniteRecord,
+                        {'type': 'debt', 'section': 'all'});
+                  },
+                  child: Text(
+                    transH.seeAll,
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      color: AppColors.greyColor,
+                      fontFamily: AppFonts.actionFont,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+            ],
+          ),
         ),
         AllDebtView(
           width: width,
         ).animate().fade(delay: 400.ms),
         // Overdue
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Text(
-              transH.overdue.capitalizeAll(),
-              style: TextStyle(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w600,
-                fontFamily: AppFonts.actionFont,
-              ),
-              overflow: TextOverflow.ellipsis,
-            ),
-            if (dueDebtRecords.length < 3)
-              const SizedBox()
-            else
-              TextButton(
-                onPressed: () {
-                  navigateNamed(context, AppRoutes.infiniteRecord,
-                      {'type': 'debt', 'section': 'due'});
-                },
-                child: Text(
-                  transH.seeAll,
+        if (dueDebtRecords.isEmpty)
+          const SizedBox()
+        else
+          Container(
+            margin: EdgeInsets.only(bottom: 10.h),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  transH.overdue.capitalizeAll(),
                   style: TextStyle(
-                    fontSize: 14.sp,
-                    color: AppColors.greyColor,
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w600,
                     fontFamily: AppFonts.actionFont,
                   ),
                   overflow: TextOverflow.ellipsis,
                 ),
-              ),
-          ],
-        ),
-        OverdueView(
-          width: width,
-        ).animate().fade(delay: 500.ms),
+                if (dueDebtRecords.length < 3)
+                  const SizedBox()
+                else
+                  TextButton(
+                    onPressed: () {
+                      navigateNamed(context, AppRoutes.infiniteRecord,
+                          {'type': 'debt', 'section': 'due'});
+                    },
+                    child: Text(
+                      transH.seeAll,
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        color: AppColors.greyColor,
+                        fontFamily: AppFonts.actionFont,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+              ],
+            ),
+          ),
+        if (dueDebtRecords.isEmpty)
+          const SizedBox()
+        else
+          OverdueView(
+            width: width,
+          ).animate().fade(delay: 500.ms),
         // Pending
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Text(
-              transH.pending.capitalizeAll(),
-              style: TextStyle(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w600,
-                fontFamily: AppFonts.actionFont,
-              ),
-              overflow: TextOverflow.ellipsis,
-            ),
-            if (pendingDebtRecords.length < 3)
-              const SizedBox()
-            else
-              TextButton(
-                onPressed: () {
-                  navigateNamed(context, AppRoutes.infiniteRecord,
-                      {'type': 'debt', 'section': 'pending'});
-                },
-                child: Text(
-                  transH.seeAll,
+        if (pendingDebtRecords.isEmpty)
+          const SizedBox()
+        else
+          Container(
+            margin: EdgeInsets.only(bottom: 10.h),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  transH.pending.capitalizeAll(),
                   style: TextStyle(
-                    fontSize: 14.sp,
-                    color: AppColors.greyColor,
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w600,
                     fontFamily: AppFonts.actionFont,
                   ),
                   overflow: TextOverflow.ellipsis,
                 ),
-              ),
-          ],
-        ),
-        PendingView(
-          width: width,
-        ).animate().fade(delay: 600.ms),
+                if (pendingDebtRecords.length < 3)
+                  const SizedBox()
+                else
+                  TextButton(
+                    onPressed: () {
+                      navigateNamed(context, AppRoutes.infiniteRecord,
+                          {'type': 'debt', 'section': 'pending'});
+                    },
+                    child: Text(
+                      transH.seeAll,
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        color: AppColors.greyColor,
+                        fontFamily: AppFonts.actionFont,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+              ],
+            ),
+          ),
+        if (pendingDebtRecords.isEmpty)
+          const SizedBox()
+        else
+          PendingView(
+            width: width,
+          ).animate().fade(delay: 600.ms),
         // Paid
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Text(
-              transH.paid.capitalizeAll(),
-              style: TextStyle(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w600,
-                fontFamily: AppFonts.actionFont,
-              ),
-              overflow: TextOverflow.ellipsis,
-            ),
-            if (paidDebtRecords.length < 3)
-              const SizedBox()
-            else
-              TextButton(
-                onPressed: () {
-                  navigateNamed(context, AppRoutes.infiniteRecord,
-                      {'type': 'debt', 'section': 'paid'});
-                },
-                child: Text(
-                  transH.seeAll,
+        if (paidDebtRecords.isEmpty)
+          const SizedBox()
+        else
+          Container(
+            margin: EdgeInsets.only(bottom: 10.h),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  transH.paid.capitalizeAll(),
                   style: TextStyle(
-                    fontSize: 14.sp,
-                    color: AppColors.greyColor,
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w600,
                     fontFamily: AppFonts.actionFont,
                   ),
                   overflow: TextOverflow.ellipsis,
                 ),
-              ),
-          ],
-        ),
-        PaidView(
-          width: width,
-        ).animate().fade(delay: 700.ms),
+                if (paidDebtRecords.length < 3)
+                  const SizedBox()
+                else
+                  TextButton(
+                    onPressed: () {
+                      navigateNamed(context, AppRoutes.infiniteRecord,
+                          {'type': 'debt', 'section': 'paid'});
+                    },
+                    child: Text(
+                      transH.seeAll,
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        color: AppColors.greyColor,
+                        fontFamily: AppFonts.actionFont,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+              ],
+            ),
+          ),
+        if (paidDebtRecords.isEmpty)
+          const SizedBox()
+        else
+          PaidView(
+            width: width,
+          ).animate().fade(delay: 700.ms),
       ],
     );
   }
