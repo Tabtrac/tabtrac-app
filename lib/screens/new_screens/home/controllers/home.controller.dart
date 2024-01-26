@@ -1,18 +1,11 @@
 // ignore_for_file: use_build_context_synchronously, avoid_print
 
-import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fundz_app/helpers/functions.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../constants/app_routes.dart';
-import '../../../../constants/urls.dart';
 import '../../../../controllers/utl_controllers.dart';
-import '../../../../widgets/snackbars.dart';
 import '../models/overview.model.dart';
 import '../providers/provider.dart';
 import '../widgets/hero_card.dart';
@@ -23,47 +16,6 @@ class HomeController {
 
   HomeController({required this.ref, required this.context});
   UtitlityController utitlityController = UtitlityController();
-  Future getOverviewData() async {
-    if (await isOnline()) {
-      final transH = AppLocalizations.of(context)!;
-      try {
-        // Code Area
-        final accessToken = await utitlityController.getData('access_token');
-        final response = await http.get(
-          Uri.parse('$domainPortion/api/record/overview/'),
-          headers: {
-            HttpHeaders.authorizationHeader: 'Bearer $accessToken',
-          },
-        );
-        var responseData = json.decode(response.body);
-
-        var statusCode = response.statusCode;
-        if (statusCode == 401) {
-          utitlityController.writeData('needsLogOut', 'true');
-          navigateReplacementNamed(context, AppRoutes.loginRoute);
-          // return CurrentState.none;
-        } else if (statusCode == 200 || statusCode == 201) {
-          OverviewData data = OverviewData.fromJson(responseData);
-          ref.read(overviewDataProvider.notifier).setData(data);
-          ref.read(overviewDataProvider.notifier).setData(data);
-          // return CurrentState.done;
-        } else {
-          errorSnackBar(
-              context: context,
-              title: transH.error,
-              message: transH.unkownError);
-        }
-      } catch (e) {
-        if (e.toString().contains('SocketException')) {
-          // return CurrentState.network;
-          errorSnackBar(
-              context: context, title: transH.error, message: transH.network);
-        }
-        errorSnackBar(
-            context: context, title: transH.error, message: transH.unkownError);
-      }
-    }
-  }
 
   List<Widget> getHeroWidgets(AppLocalizations transH, double width) {
     OverviewData? overviewData = ref.watch(overviewDataProvider);

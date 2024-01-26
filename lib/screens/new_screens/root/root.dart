@@ -70,11 +70,10 @@ class _RootHomeState extends ConsumerState<RootHome> {
   }
 
   void initializeData() async {
-    final homeController = HomeController(ref: ref, context: context);
     final clientController = ClientController(ref: ref, context: context);
     final recordController = RecordController(ref: ref, context: context);
 
-    homeController.getOverviewData();
+    recordController.getOverviewData();
     clientController.getAllClients();
     recordController.onLoadData();
   }
@@ -124,12 +123,11 @@ class _RootHomeState extends ConsumerState<RootHome> {
         width: width,
         initialIndex: viewController,
         onDoubleTap: (index) {
-          final homeController = HomeController(ref: ref, context: context);
           final clientController = ClientController(ref: ref, context: context);
           final recordController = RecordController(ref: ref, context: context);
 
           if (index == 0) {
-            homeController.getOverviewData();
+            recordController.getOverviewData();
             recordController.getRecentActivity();
           } else if (index == 1) {
             clientController.getAllClients();
