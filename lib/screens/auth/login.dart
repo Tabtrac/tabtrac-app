@@ -45,6 +45,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     final transH = AppLocalizations.of(context)!;
+    final buttonLoading = ref.watch(buttonLoadingNotifierProvider);
     return WillPopScope(
       onWillPop: () async {
         ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
@@ -133,15 +134,17 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         SizedBox(height: 20.h),
                         CustomBtn(
                           onPressed: () {
-                            ref
-                                .read(buttonLoadingNotifierProvider.notifier)
-                                .changeIndex(true);
-                            loginUser(
-                              email.text,
-                              password.text,
-                              width,
-                              transH,
-                            );
+                            if (!buttonLoading) {
+                              ref
+                                  .read(buttonLoadingNotifierProvider.notifier)
+                                  .changeIndex(true);
+                              loginUser(
+                                email.text,
+                                password.text,
+                                width,
+                                transH,
+                              );
+                            }
                           },
                           // width: width ,
                           btnColor: AppColors.primaryColor,

@@ -291,5 +291,6 @@
   "internet": "Internet",
   "userOffline": "You dey offline for now",
   "userOnline": "You dey online",
-  "feedback": "Feedback"
+  "feedback": "Feedback",
+  "enter_username": "enter your username"
 }

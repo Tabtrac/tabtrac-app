@@ -78,3 +78,15 @@ class ViewControlllerNotifier extends StateNotifier<int> {
     state = index;
   }
 }
+class AuthBoolStateNotifier extends StateNotifier<bool> {
+  AuthBoolStateNotifier() : super(false);
+
+  void change(bool value) {
+    state = value;
+  }
+}
+
+final termsCheckedProvider =
+    StateNotifierProvider.autoDispose<AuthBoolStateNotifier, bool>((ref) {
+  return AuthBoolStateNotifier();
+});

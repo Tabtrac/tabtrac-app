@@ -9,6 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../constants/app_routes.dart';
 import '../../constants/colors.dart';
+import '../../controllers/utl_provider_controllers.dart';
 import '../../helpers/app_fonts.dart';
 import '../../helpers/functions.dart';
 import '../../providers/providers.dart';
@@ -48,6 +49,8 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     final transH = AppLocalizations.of(context)!;
+    final termsChecked = ref.watch(termsCheckedProvider);
+    final buttonLoading = ref.watch(buttonLoadingNotifierProvider);
     return WillPopScope(
       onWillPop: () async {
         ref.read(buttonLoadingNotifierProvider.notifier).changeIndex(false);
@@ -101,7 +104,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                         FormInput(
                           width,
                           controller: name,
-                          hintText: transH.enterName,
+                          hintText: transH.enter_username,
                           isPassword: false,
                           isLast: false,
                         ),
@@ -121,48 +124,62 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                           isPassword: true,
                           isLast: true,
                         ),
-                        Row(
-                          children: <Widget>[
-                            FittedBox(
-                              child: Text(
+                        FittedBox(
+                          child: Row(
+                            children: <Widget>[
+                              Checkbox(
+                                value: termsChecked,
+                                onChanged: (value) {
+                                  if (value != null) {
+                                    ref
+                                        .read(termsCheckedProvider.notifier)
+                                        .change(value);
+                                  }
+                                },
+                              ),
+                              Text(
                                 'By registering you accept our',
                                 style: TextStyle(
                                   color: AppColors.blackColor,
                                   fontSize: 14.sp,
                                 ),
                               ),
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                navigateNamed(context, AppRoutes.termsRoute);
-                              },
-                              child: FittedBox(
-                                child: Text(
-                                  'Terms and Conditions',
-                                  style: TextStyle(
-                                    color: AppColors.primaryColor,
-                                    fontSize: 14.sp,
+                              TextButton(
+                                onPressed: () {
+                                  navigateNamed(context, AppRoutes.termsRoute);
+                                },
+                                child: FittedBox(
+                                  child: Text(
+                                    'Terms and Conditions',
+                                    style: TextStyle(
+                                      color: AppColors.primaryColor,
+                                      fontSize: 14.sp,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                         CustomBtn(
                           onPressed: () {
-                            ref
-                                .read(buttonLoadingNotifierProvider.notifier)
-                                .changeIndex(true);
-                            signUpUser(
-                              name.text,
-                              email.text,
-                              password.text,
-                              width,
-                              transH,
-                            );
+                            if (termsChecked && !buttonLoading) {
+                              ref
+                                  .read(buttonLoadingNotifierProvider.notifier)
+                                  .changeIndex(true);
+                              signUpUser(
+                                name.text,
+                                email.text,
+                                password.text,
+                                width,
+                                transH,
+                              );
+                            }
                           },
                           // width: width ,
-                          btnColor: AppColors.primaryColor,
+                          btnColor: termsChecked
+                              ? AppColors.primaryColor
+                              : AppColors.greyColor,
                           fontSize: 16.sp,
                           text: transH.signUp,
                           textColor: AppColors.whiteColor,

@@ -369,7 +369,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 contentPadding:
                     const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                 onTap: () {
-                  launchUrlNow('https://chat.whatsapp.com/BHFioceqPSf3yRlavRdNZS');
+                  launchEmail('tabtrac.business@gmail.com', 'Feedback on Tabtrac', '');
                 },
               ),
               ListTile(
