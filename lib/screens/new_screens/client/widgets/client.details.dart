@@ -122,20 +122,22 @@ class _ClientDetailsState extends ConsumerState<ClientDetails> {
           ? SizedBox(
               width: width,
               height: height,
-              child: deletePlaceholderWidget(transH, width, height))
-          : SingleChildScrollView(
-              child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  width: width,
-                  height: height,
-                  child: Column(
-                    children: <Widget>[
-                      if (clientLoading)
-                        Expanded(child: CleintDetailsShimmer(width: width))
-                      else if (currentCleintDetails == null)
-                        NoActivity(width: width).animate().fadeIn(delay: 500.ms)
-                      else
-                        Column(
+              child: deletePlaceholderWidget(transH, width, height),
+            )
+          : Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              width: width,
+              height: height,
+              child: Column(
+                children: <Widget>[
+                  if (clientLoading)
+                    Expanded(child: CleintDetailsShimmer(width: width))
+                  else if (currentCleintDetails == null)
+                    NoActivity(width: width).animate().fadeIn(delay: 500.ms)
+                  else
+                    Flexible(
+                      child: SingleChildScrollView(
+                        child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             SizedBox(height: 20.h),
@@ -499,9 +501,10 @@ class _ClientDetailsState extends ConsumerState<ClientDetails> {
                             )
                           ],
                         ).animate().fadeIn(),
-                    ],
-                  )),
-            ),
+                      ),
+                    ),
+                ],
+              )),
     );
   }
 }

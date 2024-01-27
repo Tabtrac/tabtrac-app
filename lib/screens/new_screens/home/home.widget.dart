@@ -14,6 +14,7 @@ import '../../../widgets/no_activity.dart';
 import '../../../widgets/shimmers.widget.dart';
 import 'controllers/home.controller.dart';
 import 'providers/provider.dart';
+import 'widgets/actions.dart';
 import 'widgets/recent_activities.dart';
 
 // Providers
@@ -104,10 +105,9 @@ class _HomeWidgetState extends ConsumerState<HomeWidget> {
             ],
           ),
           SizedBox(height: 10.h),
-          SizedBox(
-            height: widget.height * .75 + 15.h,
+          Flexible(
             child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
+              physics: const ClampingScrollPhysics(),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -149,17 +149,17 @@ class _HomeWidgetState extends ConsumerState<HomeWidget> {
                       ),
                     ),
                   ),
-                  // SizedBox(height: 5.h),
-                  // Text(
-                  //   transH.actions.capitalizeAll(),
-                  //   style: TextStyle(
-                  //     fontSize: 16.sp,
-                  //     fontWeight: FontWeight.w600,
-                  //   ),
-                  // ),
-                  // SizedBox(height: 10.h),
-                  // ActionWidgets(width: widget.width),
+                  SizedBox(height: 5.h),
+                  Text(
+                    transH.actions.capitalizeAll(),
+                    style: TextStyle(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                   SizedBox(height: 10.h),
+                  ActionWidgets(width: widget.width),
+                  SizedBox(height: 20.h),
                   Text(
                     transH.recentActivity.capitalizeAll(),
                     style: TextStyle(
@@ -167,7 +167,7 @@ class _HomeWidgetState extends ConsumerState<HomeWidget> {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  SizedBox(height: 10.h),
+                  SizedBox(height: 5.h),
                   if (recentLoading)
                     Shimmer.fromColors(
                       baseColor: AppColors.greyColor.withOpacity(.5),

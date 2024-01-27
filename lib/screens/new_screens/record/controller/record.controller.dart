@@ -32,6 +32,7 @@ class RecordController {
     final transH = AppLocalizations.of(context)!;
     if (await isOnline()) {
       ref.read(recentLoadingProvider.notifier).change(true);
+      ref.read(recordLoadingProvider.notifier).change(true);
       try {
         // Code Area
         final accessToken = await utitlityController.getData('access_token');
@@ -100,7 +101,9 @@ class RecordController {
           responseData['actions']['debt']['pending'].forEach((element) {
             pendingDebtRecordList.add(UserRecord.fromJson(element));
           });
-          ref.read(pendingDebtRecordsProvider.notifier).change(pendingDebtRecordList);
+          ref
+              .read(pendingDebtRecordsProvider.notifier)
+              .change(pendingDebtRecordList);
 
           // due
           responseData['actions']['debt']['due'].forEach((element) {
@@ -119,20 +122,27 @@ class RecordController {
           responseData['actions']['credit']['pending'].forEach((element) {
             pendingCreditRecordList.add(UserRecord.fromJson(element));
           });
-          ref.read(pendingCreditRecordsProvider.notifier).change(pendingCreditRecordList);
+          ref
+              .read(pendingCreditRecordsProvider.notifier)
+              .change(pendingCreditRecordList);
 
           // due
           responseData['actions']['credit']['due'].forEach((element) {
             dueCreditRecordList.add(UserRecord.fromJson(element));
           });
-          ref.read(dueCreditRecordsProvider.notifier).change(dueCreditRecordList);
+          ref
+              .read(dueCreditRecordsProvider.notifier)
+              .change(dueCreditRecordList);
 
           // paid
           responseData['actions']['credit']['paid'].forEach((element) {
             paidCreditRecordList.add(UserRecord.fromJson(element));
           });
-          ref.read(paidCreditRecordsProvider.notifier).change(paidCreditRecordList);
+          ref
+              .read(paidCreditRecordsProvider.notifier)
+              .change(paidCreditRecordList);
 
+          ref.read(recordLoadingProvider.notifier).change(false);
         } else {
           errorSnackBar(
               context: context,

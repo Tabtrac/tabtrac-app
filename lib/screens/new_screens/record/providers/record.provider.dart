@@ -78,13 +78,11 @@ class IntNotifier extends StateNotifier<int> {
   }
 }
 
-final nextIntProvider =
-    StateNotifierProvider<IsNext, String?>((ref) {
+final nextIntProvider = StateNotifierProvider<IsNext, String?>((ref) {
   return IsNext();
 });
 
-final currentLoadCount =
-    StateNotifierProvider<IntNotifier, int>((ref) {
+final currentLoadCount = StateNotifierProvider<IntNotifier, int>((ref) {
   return IntNotifier();
 });
 
@@ -93,19 +91,25 @@ final infiniteRecordListProvider =
   return RecordListNotifier();
 });
 
-
 class BoolStateNotifier extends StateNotifier<bool> {
-  BoolStateNotifier(): super(false);
-  
-  void change(bool value){
+  BoolStateNotifier() : super(false);
+
+  void change(bool value) {
     state = value;
   }
 }
 
-final isLoadingProvider = StateNotifierProvider.autoDispose<BoolStateNotifier, bool>((ref) {
+final isLoadingProvider =
+    StateNotifierProvider.autoDispose<BoolStateNotifier, bool>((ref) {
   return BoolStateNotifier();
 });
 
-final markAsPaidProvider = StateNotifierProvider.autoDispose<BoolStateNotifier, bool>((ref) {
+final markAsPaidProvider =
+    StateNotifierProvider.autoDispose<BoolStateNotifier, bool>((ref) {
+  return BoolStateNotifier();
+});
+
+final recordLoadingProvider =
+    StateNotifierProvider.autoDispose<BoolStateNotifier, bool>((ref) {
   return BoolStateNotifier();
 });
