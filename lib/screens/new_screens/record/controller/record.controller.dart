@@ -29,16 +29,126 @@ class RecordController {
   UtitlityController utitlityController = UtitlityController();
 
   Future<void> onLoadData() async {
-    await getOverviewData();
-    await getAllCreditRecords();
-    await getAllDebtRecords();
-    await getRecentActivity();
-    await getAllRecordActions('pending', 'debt');
-    await getAllRecordActions('due', 'debt');
-    await getAllRecordActions('paid', 'debt');
-    await getAllRecordActions('pending', 'credit');
-    await getAllRecordActions('due', 'credit');
-    await getAllRecordActions('paid', 'credit');
+    final transH = AppLocalizations.of(context)!;
+    if (await isOnline()) {
+      ref.read(recentLoadingProvider.notifier).change(true);
+      try {
+        // Code Area
+        final accessToken = await utitlityController.getData('access_token');
+        final response = await http.get(
+          Uri.parse('$domainPortion/api/record/omega/'),
+          headers: {
+            HttpHeaders.authorizationHeader: 'Bearer $accessToken',
+          },
+        );
+        var responseData = json.decode(response.body);
+
+        var statusCode = response.statusCode;
+        if (statusCode == 401) {
+          utitlityController.writeData('needsLogOut', 'true');
+          navigateReplacementNamed(context, AppRoutes.loginRoute);
+          // return CurrentState.none;
+        } else if (statusCode == 200 || statusCode == 201) {
+          // overview data
+          OverviewData data = OverviewData.fromJson(responseData['overview']);
+          ref.read(overviewDataProvider.notifier).setData(data);
+          // end of overview data
+
+          // all credit records
+          List<UserRecord> creditRecord = [];
+          responseData['records']['credit_all'].forEach((element) {
+            creditRecord.add(UserRecord.fromJson(element));
+          });
+          ref.read(allCreditRecordsProvider.notifier).change(creditRecord);
+
+          // all debt records
+          List<UserRecord> debtRecord = [];
+          responseData['records']['debt_all'].forEach((element) {
+            debtRecord.add(UserRecord.fromJson(element));
+          });
+          ref.read(allDebtRecordsProvider.notifier).change(debtRecord);
+
+          // Recent activities
+          List<UserRecord> creditRecordsRecent = [];
+          List<UserRecord> debtRecordsRecent = [];
+          responseData['recent_activities']['credit'].forEach((element) {
+            creditRecordsRecent.add(UserRecord.fromJson(element));
+          });
+          responseData['recent_activities']['debt'].forEach((element) {
+            debtRecordsRecent.add(UserRecord.fromJson(element));
+          });
+          ref.read(recentDebtRecordProvider.notifier).change(debtRecordsRecent);
+          ref
+              .read(recentCreditRecordProvider.notifier)
+              .change(creditRecordsRecent);
+          ref.read(recentLoadingProvider.notifier).change(false);
+          // end of recent activities
+
+          // records actions
+          // credit records actions
+          List<UserRecord> pendingCreditRecordList = [];
+          List<UserRecord> dueCreditRecordList = [];
+          List<UserRecord> paidCreditRecordList = [];
+
+          // debt records actions
+          List<UserRecord> pendingDebtRecordList = [];
+          List<UserRecord> dueDebtRecordList = [];
+          List<UserRecord> paidDebtRecordList = [];
+
+          // debt Handler
+          // pending
+          responseData['actions']['debt']['pending'].forEach((element) {
+            pendingDebtRecordList.add(UserRecord.fromJson(element));
+          });
+          ref.read(pendingDebtRecordsProvider.notifier).change(pendingDebtRecordList);
+
+          // due
+          responseData['actions']['debt']['due'].forEach((element) {
+            dueDebtRecordList.add(UserRecord.fromJson(element));
+          });
+          ref.read(dueDebtRecordsProvider.notifier).change(dueDebtRecordList);
+
+          // paid
+          responseData['actions']['debt']['paid'].forEach((element) {
+            paidDebtRecordList.add(UserRecord.fromJson(element));
+          });
+          ref.read(paidDebtRecordsProvider.notifier).change(paidDebtRecordList);
+
+          // credit Handler
+          // pending
+          responseData['actions']['credit']['pending'].forEach((element) {
+            pendingCreditRecordList.add(UserRecord.fromJson(element));
+          });
+          ref.read(pendingCreditRecordsProvider.notifier).change(pendingCreditRecordList);
+
+          // due
+          responseData['actions']['credit']['due'].forEach((element) {
+            dueCreditRecordList.add(UserRecord.fromJson(element));
+          });
+          ref.read(dueCreditRecordsProvider.notifier).change(dueCreditRecordList);
+
+          // paid
+          responseData['actions']['credit']['paid'].forEach((element) {
+            paidCreditRecordList.add(UserRecord.fromJson(element));
+          });
+          ref.read(paidCreditRecordsProvider.notifier).change(paidCreditRecordList);
+
+        } else {
+          errorSnackBar(
+              context: context,
+              title: transH.error,
+              message: transH.unkownError);
+        }
+      } catch (e) {
+        if (e.toString().contains('SocketException')) {
+          // return CurrentState.network;
+          errorSnackBar(
+              context: context, title: transH.error, message: transH.network);
+        }
+        errorSnackBar(
+            context: context, title: transH.error, message: transH.unkownError);
+      }
+    }
   }
 
   Future getOverviewData() async {
@@ -62,7 +172,6 @@ class RecordController {
           // return CurrentState.none;
         } else if (statusCode == 200 || statusCode == 201) {
           OverviewData data = OverviewData.fromJson(responseData);
-          ref.read(overviewDataProvider.notifier).setData(data);
           ref.read(overviewDataProvider.notifier).setData(data);
           // return CurrentState.done;
         } else {

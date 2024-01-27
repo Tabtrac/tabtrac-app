@@ -72,7 +72,7 @@ class _RootHomeState extends ConsumerState<RootHome> {
     final clientController = ClientController(ref: ref, context: context);
     final recordController = RecordController(ref: ref, context: context);
 
-    recordController.getOverviewData();
+    // recordController.getOverviewData();
     clientController.getAllClients();
     recordController.onLoadData();
   }
