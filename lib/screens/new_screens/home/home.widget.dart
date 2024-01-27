@@ -45,14 +45,6 @@ class HomeWidget extends ConsumerStatefulWidget {
 }
 
 class _HomeWidgetState extends ConsumerState<HomeWidget> {
-  // @override
-  // void initState() {
-  //   super.initState();
-
-  //   final homeController = HomeController(ref: ref, context: context);
-  //   homeController.getOverviewData();
-  // }
-
   @override
   Widget build(BuildContext context) {
     final transH = AppLocalizations.of(context)!;
@@ -66,7 +58,7 @@ class _HomeWidgetState extends ConsumerState<HomeWidget> {
     return Container(
       width: widget.width,
       height: widget.height * .9,
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      padding:  EdgeInsets.symmetric(horizontal: isTablet() ? 50.w : 20.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -83,7 +75,7 @@ class _HomeWidgetState extends ConsumerState<HomeWidget> {
                       transH.hello,
                       style: TextStyle(
                         color: AppColors.primaryColor,
-                        fontSize: 14.sp,
+                        fontSize: isTablet() ? 10.sp : 14.sp,
                         fontWeight: FontWeight.w600,
                         fontFamily: AppFonts.actionFont,
                       ),
@@ -94,7 +86,7 @@ class _HomeWidgetState extends ConsumerState<HomeWidget> {
                       style: TextStyle(
                         color: AppColors.primaryColor,
                         fontFamily: AppFonts.actionFont,
-                        fontSize: 12.sp,
+                        fontSize: isTablet() ? 8.sp : 14.sp,
                       ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -153,7 +145,7 @@ class _HomeWidgetState extends ConsumerState<HomeWidget> {
                   Text(
                     transH.actions.capitalizeAll(),
                     style: TextStyle(
-                      fontSize: 16.sp,
+                      fontSize: isTablet() ? 10.sp : 16.sp,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -163,7 +155,7 @@ class _HomeWidgetState extends ConsumerState<HomeWidget> {
                   Text(
                     transH.recentActivity.capitalizeAll(),
                     style: TextStyle(
-                      fontSize: 16.sp,
+                        fontSize: isTablet() ? 10.sp : 16.sp,
                       fontWeight: FontWeight.w600,
                     ),
                   ),

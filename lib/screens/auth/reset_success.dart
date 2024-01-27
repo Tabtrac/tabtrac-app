@@ -33,46 +33,108 @@ class _PasswordResetSuccessState extends ConsumerState<PasswordResetSuccess> {
     final transH = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: AppColors.whiteColor,
-      body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        width: width,
-        height: height,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            SvgPicture.asset('assets/svgs/check.svg'),
-            SizedBox(height: 20.h),
-            Text(
-              transH.passwordChang,
-              style: TextStyle(
-                color: AppColors.blackColor,
-                fontWeight: FontWeight.bold,
-                fontSize: 24.sp,
-                fontFamily: AppFonts.actionFont,
-              ),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          if (constraints.maxWidth > 600) {
+            return tabletLayout(width, height, transH, context);
+          } else {
+            return mobileLayout(width, height, transH, context);
+          }
+        },
+      ),
+    );
+  }
+
+  Container tabletLayout(double width, double height, AppLocalizations transH,
+      BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      width: width,
+      height: height,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          SvgPicture.asset('assets/svgs/check.svg'),
+          SizedBox(height: 20.h),
+          Text(
+            transH.passwordChang,
+            style: TextStyle(
+              color: AppColors.blackColor,
+              fontWeight: FontWeight.bold,
+              fontSize: 14.sp,
+              fontFamily: AppFonts.actionFont,
             ),
-            SizedBox(height: 10.h),
-            Text(
-              transH.passwordChangedMessage.capitalizeFirst.toString(),
-              style: TextStyle(
-                color: AppColors.blackColor,
-                fontSize: 16.sp,
-                fontFamily: AppFonts.primaryFont,
-              ),
-              textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 10.h),
+          Text(
+            transH.passwordChangedMessage.capitalizeFirst.toString(),
+            style: TextStyle(
+              color: AppColors.blackColor,
+              fontSize: 12.sp,
+              fontFamily: AppFonts.primaryFont,
             ),
-            SizedBox(height: 20.h),
-            CustomBtn(
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 20.h),
+          Align(
+            alignment: Alignment.center,
+            child: CustomBtn(
               onPressed: () {
                 navigateReplacementNamed(context, AppRoutes.loginRoute);
               },
+              width: width * .3,
               btnColor: AppColors.primaryColor,
-              fontSize: 16.sp,
+              fontSize: 10.sp,
               text: transH.loginNow.capitalizeAll(),
               textColor: AppColors.whiteColor,
-            )
-          ],
-        ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Container mobileLayout(double width, double height, AppLocalizations transH,
+      BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      width: width,
+      height: height,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          SvgPicture.asset('assets/svgs/check.svg'),
+          SizedBox(height: 20.h),
+          Text(
+            transH.passwordChang,
+            style: TextStyle(
+              color: AppColors.blackColor,
+              fontWeight: FontWeight.bold,
+              fontSize: 24.sp,
+              fontFamily: AppFonts.actionFont,
+            ),
+          ),
+          SizedBox(height: 10.h),
+          Text(
+            transH.passwordChangedMessage.capitalizeFirst.toString(),
+            style: TextStyle(
+              color: AppColors.blackColor,
+              fontSize: 16.sp,
+              fontFamily: AppFonts.primaryFont,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 20.h),
+          CustomBtn(
+            onPressed: () {
+              navigateReplacementNamed(context, AppRoutes.loginRoute);
+            },
+            btnColor: AppColors.primaryColor,
+            fontSize: 16.sp,
+            text: transH.loginNow.capitalizeAll(),
+            textColor: AppColors.whiteColor,
+          )
+        ],
       ),
     );
   }

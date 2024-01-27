@@ -2,6 +2,7 @@
 
 import 'dart:async';
 import 'dart:math';
+import 'dart:ui' as ui;
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
@@ -492,6 +493,12 @@ void launchEmail(String to, String subject, String body) async {
   );
 
   await launch(emailLaunchUri.toString());
+}
+
+bool isTablet() {
+  final double shortestSide = ui.window.physicalSize.shortestSide;
+
+  return shortestSide > 600;
 }
 
 void launchPhoneCall(String phoneNumber) async {

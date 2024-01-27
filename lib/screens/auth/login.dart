@@ -56,139 +56,287 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         body: SafeArea(
           child: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
-            child: Container(
-              height: height,
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 25.0, vertical: 30.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  SizedBox(
-                    width: width,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: height * .02),
-                        Navigator.canPop(context)
-                            ? IconButton(
-                                onPressed: () {
-                                  if (Navigator.canPop(context)) {
-                                    Navigator.pop(context);
-                                  } else {
-                                    navigateReplacementNamed(
-                                        context, AppRoutes.splashRoute);
-                                  }
-                                },
-                                padding: const EdgeInsets.all(0),
-                                icon: Icon(
-                                  Icons.arrow_back_ios,
-                                  color: AppColors.primaryColor,
-                                  size: 24.sp,
-                                ),
-                              )
-                            : const SizedBox(),
-                        SizedBox(height: height * .02),
-                        Text(
-                          transH.welcomeBack,
-                          style: TextStyle(
-                            color: AppColors.primaryColor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24.sp,
-                            fontFamily: AppFonts.actionFont,
-                          ),
-                          textScaleFactor: 1,
-                        ),
-                        SizedBox(height: 30.h),
-                        FormInput(
-                          width,
-                          controller: email,
-                          hintText: transH.enterEmail,
-                          isPassword: false,
-                          isLast: false,
-                        ),
-                        SizedBox(height: 20.h),
-                        FormInput(
-                          width,
-                          controller: password,
-                          hintText: transH.enterPassword,
-                          isPassword: true,
-                          isLast: true,
-                        ),
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: TextButton(
-                            onPressed: () {
-                              navigateNamed(
-                                  context, AppRoutes.forgottenPasswordRoute);
-                            },
-                            child: Text(
-                              "${transH.forgetPass.capitalizeFirst.toString()}?",
-                              style: TextStyle(
-                                color: AppColors.blackColor.withOpacity(.7),
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 20.h),
-                        CustomBtn(
-                          onPressed: () {
-                            if (!buttonLoading) {
-                              ref
-                                  .read(buttonLoadingNotifierProvider.notifier)
-                                  .changeIndex(true);
-                              loginUser(
-                                email.text,
-                                password.text,
-                                width,
-                                transH,
-                              );
-                            }
-                          },
-                          // width: width ,
-                          btnColor: AppColors.primaryColor,
-                          fontSize: 16.sp,
-                          text: transH.signIn,
-                          textColor: AppColors.whiteColor,
-                          actionBtn: true,
-                        ),
-                      ],
-                    ),
-                  ),
-                  FittedBox(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          "${transH.donHaveAcc.capitalizeFirst.toString()}?",
-                          style: TextStyle(
-                            color: AppColors.primaryColor,
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            navigateNamed(context, AppRoutes.signupRoute);
-                          },
-                          child: Text(
-                            transH.registerNow.capitalizeAll(),
-                            style: TextStyle(
-                              color: AppColors.primaryColor.withOpacity(.7),
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
+            child: LayoutBuilder(builder: (context, constraints) {
+              if (constraints.maxWidth > 600) {
+                return tabletLayout(
+                    height, width, context, transH, buttonLoading);
+              } else {
+                return mobileLayout(
+                    height, width, context, transH, buttonLoading);
+              }
+            }),
           ),
         ),
+      ),
+    );
+  }
+
+  Container tabletLayout(double height, double width, BuildContext context,
+      AppLocalizations transH, bool buttonLoading) {
+    return Container(
+      height: height,
+      padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 30.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          SizedBox(
+            width: width,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: height * .02),
+                Navigator.canPop(context)
+                    ? IconButton(
+                        onPressed: () {
+                          if (Navigator.canPop(context)) {
+                            Navigator.pop(context);
+                          } else {
+                            navigateReplacementNamed(
+                                context, AppRoutes.splashRoute);
+                          }
+                        },
+                        padding: const EdgeInsets.all(0),
+                        icon: Icon(
+                          Icons.arrow_back_ios,
+                          color: AppColors.primaryColor,
+                          size: 14.sp,
+                        ),
+                      )
+                    : const SizedBox(),
+                SizedBox(height: height * .02),
+                Text(
+                  transH.welcomeBack,
+                  style: TextStyle(
+                    color: AppColors.primaryColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14.sp,
+                    fontFamily: AppFonts.actionFont,
+                  ),
+                  textScaleFactor: 1,
+                ),
+                SizedBox(height: 30.h),
+                FormInput(
+                  width,
+                  controller: email,
+                  hintText: transH.enterEmail,
+                  isPassword: false,
+                  isLast: false,
+                ),
+                SizedBox(height: 20.h),
+                FormInput(
+                  width,
+                  controller: password,
+                  hintText: transH.enterPassword,
+                  isPassword: true,
+                  isLast: true,
+                ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: () {
+                      navigateNamed(context, AppRoutes.forgottenPasswordRoute);
+                    },
+                    child: Text(
+                      "${transH.forgetPass.capitalizeFirst.toString()}?",
+                      style: TextStyle(
+                        color: AppColors.blackColor.withOpacity(.7),
+                        fontSize: 10.sp,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20.h),
+                Align(
+                  alignment: Alignment.center,
+                  child: CustomBtn(
+                    width: width * .3,
+                    onPressed: () {
+                      if (!buttonLoading) {
+                        ref
+                            .read(buttonLoadingNotifierProvider.notifier)
+                            .changeIndex(true);
+                        loginUser(
+                          email.text,
+                          password.text,
+                          width,
+                          transH,
+                        );
+                      }
+                    },
+                    // width: width ,
+                    btnColor: AppColors.primaryColor,
+                    fontSize: 10.sp,
+                    text: transH.signIn,
+                    textColor: AppColors.whiteColor,
+                    actionBtn: true,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          FittedBox(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  "${transH.donHaveAcc.capitalizeFirst.toString()}?",
+                  style: TextStyle(
+                    color: AppColors.primaryColor,
+                    fontSize: 10.sp,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    navigateNamed(context, AppRoutes.signupRoute);
+                  },
+                  child: Text(
+                    transH.registerNow.capitalizeAll(),
+                    style: TextStyle(
+                      color: AppColors.primaryColor.withOpacity(.7),
+                      fontSize: 10.sp,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Container mobileLayout(double height, double width, BuildContext context,
+      AppLocalizations transH, bool buttonLoading) {
+    return Container(
+      height: height,
+      padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 30.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          SizedBox(
+            width: width,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: height * .02),
+                Navigator.canPop(context)
+                    ? IconButton(
+                        onPressed: () {
+                          if (Navigator.canPop(context)) {
+                            Navigator.pop(context);
+                          } else {
+                            navigateReplacementNamed(
+                                context, AppRoutes.splashRoute);
+                          }
+                        },
+                        padding: const EdgeInsets.all(0),
+                        icon: Icon(
+                          Icons.arrow_back_ios,
+                          color: AppColors.primaryColor,
+                          size: 24.sp,
+                        ),
+                      )
+                    : const SizedBox(),
+                SizedBox(height: height * .02),
+                Text(
+                  transH.welcomeBack,
+                  style: TextStyle(
+                    color: AppColors.primaryColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 24.sp,
+                    fontFamily: AppFonts.actionFont,
+                  ),
+                  textScaleFactor: 1,
+                ),
+                SizedBox(height: 30.h),
+                FormInput(
+                  width,
+                  controller: email,
+                  hintText: transH.enterEmail,
+                  isPassword: false,
+                  isLast: false,
+                ),
+                SizedBox(height: 20.h),
+                FormInput(
+                  width,
+                  controller: password,
+                  hintText: transH.enterPassword,
+                  isPassword: true,
+                  isLast: true,
+                ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: () {
+                      navigateNamed(context, AppRoutes.forgottenPasswordRoute);
+                    },
+                    child: Text(
+                      "${transH.forgetPass.capitalizeFirst.toString()}?",
+                      style: TextStyle(
+                        color: AppColors.blackColor.withOpacity(.7),
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20.h),
+                CustomBtn(
+                  onPressed: () {
+                    if (!buttonLoading) {
+                      ref
+                          .read(buttonLoadingNotifierProvider.notifier)
+                          .changeIndex(true);
+                      loginUser(
+                        email.text,
+                        password.text,
+                        width,
+                        transH,
+                      );
+                    }
+                  },
+                  // width: width ,
+                  btnColor: AppColors.primaryColor,
+                  fontSize: 16.sp,
+                  text: transH.signIn,
+                  textColor: AppColors.whiteColor,
+                  actionBtn: true,
+                ),
+              ],
+            ),
+          ),
+          FittedBox(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  "${transH.donHaveAcc.capitalizeFirst.toString()}?",
+                  style: TextStyle(
+                    color: AppColors.primaryColor,
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    navigateNamed(context, AppRoutes.signupRoute);
+                  },
+                  child: Text(
+                    transH.registerNow.capitalizeAll(),
+                    style: TextStyle(
+                      color: AppColors.primaryColor.withOpacity(.7),
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
       ),
     );
   }

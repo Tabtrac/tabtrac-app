@@ -61,166 +61,345 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
         body: SafeArea(
           child: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
-            child: Container(
-              height: height,
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 25.0, vertical: 30.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  SizedBox(
-                    width: width,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: height * .02),
-                        IconButton(
-                          onPressed: () {
-                            if (Navigator.canPop(context)) {
-                              Navigator.pop(context);
-                            } else {
-                              navigateReplacementNamed(
-                                  context, AppRoutes.splashRoute);
-                            }
-                          },
-                          padding: const EdgeInsets.all(0),
-                          icon: Icon(
-                            Icons.arrow_back_ios,
-                            color: AppColors.primaryColor,
-                            size: 24.sp,
-                          ),
-                        ),
-                        SizedBox(height: height * .02),
-                        Text(
-                          transH.registerMessage,
-                          style: TextStyle(
-                            color: AppColors.primaryColor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24.sp,
-                            fontFamily: AppFonts.actionFont,
-                          ),
-                        ),
-                        SizedBox(height: 30.h),
-                        FormInput(
-                          width,
-                          controller: name,
-                          hintText: transH.enter_username,
-                          isPassword: false,
-                          isLast: false,
-                        ),
-                        SizedBox(height: 20.h),
-                        FormInput(
-                          width,
-                          controller: email,
-                          hintText: transH.enterEmail,
-                          isPassword: false,
-                          isLast: false,
-                        ),
-                        SizedBox(height: 20.h),
-                        FormInput(
-                          width,
-                          controller: password,
-                          hintText: transH.enterPassword,
-                          isPassword: true,
-                          isLast: true,
-                        ),
-                        FittedBox(
-                          child: Row(
-                            children: <Widget>[
-                              Checkbox(
-                                value: termsChecked,
-                                onChanged: (value) {
-                                  if (value != null) {
+            child: LayoutBuilder(builder: (context, constraints) {
+              if (constraints.maxWidth > 600) {
+                return Container(
+                  height: height,
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 25.0, vertical: 30.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      SizedBox(
+                        width: width,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(height: height * .02),
+                            IconButton(
+                              onPressed: () {
+                                if (Navigator.canPop(context)) {
+                                  Navigator.pop(context);
+                                } else {
+                                  navigateReplacementNamed(
+                                      context, AppRoutes.splashRoute);
+                                }
+                              },
+                              padding: const EdgeInsets.all(0),
+                              icon: Icon(
+                                Icons.arrow_back_ios,
+                                color: AppColors.primaryColor,
+                                size: 14.sp,
+                              ),
+                            ),
+                            SizedBox(height: height * .02),
+                            Text(
+                              transH.registerMessage,
+                              style: TextStyle(
+                                color: AppColors.primaryColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14.sp,
+                                fontFamily: AppFonts.actionFont,
+                              ),
+                            ),
+                            SizedBox(height: 30.h),
+                            FormInput(
+                              width * .4,
+                              controller: name,
+                              hintText: transH.enter_username,
+                              isPassword: false,
+                              isLast: false,
+                            ),
+                            SizedBox(height: 20.h),
+                            FormInput(
+                              width,
+                              controller: email,
+                              hintText: transH.enterEmail,
+                              isPassword: false,
+                              isLast: false,
+                            ),
+                            SizedBox(height: 20.h),
+                            FormInput(
+                              width,
+                              controller: password,
+                              hintText: transH.enterPassword,
+                              isPassword: true,
+                              isLast: true,
+                            ),
+                            SizedBox(height: 10.h),
+                            Align(
+                              alignment: Alignment.center,
+                              child: FittedBox(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Checkbox(
+                                      value: termsChecked,
+                                      onChanged: (value) {
+                                        if (value != null) {
+                                          ref
+                                              .read(termsCheckedProvider.notifier)
+                                              .change(value);
+                                        }
+                                      },
+                                    ),
+                                    Text(
+                                      'By registering you accept our',
+                                      style: TextStyle(
+                                        color: AppColors.blackColor,
+                                        fontSize: 8.sp,
+                                      ),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        navigateNamed(
+                                            context, AppRoutes.termsRoute);
+                                      },
+                                      child: FittedBox(
+                                        child: Text(
+                                          'Terms and Conditions',
+                                          style: TextStyle(
+                                            color: AppColors.primaryColor,
+                                            fontSize: 8.sp,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 10.h),
+                            Align(
+                              alignment: Alignment.center,
+                              child: CustomBtn(
+                                width: width * .3,
+                                onPressed: () {
+                                  if (termsChecked && !buttonLoading) {
                                     ref
-                                        .read(termsCheckedProvider.notifier)
-                                        .change(value);
+                                        .read(buttonLoadingNotifierProvider
+                                            .notifier)
+                                        .changeIndex(true);
+                                    signUpUser(
+                                      name.text,
+                                      email.text,
+                                      password.text,
+                                      width,
+                                      transH,
+                                    );
                                   }
                                 },
+                                // width: width ,
+                                btnColor: termsChecked
+                                    ? AppColors.primaryColor
+                                    : AppColors.greyColor,
+                                fontSize: 10.sp,
+                                text: transH.signUp,
+                                textColor: AppColors.whiteColor,
+                                actionBtn: true,
                               ),
-                              Text(
-                                'By registering you accept our',
+                            ),
+                          ],
+                        ),
+                      ),
+                      FittedBox(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              "${transH.allHaveAcc.capitalizeFirst.toString()}?",
+                              style: TextStyle(
+                                color: AppColors.primaryColor,
+                                fontSize: 10.sp,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                navigateNamed(context, AppRoutes.loginRoute);
+                              },
+                              child: Text(
+                                transH.loginNow.capitalizeAll(),
                                 style: TextStyle(
-                                  color: AppColors.blackColor,
-                                  fontSize: 14.sp,
+                                  color: AppColors.primaryColor.withOpacity(.7),
+                                  fontSize: 10.sp,
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
-                              TextButton(
-                                onPressed: () {
-                                  navigateNamed(context, AppRoutes.termsRoute);
-                                },
-                                child: FittedBox(
-                                  child: Text(
-                                    'Terms and Conditions',
-                                    style: TextStyle(
-                                      color: AppColors.primaryColor,
-                                      fontSize: 14.sp,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                        CustomBtn(
-                          onPressed: () {
-                            if (termsChecked && !buttonLoading) {
-                              ref
-                                  .read(buttonLoadingNotifierProvider.notifier)
-                                  .changeIndex(true);
-                              signUpUser(
-                                name.text,
-                                email.text,
-                                password.text,
-                                width,
-                                transH,
-                              );
-                            }
-                          },
-                          // width: width ,
-                          btnColor: termsChecked
-                              ? AppColors.primaryColor
-                              : AppColors.greyColor,
-                          fontSize: 16.sp,
-                          text: transH.signUp,
-                          textColor: AppColors.whiteColor,
-                          actionBtn: true,
-                        ),
-                      ],
-                    ),
+                      )
+                    ],
                   ),
-                  FittedBox(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          "${transH.allHaveAcc.capitalizeFirst.toString()}?",
-                          style: TextStyle(
-                            color: AppColors.primaryColor,
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w600,
-                          ),
+                );
+              } else {
+                return mobileLayout(height, width, context, transH,
+                    termsChecked, buttonLoading);
+              }
+            }),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Container mobileLayout(double height, double width, BuildContext context,
+      AppLocalizations transH, bool termsChecked, bool buttonLoading) {
+    return Container(
+      height: height,
+      padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 30.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          SizedBox(
+            width: width,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: height * .02),
+                IconButton(
+                  onPressed: () {
+                    if (Navigator.canPop(context)) {
+                      Navigator.pop(context);
+                    } else {
+                      navigateReplacementNamed(context, AppRoutes.splashRoute);
+                    }
+                  },
+                  padding: const EdgeInsets.all(0),
+                  icon: Icon(
+                    Icons.arrow_back_ios,
+                    color: AppColors.primaryColor,
+                    size: 24.sp,
+                  ),
+                ),
+                SizedBox(height: height * .02),
+                Text(
+                  transH.registerMessage,
+                  style: TextStyle(
+                    color: AppColors.primaryColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 24.sp,
+                    fontFamily: AppFonts.actionFont,
+                  ),
+                ),
+                SizedBox(height: 30.h),
+                FormInput(
+                  width,
+                  controller: name,
+                  hintText: transH.enter_username,
+                  isPassword: false,
+                  isLast: false,
+                ),
+                SizedBox(height: 20.h),
+                FormInput(
+                  width,
+                  controller: email,
+                  hintText: transH.enterEmail,
+                  isPassword: false,
+                  isLast: false,
+                ),
+                SizedBox(height: 20.h),
+                FormInput(
+                  width,
+                  controller: password,
+                  hintText: transH.enterPassword,
+                  isPassword: true,
+                  isLast: true,
+                ),
+                FittedBox(
+                  child: Row(
+                    children: <Widget>[
+                      Checkbox(
+                        value: termsChecked,
+                        onChanged: (value) {
+                          if (value != null) {
+                            ref
+                                .read(termsCheckedProvider.notifier)
+                                .change(value);
+                          }
+                        },
+                      ),
+                      Text(
+                        'By registering you accept our',
+                        style: TextStyle(
+                          color: AppColors.blackColor,
+                          fontSize: 14.sp,
                         ),
-                        TextButton(
-                          onPressed: () {
-                            navigateNamed(context, AppRoutes.loginRoute);
-                          },
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          navigateNamed(context, AppRoutes.termsRoute);
+                        },
+                        child: FittedBox(
                           child: Text(
-                            transH.loginNow.capitalizeAll(),
+                            'Terms and Conditions',
                             style: TextStyle(
-                              color: AppColors.primaryColor.withOpacity(.7),
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w600,
+                              color: AppColors.primaryColor,
+                              fontSize: 14.sp,
                             ),
                           ),
                         ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
+                      ),
+                    ],
+                  ),
+                ),
+                CustomBtn(
+                  onPressed: () {
+                    if (termsChecked && !buttonLoading) {
+                      ref
+                          .read(buttonLoadingNotifierProvider.notifier)
+                          .changeIndex(true);
+                      signUpUser(
+                        name.text,
+                        email.text,
+                        password.text,
+                        width,
+                        transH,
+                      );
+                    }
+                  },
+                  // width: width ,
+                  btnColor: termsChecked
+                      ? AppColors.primaryColor
+                      : AppColors.greyColor,
+                  fontSize: 16.sp,
+                  text: transH.signUp,
+                  textColor: AppColors.whiteColor,
+                  actionBtn: true,
+                ),
+              ],
             ),
           ),
-        ),
+          FittedBox(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  "${transH.allHaveAcc.capitalizeFirst.toString()}?",
+                  style: TextStyle(
+                    color: AppColors.primaryColor,
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    navigateNamed(context, AppRoutes.loginRoute);
+                  },
+                  child: Text(
+                    transH.loginNow.capitalizeAll(),
+                    style: TextStyle(
+                      color: AppColors.primaryColor.withOpacity(.7),
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
       ),
     );
   }

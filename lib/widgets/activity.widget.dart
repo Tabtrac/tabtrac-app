@@ -51,25 +51,25 @@ class ActivityWidget extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Container(
-              width: 40.w,
-              height: 35.h,
+              width: isTablet() ? 25.w : 35.w,
+              height: isTablet() ? 25.w : 35.w,
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: AppColors.greyColor.withOpacity(.5),
-                borderRadius: BorderRadius.circular(30),
+                borderRadius: BorderRadius.circular(100),
               ),
-              margin: const EdgeInsets.only(bottom: 20.0),
+              margin: EdgeInsets.only(bottom: isTablet() ? 10 : 20.0),
               child: Text(
                 name.substring(0, 1),
                 style: TextStyle(
                   color: Theme.of(context).textTheme.bodyMedium!.color,
                   fontFamily: AppFonts.actionFont,
-                  fontSize: 18.sp,
+                  fontSize: isTablet() ? 10.sp : 18.sp,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
-            SizedBox(width: 10.w),
+            SizedBox(width: isTablet() ? 5.w : 10.w),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -83,7 +83,7 @@ class ActivityWidget extends ConsumerWidget {
                                 transH.debt.toUpperCase(),
                                 style: TextStyle(
                                   color: AppColors.greyColor,
-                                  fontSize: 10.sp,
+                                  fontSize: isTablet() ? 6.sp : 10.sp,
                                   fontFamily: AppFonts.actionFont,
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -92,7 +92,7 @@ class ActivityWidget extends ConsumerWidget {
                                 transH.credit.toUpperCase(),
                                 style: TextStyle(
                                   color: AppColors.greyColor,
-                                  fontSize: 10.sp,
+                                  fontSize: isTablet() ? 6.sp : 10.sp,
                                   fontFamily: AppFonts.actionFont,
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -101,7 +101,7 @@ class ActivityWidget extends ConsumerWidget {
                       Text(
                         moneyComma(amount, currency),
                         style: TextStyle(
-                          fontSize: 18.sp,
+                          fontSize: isTablet() ? 10.sp : 18.sp,
                           fontWeight: FontWeight.w600,
                           color: AppColors.primaryColor,
                         ),
@@ -119,12 +119,10 @@ class ActivityWidget extends ConsumerWidget {
                           Text(
                             name,
                             style: TextStyle(
-                              color: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium!
-                                  .color,
+                              color:
+                                  Theme.of(context).textTheme.bodyMedium!.color,
                               fontFamily: AppFonts.actionFont,
-                              fontSize: 16.sp,
+                              fontSize: isTablet() ? 8.sp : 16.sp,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -140,13 +138,13 @@ class ActivityWidget extends ConsumerWidget {
                                       .textTheme
                                       .bodyMedium!
                                       .color,
-                                  size: 14.sp,
+                                  size: isTablet() ? 8.sp : 14.sp,
                                 ),
                                 SizedBox(width: 5.w),
                                 Text(
                                   convertToAgo(DateTime.parse(paymentDate)),
                                   style: TextStyle(
-                                    fontSize: 12.sp,
+                                    fontSize: isTablet() ? 6.sp : 12.sp,
                                   ),
                                   textScaleFactor: 1.0,
                                 )
@@ -171,7 +169,7 @@ class ActivityWidget extends ConsumerWidget {
                             style: TextStyle(
                               color: AppColors.unpaidColor,
                               fontWeight: FontWeight.w600,
-                              fontSize: 12.sp,
+                              fontSize: isTablet() ? 6.sp : 12.sp,
                             ),
                           ),
                         )
@@ -187,7 +185,7 @@ class ActivityWidget extends ConsumerWidget {
                             transH.paid.capitalizeFirst.toString(),
                             style: TextStyle(
                               color: AppColors.paidColor,
-                              fontSize: 12.sp,
+                              fontSize: isTablet() ? 6.sp : 12.sp,
                               fontWeight: FontWeight.w600,
                             ),
                           ),

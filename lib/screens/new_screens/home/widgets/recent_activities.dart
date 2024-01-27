@@ -39,7 +39,7 @@ class _RecentActivitiesState extends ConsumerState<RecentActivities> {
               transH.debt.capitalizeFirst.toString(),
               style: TextStyle(
                 color: AppColors.greyColor,
-                fontSize: 14.sp,
+                fontSize: isTablet() ? 10.sp : 14.sp,
               ),
             ),
           Column(
@@ -84,7 +84,7 @@ class _RecentActivitiesState extends ConsumerState<RecentActivities> {
               transH.credit.capitalizeFirst.toString(),
               style: TextStyle(
                 color: AppColors.greyColor,
-                fontSize: 14.sp,
+                fontSize: isTablet() ? 10.sp : 14.sp,
               ),
             ),
           Column(

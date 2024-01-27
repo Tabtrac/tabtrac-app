@@ -77,146 +77,303 @@ class _ForgottenPasswordResetScreenState
         body: SafeArea(
           child: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
-            child: Container(
-              height: height,
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 25.0, vertical: 30.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  SizedBox(
-                    width: width,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: height * .02),
-                        IconButton(
-                          onPressed: () {
-                            ref
-                                .read(buttonLoadingNotifierProvider.notifier)
-                                .changeIndex(false);
-                            if (currentPage == 1) {
-                              ref
-                                  .read(currentPageProvider.notifier)
-                                  .changePage(0);
-                            } else {
-                              if (Navigator.canPop(context)) {
-                                Navigator.pop(context);
-                              } else {
-                                navigateReplacementNamed(
-                                    context, AppRoutes.splashRoute);
-                              }
-                            }
-                          },
-                          padding: const EdgeInsets.all(0),
-                          icon: Icon(
-                            Icons.arrow_back_ios,
-                            color: AppColors.primaryColor,
-                            size: 24.sp,
-                          ),
-                        ),
-                        SizedBox(height: height * .02),
-                        currentPage == 1
-                            ? Text(
-                                transH.resetPassword.capitalizeAll(),
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: AppColors.primaryColor,
-                                  fontSize: 24.sp,
-                                  fontFamily: AppFonts.actionFont,
-                                ),
-                              )
-                            : Text(
-                                transH.verifyOTP.toUpperCase(),
-                                style: TextStyle(
-                                  color: AppColors.primaryColor,
-                                  fontSize: 24.sp,
-                                  fontFamily: AppFonts.actionFont,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                        currentPage == 0
-                            ? Text(
-                                transH.otpMessage,
-                                style: TextStyle(
-                                  color: AppColors.greyColor,
-                                  fontSize: 14.sp,
-                                ),
-                              )
-                            : Text(
-                                transH.newPassMessage,
-                                style: TextStyle(
-                                  color: AppColors.greyColor,
-                                  fontSize: 14.sp,
-                                ),
-                              ),
-                        SizedBox(height: 30.h),
-                        currentPage == 0
-                            ? OtpTextField(
-                                // handleControllers: (controllers) => controller.phoneOTPController,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                numberOfFields: 4,
-                                fieldWidth: 60.w,
-                                showFieldAsBox: true,
-                                autoFocus: true,
-                                borderRadius: BorderRadius.circular(15),
-                                styles: List.generate(
-                                  4,
-                                  (index) => TextStyle(
-                                      color: AppColors.primaryColor,
-                                      fontSize: 14.sp),
-                                ),
-                                focusedBorderColor: AppColors.primaryColor,
-                                onSubmit: (String value) {
-                                  code = value;
-                                },
-                              )
-                            : FormInput(
-                                width,
-                                controller: password,
-                                hintText: transH.enterPassword,
-                                isPassword: true,
-                                isLast: true,
-                              ),
-                        SizedBox(height: 20.h),
-                        currentPage == 0
-                            ? CustomBtn(
-                                onPressed: () {
-                                  ref
-                                      .read(currentPageProvider.notifier)
-                                      .changePage(1);
-                                },
-                                // width: width ,
-                                btnColor: AppColors.primaryColor,
-                                fontSize: 16.sp,
-                                text: transH.reset.capitalizeAll(),
-                                textColor: AppColors.whiteColor,
-                              )
-                            : CustomBtn(
-                                onPressed: () {
-                                  ref
-                                      .read(buttonLoadingNotifierProvider
-                                          .notifier)
-                                      .changeIndex(true);
-
-                                  resetPassword(code, password.text, transH);
-                                },
-                                // width: width ,
-                                btnColor: AppColors.primaryColor,
-                                fontSize: 16.sp,
-                                text: transH.reset.capitalizeAll(),
-                                textColor: AppColors.whiteColor,
-                                actionBtn: true,
-                              ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                if (constraints.maxWidth > 600) {
+                  return tabletLayout(
+                      height, width, currentPage, context, transH);
+                } else {
+                  return mobileLayout(
+                      height, width, currentPage, context, transH);
+                }
+              },
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Container tabletLayout(double height, double width, int currentPage,
+      BuildContext context, AppLocalizations transH) {
+    return Container(
+      height: height,
+      padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 30.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          SizedBox(
+            width: width,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: height * .02),
+                IconButton(
+                  onPressed: () {
+                    ref
+                        .read(buttonLoadingNotifierProvider.notifier)
+                        .changeIndex(false);
+                    if (currentPage == 1) {
+                      ref.read(currentPageProvider.notifier).changePage(0);
+                    } else {
+                      if (Navigator.canPop(context)) {
+                        Navigator.pop(context);
+                      } else {
+                        navigateReplacementNamed(
+                            context, AppRoutes.splashRoute);
+                      }
+                    }
+                  },
+                  padding: const EdgeInsets.all(0),
+                  icon: Icon(
+                    Icons.arrow_back_ios,
+                    color: AppColors.primaryColor,
+                    size: 14.sp,
+                  ),
+                ),
+                SizedBox(height: height * .02),
+                if (currentPage == 1)
+                  Text(
+                    transH.resetPassword.capitalizeAll(),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.primaryColor,
+                      fontSize: 14.sp,
+                      fontFamily: AppFonts.actionFont,
+                    ),
+                  )
+                else
+                  Text(
+                    transH.verifyOTP.toUpperCase(),
+                    style: TextStyle(
+                      color: AppColors.primaryColor,
+                      fontSize: 14.sp,
+                      fontFamily: AppFonts.actionFont,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                if (currentPage == 0)
+                  Text(
+                    transH.otpMessage,
+                    style: TextStyle(
+                      color: AppColors.greyColor,
+                      fontSize: 8.sp,
+                    ),
+                  )
+                else
+                  Text(
+                    transH.newPassMessage,
+                    style: TextStyle(
+                      color: AppColors.greyColor,
+                      fontSize: 8.sp,
+                    ),
+                  ),
+                SizedBox(height: 30.h),
+                if (currentPage == 0)
+                  OtpTextField(
+                    // handleControllers: (controllers) => controller.phoneOTPController,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    numberOfFields: 4,
+                    fieldWidth: 60.w,
+                    showFieldAsBox: true,
+                    autoFocus: true,
+                    borderRadius: BorderRadius.circular(15),
+                    styles: List.generate(
+                      4,
+                      (index) => TextStyle(
+                          color: AppColors.primaryColor, fontSize: 14.sp),
+                    ),
+                    focusedBorderColor: AppColors.primaryColor,
+                    onSubmit: (String value) {
+                      code = value;
+                    },
+                  )
+                else
+                  FormInput(
+                    width,
+                    controller: password,
+                    hintText: transH.enterPassword,
+                    isPassword: true,
+                    isLast: true,
+                  ),
+                SizedBox(height: 20.h),
+                if (currentPage == 0)
+                  Align(
+                    alignment: Alignment.center,
+                    child: CustomBtn(
+                      width: width * .3,
+                      onPressed: () {
+                        ref.read(currentPageProvider.notifier).changePage(1);
+                      },
+                      // width: width ,
+                      btnColor: AppColors.primaryColor,
+                      fontSize: 10.sp,
+                      text: transH.reset.capitalizeAll(),
+                      textColor: AppColors.whiteColor,
+                    ),
+                  )
+                else
+                  Align(
+                    alignment: Alignment.center,
+                    child: CustomBtn(
+                      width: width * .3,
+                      onPressed: () {
+                        ref
+                            .read(buttonLoadingNotifierProvider.notifier)
+                            .changeIndex(true);
+
+                        resetPassword(code, password.text, transH);
+                      },
+                      // width: width ,
+                      btnColor: AppColors.primaryColor,
+                      fontSize: 10.sp,
+                      text: transH.reset.capitalizeAll(),
+                      textColor: AppColors.whiteColor,
+                      actionBtn: true,
+                    ),
+                  ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Container mobileLayout(double height, double width, int currentPage,
+      BuildContext context, AppLocalizations transH) {
+    return Container(
+      height: height,
+      padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 30.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          SizedBox(
+            width: width,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: height * .02),
+                IconButton(
+                  onPressed: () {
+                    ref
+                        .read(buttonLoadingNotifierProvider.notifier)
+                        .changeIndex(false);
+                    if (currentPage == 1) {
+                      ref.read(currentPageProvider.notifier).changePage(0);
+                    } else {
+                      if (Navigator.canPop(context)) {
+                        Navigator.pop(context);
+                      } else {
+                        navigateReplacementNamed(
+                            context, AppRoutes.splashRoute);
+                      }
+                    }
+                  },
+                  padding: const EdgeInsets.all(0),
+                  icon: Icon(
+                    Icons.arrow_back_ios,
+                    color: AppColors.primaryColor,
+                    size: 24.sp,
+                  ),
+                ),
+                SizedBox(height: height * .02),
+                if (currentPage == 1)
+                  Text(
+                    transH.resetPassword.capitalizeAll(),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.primaryColor,
+                      fontSize: 24.sp,
+                      fontFamily: AppFonts.actionFont,
+                    ),
+                  )
+                else
+                  Text(
+                    transH.verifyOTP.toUpperCase(),
+                    style: TextStyle(
+                      color: AppColors.primaryColor,
+                      fontSize: 24.sp,
+                      fontFamily: AppFonts.actionFont,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                if (currentPage == 0)
+                  Text(
+                    transH.otpMessage,
+                    style: TextStyle(
+                      color: AppColors.greyColor,
+                      fontSize: 14.sp,
+                    ),
+                  )
+                else
+                  Text(
+                    transH.newPassMessage,
+                    style: TextStyle(
+                      color: AppColors.greyColor,
+                      fontSize: 14.sp,
+                    ),
+                  ),
+                SizedBox(height: 30.h),
+                if (currentPage == 0)
+                  OtpTextField(
+                    // handleControllers: (controllers) => controller.phoneOTPController,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    numberOfFields: 4,
+                    fieldWidth: 60.w,
+                    showFieldAsBox: true,
+                    autoFocus: true,
+                    borderRadius: BorderRadius.circular(15),
+                    styles: List.generate(
+                      4,
+                      (index) => TextStyle(
+                          color: AppColors.primaryColor, fontSize: 14.sp),
+                    ),
+                    focusedBorderColor: AppColors.primaryColor,
+                    onSubmit: (String value) {
+                      code = value;
+                    },
+                  )
+                else
+                  FormInput(
+                    width,
+                    controller: password,
+                    hintText: transH.enterPassword,
+                    isPassword: true,
+                    isLast: true,
+                  ),
+                SizedBox(height: 20.h),
+                if (currentPage == 0)
+                  CustomBtn(
+                    onPressed: () {
+                      ref.read(currentPageProvider.notifier).changePage(1);
+                    },
+                    // width: width ,
+                    btnColor: AppColors.primaryColor,
+                    fontSize: 16.sp,
+                    text: transH.reset.capitalizeAll(),
+                    textColor: AppColors.whiteColor,
+                  )
+                else
+                  CustomBtn(
+                    onPressed: () {
+                      ref
+                          .read(buttonLoadingNotifierProvider.notifier)
+                          .changeIndex(true);
+
+                      resetPassword(code, password.text, transH);
+                    },
+                    // width: width ,
+                    btnColor: AppColors.primaryColor,
+                    fontSize: 16.sp,
+                    text: transH.reset.capitalizeAll(),
+                    textColor: AppColors.whiteColor,
+                    actionBtn: true,
+                  ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -255,7 +412,8 @@ class _ForgottenPasswordResetScreenState
         ref.read(currentPageProvider.notifier).changePage(0);
         errorSnackBar(
           title: transH.error.capitalizeFirst.toString(),
-          message: transH.otpExpiredcheckEmailForNewOTP.capitalizeFirst.toString(),
+          message:
+              transH.otpExpiredcheckEmailForNewOTP.capitalizeFirst.toString(),
         );
       } else if (data['response'] == 'password reset successful') {
         navigateToPage(context, const PasswordResetSuccess());

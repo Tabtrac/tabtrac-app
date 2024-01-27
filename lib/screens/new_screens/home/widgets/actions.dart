@@ -35,7 +35,9 @@ class ActionWidgets extends ConsumerWidget {
                     child: Container(
                       padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
-                        color: isDarkMode ? AppColors.darkThemeShade :  AppColors.lightThemeShade,
+                        color: isDarkMode
+                            ? AppColors.darkThemeShade
+                            : AppColors.lightThemeShade,
                         borderRadius: BorderRadius.circular(50),
                       ),
                       margin: const EdgeInsets.only(right: 10.0),
@@ -43,7 +45,7 @@ class ActionWidgets extends ConsumerWidget {
                         HeroIcons.userPlus,
                         style: HeroIconStyle.outline,
                         color: AppColors.primaryColor,
-                        size: 24.sp,
+                        size: isTablet() ? 14.sp : 24.sp,
                       ),
                     ),
                   ),
@@ -52,7 +54,7 @@ class ActionWidgets extends ConsumerWidget {
                     transH.addNewClient.capitalizeAll(),
                     style: TextStyle(
                       fontFamily: AppFonts.actionFont,
-                      fontSize: 12.sp,
+                      fontSize: isTablet() ? 8.sp : 12.sp,
                     ),
                   ),
                 ],
@@ -69,7 +71,9 @@ class ActionWidgets extends ConsumerWidget {
                     child: Container(
                       padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
-                        color: isDarkMode ? AppColors.darkThemeShade :  AppColors.lightThemeShade,
+                        color: isDarkMode
+                            ? AppColors.darkThemeShade
+                            : AppColors.lightThemeShade,
                         borderRadius: BorderRadius.circular(50),
                       ),
                       margin: const EdgeInsets.only(right: 10.0),
@@ -77,7 +81,7 @@ class ActionWidgets extends ConsumerWidget {
                         HeroIcons.documentPlus,
                         style: HeroIconStyle.outline,
                         color: AppColors.primaryColor,
-                        size: 24.sp,
+                        size: isTablet() ? 14.sp : 24.sp,
                       ),
                     ),
                   ),
@@ -86,7 +90,7 @@ class ActionWidgets extends ConsumerWidget {
                     transH.createNewRecord.capitalizeAll(),
                     style: TextStyle(
                       fontFamily: AppFonts.actionFont,
-                      fontSize: 12.sp,
+                      fontSize: isTablet() ? 8.sp : 12.sp,
                     ),
                   ),
                 ],

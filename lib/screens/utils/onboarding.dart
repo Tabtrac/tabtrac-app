@@ -91,41 +91,15 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
                   controller: controller,
                   itemBuilder: (context, index) {
                     OnbordingDataModel data = onboardingData[index];
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        SizedBox(
-                          width: 350.w,
-                          height: 350.h,
-                          child: SvgPicture.asset(
-                            data.svg,
-                            semanticsLabel: data.title,
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                        SizedBox(height: height * .06),
-                        Text(
-                          data.title,
-                          style: TextStyle(
-                            color: AppColors.primaryColor,
-                            fontSize: 24.sp,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: AppFonts.actionFont,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        SizedBox(height: height * .01),
-                        Text(
-                          data.message,
-                          style: TextStyle(
-                            color: AppColors.blackColor,
-                            fontSize: 14.sp,
-                            fontFamily: AppFonts.primaryFont,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ).animate().scaleXY();
+                    return LayoutBuilder(
+                      builder: (context, constraints) {
+                        if (constraints.maxWidth > 600) {
+                          return TabletLayout(data: data, height: height).animate().scaleXY();
+                        } else {
+                          return MobileLayout(data: data, height: height).animate().scaleXY();
+                        }
+                      },
+                    );
                   },
                 ),
               ),
@@ -176,6 +150,108 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class MobileLayout extends StatelessWidget {
+  const MobileLayout({
+    super.key,
+    required this.data,
+    required this.height,
+  });
+
+  final OnbordingDataModel data;
+  final double height;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        SizedBox(
+          width: 350.w,
+          height: 350.h,
+          child: SvgPicture.asset(
+            data.svg,
+            semanticsLabel: data.title,
+            fit: BoxFit.contain,
+          ),
+        ),
+        SizedBox(height: height * .06),
+        Text(
+          data.title,
+          style: TextStyle(
+            color: AppColors.primaryColor,
+            fontSize: 24.sp,
+            fontWeight: FontWeight.bold,
+            fontFamily: AppFonts.actionFont,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        SizedBox(height: height * .01),
+        Text(
+          data.message,
+          style: TextStyle(
+            color: AppColors.blackColor,
+            fontSize: 14.sp,
+            fontFamily: AppFonts.primaryFont,
+          ),
+          textAlign: TextAlign.center,
+        ),
+      ],
+    );
+  }
+}
+
+class TabletLayout extends StatelessWidget {
+  const TabletLayout({
+    super.key,
+    required this.data,
+    required this.height,
+  });
+
+  final OnbordingDataModel data;
+  final double height;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        SizedBox(
+          width: 350.w,
+          height: 350.h,
+          child: SvgPicture.asset(
+            data.svg,
+            semanticsLabel: data.title,
+            fit: BoxFit.contain,
+          ),
+        ),
+        SizedBox(height: height * .06),
+        FittedBox(
+          child: Text(
+            data.title,
+            style: TextStyle(
+              color: AppColors.primaryColor,
+              fontSize: 14.sp,
+              fontWeight: FontWeight.bold,
+              fontFamily: AppFonts.actionFont,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        SizedBox(height: height * .01),
+        Text(
+          data.message,
+          style: TextStyle(
+            color: AppColors.blackColor,
+            fontSize: 8.sp,
+            fontFamily: AppFonts.primaryFont,
+          ),
+          textAlign: TextAlign.center,
+        ),
+      ],
     );
   }
 }

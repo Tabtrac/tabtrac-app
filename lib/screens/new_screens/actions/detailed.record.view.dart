@@ -77,7 +77,7 @@ class _DetailedRecordViewState extends ConsumerState<DetailedRecordView> {
                 icon: Icon(
                   Icons.arrow_back_ios,
                   color: AppColors.primaryColor,
-                  size: 24.sp,
+                  size: isTablet() ? 14.sp : 24.sp,
                 ),
               )
             : null,
@@ -87,7 +87,7 @@ class _DetailedRecordViewState extends ConsumerState<DetailedRecordView> {
           style: TextStyle(
             color: AppColors.primaryColor,
             fontWeight: FontWeight.bold,
-            fontSize: 18.sp,
+            fontSize: isTablet() ? 10.sp : 18.sp,
             fontFamily: AppFonts.actionFont,
           ),
         ),
@@ -101,7 +101,8 @@ class _DetailedRecordViewState extends ConsumerState<DetailedRecordView> {
           : Container(
               width: width,
               height: height * .9,
-              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              padding:
+                  EdgeInsets.symmetric(horizontal: isTablet() ? 30.w : 15.0),
               child: Column(
                 children: <Widget>[
                   SizedBox(height: 20.h),
@@ -112,8 +113,8 @@ class _DetailedRecordViewState extends ConsumerState<DetailedRecordView> {
                           : AppColors.lightThemeShade.withOpacity(.5),
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 15, vertical: 10.0),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: isTablet() ? 30 : 15, vertical: 10.0),
                     child: Column(
                       children: [
                         Column(
@@ -129,7 +130,7 @@ class _DetailedRecordViewState extends ConsumerState<DetailedRecordView> {
                                           .capitalizeAll(),
                                   style: TextStyle(
                                     fontFamily: AppFonts.actionFont,
-                                    fontSize: 16.sp,
+                                    fontSize: isTablet() ? 10.sp : 16.sp,
                                   ),
                                 ),
                                 if (type == 'debt' &&
@@ -140,7 +141,7 @@ class _DetailedRecordViewState extends ConsumerState<DetailedRecordView> {
                                       HeroIcons.checkCircle,
                                       style: HeroIconStyle.outline,
                                       color: AppColors.paidColor,
-                                      size: 20.sp,
+                                      size: isTablet() ? 10.sp : 20.sp,
                                     ),
                                     style: ButtonStyle(
                                       backgroundColor:
@@ -158,7 +159,7 @@ class _DetailedRecordViewState extends ConsumerState<DetailedRecordView> {
                                       style: TextStyle(
                                         color: AppColors.blackColor,
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 12.sp,
+                                        fontSize: isTablet() ? 6.sp : 12.sp,
                                         fontFamily: AppFonts.actionFont,
                                       ),
                                     ),
@@ -171,7 +172,7 @@ class _DetailedRecordViewState extends ConsumerState<DetailedRecordView> {
                                       HeroIcons.clock,
                                       style: HeroIconStyle.outline,
                                       color: AppColors.unpaidColor,
-                                      size: 20.sp,
+                                      size: isTablet() ? 10.sp : 20.sp,
                                     ),
                                     style: ButtonStyle(
                                       backgroundColor:
@@ -189,7 +190,7 @@ class _DetailedRecordViewState extends ConsumerState<DetailedRecordView> {
                                       style: TextStyle(
                                         color: AppColors.blackColor,
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 12.sp,
+                                        fontSize: isTablet() ? 6.sp : 12.sp,
                                         fontFamily: AppFonts.actionFont,
                                       ),
                                     ),
@@ -202,7 +203,7 @@ class _DetailedRecordViewState extends ConsumerState<DetailedRecordView> {
                                       HeroIcons.checkCircle,
                                       style: HeroIconStyle.outline,
                                       color: AppColors.paidColor,
-                                      size: 20.sp,
+                                      size: isTablet() ? 10.sp : 20.sp,
                                     ),
                                     style: ButtonStyle(
                                       backgroundColor:
@@ -220,7 +221,7 @@ class _DetailedRecordViewState extends ConsumerState<DetailedRecordView> {
                                       style: TextStyle(
                                         color: AppColors.blackColor,
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 12.sp,
+                                        fontSize: isTablet() ? 6.sp : 12.sp,
                                         fontFamily: AppFonts.actionFont,
                                       ),
                                     ),
@@ -233,7 +234,7 @@ class _DetailedRecordViewState extends ConsumerState<DetailedRecordView> {
                                       HeroIcons.clock,
                                       style: HeroIconStyle.outline,
                                       color: AppColors.unpaidColor,
-                                      size: 20.sp,
+                                      size: isTablet() ? 10.sp : 20.sp,
                                     ),
                                     style: ButtonStyle(
                                       backgroundColor:
@@ -251,21 +252,21 @@ class _DetailedRecordViewState extends ConsumerState<DetailedRecordView> {
                                       style: TextStyle(
                                         color: AppColors.blackColor,
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 12.sp,
+                                        fontSize: isTablet() ? 6.sp : 12.sp,
                                         fontFamily: AppFonts.actionFont,
                                       ),
                                     ),
                                   ),
                               ],
                             ),
-                            SizedBox(height: 10.h),
+                            SizedBox(height: isTablet() ? 5.h : 10.h),
                             Container(
                               height: 1.5.h,
                               decoration: BoxDecoration(
                                 color: AppColors.greyColor.withOpacity(.2),
                               ),
                             ),
-                            SizedBox(height: 20.h),
+                            SizedBox(height: isTablet() ? 5.h : 20.h),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
@@ -276,7 +277,7 @@ class _DetailedRecordViewState extends ConsumerState<DetailedRecordView> {
                                       transH.purchasedOn.toUpperCase(),
                                       style: TextStyle(
                                         color: AppColors.greyColor,
-                                        fontSize: 10.sp,
+                                        fontSize: isTablet() ? 5.sp : 10.sp,
                                         fontFamily: AppFonts.actionFont,
                                       ),
                                     ),
@@ -286,7 +287,7 @@ class _DetailedRecordViewState extends ConsumerState<DetailedRecordView> {
                                           currentLocale),
                                       style: TextStyle(
                                         fontWeight: FontWeight.w600,
-                                        fontSize: 12.sp,
+                                        fontSize: isTablet() ? 6.sp : 12.sp,
                                         fontFamily: AppFonts.actionFont,
                                       ),
                                     ),
@@ -299,7 +300,7 @@ class _DetailedRecordViewState extends ConsumerState<DetailedRecordView> {
                                       transH.dueOn.toUpperCase(),
                                       style: TextStyle(
                                         color: AppColors.greyColor,
-                                        fontSize: 10.sp,
+                                        fontSize: isTablet() ? 5.sp : 10.sp,
                                         fontFamily: AppFonts.actionFont,
                                       ),
                                     ),
@@ -311,7 +312,7 @@ class _DetailedRecordViewState extends ConsumerState<DetailedRecordView> {
                                       ),
                                       style: TextStyle(
                                         fontWeight: FontWeight.w600,
-                                        fontSize: 12.sp,
+                                        fontSize: isTablet() ? 6.sp : 12.sp,
                                         fontFamily: AppFonts.actionFont,
                                       ),
                                     ),
@@ -327,7 +328,7 @@ class _DetailedRecordViewState extends ConsumerState<DetailedRecordView> {
                                   transH.name.capitalizeAll(),
                                   style: TextStyle(
                                     color: AppColors.greyColor,
-                                    fontSize: 12.sp,
+                                    fontSize: isTablet() ? 6.sp : 12.sp,
                                     fontFamily: AppFonts.actionFont,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -349,7 +350,7 @@ class _DetailedRecordViewState extends ConsumerState<DetailedRecordView> {
                                       name.toUpperCase(),
                                       style: TextStyle(
                                         fontWeight: FontWeight.w600,
-                                        fontSize: 14.sp,
+                                        fontSize: isTablet() ? 7.sp : 14.sp,
                                         color: Theme.of(context)
                                             .textTheme
                                             .bodyMedium!
@@ -370,7 +371,7 @@ class _DetailedRecordViewState extends ConsumerState<DetailedRecordView> {
                                   transH.price.capitalizeAll(),
                                   style: TextStyle(
                                     color: AppColors.greyColor,
-                                    fontSize: 12.sp,
+                                    fontSize: isTablet() ? 6.sp : 12.sp,
                                     fontFamily: AppFonts.actionFont,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -386,7 +387,7 @@ class _DetailedRecordViewState extends ConsumerState<DetailedRecordView> {
                                     ),
                                     style: TextStyle(
                                       fontWeight: FontWeight.w600,
-                                      fontSize: 14.sp,
+                                      fontSize: isTablet() ? 7.sp : 14.sp,
                                     ),
                                     overflow: TextOverflow.ellipsis,
                                   ),
@@ -401,7 +402,7 @@ class _DetailedRecordViewState extends ConsumerState<DetailedRecordView> {
                                   transH.description.capitalizeAll(),
                                   style: TextStyle(
                                     color: AppColors.greyColor,
-                                    fontSize: 12.sp,
+                                    fontSize: isTablet() ? 6.sp : 12.sp,
                                     fontFamily: AppFonts.actionFont,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -413,7 +414,7 @@ class _DetailedRecordViewState extends ConsumerState<DetailedRecordView> {
                                     description,
                                     style: TextStyle(
                                       fontWeight: FontWeight.w600,
-                                      fontSize: 14.sp,
+                                      fontSize: isTablet() ? 7.sp : 14.sp,
                                     ),
                                     maxLines: 10,
                                     overflow: TextOverflow.ellipsis,
@@ -429,7 +430,7 @@ class _DetailedRecordViewState extends ConsumerState<DetailedRecordView> {
                                   transH.phoneNumber.capitalizeFirst.toString(),
                                   style: TextStyle(
                                     color: AppColors.greyColor,
-                                    fontSize: 12.sp,
+                                    fontSize: isTablet() ? 6.sp : 12.sp,
                                     fontFamily: AppFonts.actionFont,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -441,7 +442,7 @@ class _DetailedRecordViewState extends ConsumerState<DetailedRecordView> {
                                     phoneNumber ?? '',
                                     style: TextStyle(
                                       fontWeight: FontWeight.w600,
-                                      fontSize: 14.sp,
+                                      fontSize: isTablet() ? 7.sp : 14.sp,
                                     ),
                                     maxLines: 10,
                                     overflow: TextOverflow.ellipsis,
@@ -457,7 +458,7 @@ class _DetailedRecordViewState extends ConsumerState<DetailedRecordView> {
                                   transH.email.capitalizeFirst.toString(),
                                   style: TextStyle(
                                     color: AppColors.greyColor,
-                                    fontSize: 12.sp,
+                                    fontSize: isTablet() ? 6.sp : 12.sp,
                                     fontFamily: AppFonts.actionFont,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -469,7 +470,7 @@ class _DetailedRecordViewState extends ConsumerState<DetailedRecordView> {
                                     email ?? '',
                                     style: TextStyle(
                                       fontWeight: FontWeight.w600,
-                                      fontSize: 14.sp,
+                                      fontSize: isTablet() ? 7.sp : 14.sp,
                                     ),
                                     maxLines: 10,
                                     overflow: TextOverflow.ellipsis,
@@ -477,7 +478,7 @@ class _DetailedRecordViewState extends ConsumerState<DetailedRecordView> {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 10.h),
+                            SizedBox(height: isTablet() ? 5.h : 10.h),
                             // Align(
                             //   alignment: Alignment.center,
                             //   child: TextButton.icon(
@@ -514,13 +515,13 @@ class _DetailedRecordViewState extends ConsumerState<DetailedRecordView> {
                                   HeroIcons.pencilSquare,
                                   style: HeroIconStyle.outline,
                                   color: AppColors.primaryColor,
-                                  size: 20.sp,
+                                  size: isTablet() ? 10.sp : 10.sp,
                                 ),
                                 label: Text(
                                   transH.deposite.capitalizeFirst.toString(),
                                   style: TextStyle(
                                     color: AppColors.primaryColor,
-                                    fontSize: 14.sp,
+                                    fontSize: isTablet() ? 7.sp : 14.sp,
                                   ),
                                 ),
                               ),
@@ -540,13 +541,13 @@ class _DetailedRecordViewState extends ConsumerState<DetailedRecordView> {
                                   HeroIcons.checkCircle,
                                   style: HeroIconStyle.outline,
                                   color: AppColors.paidColor,
-                                  size: 20.sp,
+                                  size: isTablet() ? 10.sp : 10.sp,
                                 ),
                                 label: Text(
                                   transH.paid.capitalizeFirst.toString(),
                                   style: TextStyle(
                                     color: AppColors.paidColor,
-                                    fontSize: 14.sp,
+                                    fontSize: isTablet() ? 7.sp : 14.sp,
                                   ),
                                 ),
                               ),
@@ -565,12 +566,12 @@ class _DetailedRecordViewState extends ConsumerState<DetailedRecordView> {
                                 HeroIcons.trash,
                                 style: HeroIconStyle.outline,
                                 color: AppColors.dangerColor,
-                                size: 20.sp,
+                                size: isTablet() ? 10.sp : 10.sp,
                               ),
                               label: Text(
                                 transH.delete.capitalizeFirst.toString(),
                                 style: TextStyle(
-                                  fontSize: 14.sp,
+                                  fontSize: isTablet() ? 7.sp : 14.sp,
                                   color: AppColors.dangerColor,
                                 ),
                               ),

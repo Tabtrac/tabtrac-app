@@ -112,9 +112,13 @@ class _RootHomeState extends ConsumerState<RootHome> {
     return Scaffold(
       key: _scaffoldKey,
       body: SafeArea(
-        child: IndexedStack(
-          index: viewController,
-          children: screens,
+        child: Row(
+          children: [
+            IndexedStack(
+              index: viewController,
+              children: screens,
+            ),
+          ],
         ),
       ),
       bottomNavigationBar: CustomBottomNav(

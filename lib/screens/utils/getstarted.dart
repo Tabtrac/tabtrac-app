@@ -59,43 +59,120 @@ class _GetStartedState extends State<GetStarted> {
                     ],
                   ),
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    SizedBox(
-                      width: 150.w,
-                      child: Image.asset('assets/images/splash.png'),
-                    ),
-                    SizedBox(height: height * .03),
-                    CustomBtn(
-                      text: transH.signUp,
-                      textColor: AppColors.whiteColor,
-                      btnColor: AppColors.primaryColor,
-                      width: width * .9,
-                      fontSize: 16.sp,
-                      onPressed: () {
-                        navigateNamed(context, AppRoutes.signupRoute);
-                      },
-                    ),
-                    SizedBox(height: height * .02),
-                    OutlinedCustomBtn(
-                      text: transH.signIn,
-                      btnColor: AppColors.primaryColor,
-                      textColor: AppColors.primaryColor,
-                      width: width * .9,
-                      fontSize: 16.sp,
-                      onPressed: () {
-                        navigateNamed(context, AppRoutes.loginRoute);
-                      },
-                    ),
-                    SizedBox(height: height * .02),
-                  ],
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    if (constraints.maxWidth > 600) {
+                      return TabletLayout(
+                          height: height, transH: transH, width: width);
+                    } else {
+                      return MobileLayout(
+                          height: height, transH: transH, width: width);
+                    }
+                  },
                 ),
               ),
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class MobileLayout extends StatelessWidget {
+  const MobileLayout({
+    super.key,
+    required this.height,
+    required this.transH,
+    required this.width,
+  });
+
+  final double height;
+  final AppLocalizations transH;
+  final double width;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: <Widget>[
+        SizedBox(
+          width: 150.w,
+          child: Image.asset('assets/images/splash.png'),
+        ),
+        SizedBox(height: height * .03),
+        CustomBtn(
+          text: transH.signUp,
+          textColor: AppColors.whiteColor,
+          btnColor: AppColors.primaryColor,
+          width: width * .9,
+          fontSize: 16.sp,
+          onPressed: () {
+            navigateNamed(context, AppRoutes.signupRoute);
+          },
+        ),
+        SizedBox(height: height * .02),
+        OutlinedCustomBtn(
+          text: transH.signIn,
+          btnColor: AppColors.primaryColor,
+          textColor: AppColors.primaryColor,
+          width: width * .9,
+          fontSize: 16.sp,
+          onPressed: () {
+            navigateNamed(context, AppRoutes.loginRoute);
+          },
+        ),
+        SizedBox(height: height * .02),
+      ],
+    );
+  }
+}
+
+class TabletLayout extends StatelessWidget {
+  const TabletLayout({
+    super.key,
+    required this.height,
+    required this.transH,
+    required this.width,
+  });
+
+  final double height;
+  final AppLocalizations transH;
+  final double width;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: <Widget>[
+        SizedBox(
+          width: 100.w,
+          child: Image.asset('assets/images/splash.png'),
+        ),
+        SizedBox(height: height * .03),
+        CustomBtn(
+          text: transH.signUp,
+          textColor: AppColors.whiteColor,
+          btnColor: AppColors.primaryColor,
+          width: width * .9,
+          fontSize: 10.sp,
+          onPressed: () {
+            navigateNamed(context, AppRoutes.signupRoute);
+          },
+        ),
+        SizedBox(height: height * .02),
+        OutlinedCustomBtn(
+          text: transH.signIn,
+          btnColor: AppColors.primaryColor,
+          textColor: AppColors.primaryColor,
+          width: width * .9,
+          fontSize: 10.sp,
+          onPressed: () {
+            navigateNamed(context, AppRoutes.loginRoute);
+          },
+        ),
+        SizedBox(height: height * .02),
+      ],
     );
   }
 }

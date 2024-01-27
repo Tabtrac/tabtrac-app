@@ -59,123 +59,246 @@ class _ForgottenPasswordState extends ConsumerState<ForgottenPassword> {
         body: SafeArea(
           child: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
-            child: Container(
-              height: height,
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 25.0, vertical: 30.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  SizedBox(
-                    width: width,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: height * .02),
-                        IconButton(
-                          onPressed: () {
-                            if (Navigator.canPop(context)) {
-                              Navigator.pop(context);
-                            } else {
-                              navigateReplacementNamed(
-                                  context, AppRoutes.splashRoute);
-                            }
-                          },
-                          padding: const EdgeInsets.all(0),
-                          icon: Icon(
-                            Icons.arrow_back_ios,
-                            color: AppColors.primaryColor,
-                            size: 24.sp,
-                          ),
-                        ),
-                        SizedBox(height: height * .02),
-                        Text(
-                          "${transH.forgetPass}?".capitalizeFirst.toString(),
-                          style: TextStyle(
-                            color: AppColors.primaryColor,
-                            fontSize: 24.sp,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: AppFonts.actionFont,
-                          ),
-                        ),
-                        SizedBox(height: 10.h),
-                        Text(
-                          transH.forgottenPassMessage,
-                          style: TextStyle(
-                            color: AppColors.greyColor,
-                            fontSize: 14.sp,
-                          ),
-                        ),
-                        SizedBox(height: 30.h),
-                        FormInput(
-                          width,
-                          controller: email,
-                          hintText: transH.enterEmail.capitalizeFirst.toString(),
-                          isPassword: false,
-                          isLast: true,
-                        ),
-                        SizedBox(height: 20.h),
-                        CustomBtn(
-                          onPressed: () {
-                            ref
-                                .read(buttonLoadingNotifierProvider.notifier)
-                                .changeIndex(true);
-                            ref
-                                .read(currentPageProvider.notifier)
-                                .changePage(0);
-                            sendPasswordOTP(
-                              email.text,
-                              transH,
-                            );
-                          },
-                          // width: width ,
-                          btnColor: AppColors.primaryColor,
-                          fontSize: 16.sp,
-                          text: transH.sendCode.capitalizeAll(),
-                          textColor: AppColors.whiteColor,
-                          actionBtn: true,
-                        ),
-                      ],
-                    ),
-                  ),
-                  FittedBox(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          "${transH.rememberPass.capitalizeFirst.toString()}?",
-                          style: TextStyle(
-                            color: AppColors.primaryColor,
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            if (Navigator.canPop(context)) {
-                              Navigator.pop(context);
-                            } else {
-                              navigateReplacementNamed(
-                                  context, AppRoutes.splashRoute);
-                            }
-                          },
-                          child: Text(
-                            transH.loginNow.capitalizeAll(),
-                            style: TextStyle(
-                              color: AppColors.primaryColor.withOpacity(.7),
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
+            child: LayoutBuilder(builder: (context, constraints) {
+              if (constraints.maxWidth > 600) {
+                return tabletLayout(height, width, context, transH, email);
+              }
+              return mobileLayout(height, width, context, transH, email);
+            }),
           ),
         ),
+      ),
+    );
+  }
+
+  Container tabletLayout(double height, double width, BuildContext context,
+      AppLocalizations transH, TextEditingController email) {
+    return Container(
+      height: height,
+      padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 30.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          SizedBox(
+            width: width,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: height * .02),
+                IconButton(
+                  onPressed: () {
+                    if (Navigator.canPop(context)) {
+                      Navigator.pop(context);
+                    } else {
+                      navigateReplacementNamed(context, AppRoutes.splashRoute);
+                    }
+                  },
+                  padding: const EdgeInsets.all(0),
+                  icon: Icon(
+                    Icons.arrow_back_ios,
+                    color: AppColors.primaryColor,
+                    size: 14.sp,
+                  ),
+                ),
+                SizedBox(height: height * .02),
+                Text(
+                  "${transH.forgetPass}?".capitalizeFirst.toString(),
+                  style: TextStyle(
+                    color: AppColors.primaryColor,
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: AppFonts.actionFont,
+                  ),
+                ),
+                SizedBox(height: 10.h),
+                Text(
+                  transH.forgottenPassMessage,
+                  style: TextStyle(
+                    color: AppColors.greyColor,
+                    fontSize: 8.sp,
+                  ),
+                ),
+                SizedBox(height: 30.h),
+                FormInput(
+                  width,
+                  controller: email,
+                  hintText: transH.enterEmail.capitalizeFirst.toString(),
+                  isPassword: false,
+                  isLast: true,
+                ),
+                SizedBox(height: 20.h),
+                CustomBtn(
+                  onPressed: () {
+                    ref
+                        .read(buttonLoadingNotifierProvider.notifier)
+                        .changeIndex(true);
+                    ref.read(currentPageProvider.notifier).changePage(0);
+                    sendPasswordOTP(
+                      email.text,
+                      transH,
+                    );
+                  },
+                  // width: width ,
+                  btnColor: AppColors.primaryColor,
+                  fontSize: 10.sp,
+                  text: transH.sendCode.capitalizeAll(),
+                  textColor: AppColors.whiteColor,
+                  actionBtn: true,
+                ),
+              ],
+            ),
+          ),
+          FittedBox(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  "${transH.rememberPass.capitalizeFirst.toString()}?",
+                  style: TextStyle(
+                    color: AppColors.primaryColor,
+                    fontSize: 10.sp,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    if (Navigator.canPop(context)) {
+                      Navigator.pop(context);
+                    } else {
+                      navigateReplacementNamed(context, AppRoutes.splashRoute);
+                    }
+                  },
+                  child: Text(
+                    transH.loginNow.capitalizeAll(),
+                    style: TextStyle(
+                      color: AppColors.primaryColor.withOpacity(.7),
+                      fontSize: 10.sp,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Container mobileLayout(double height, double width, BuildContext context,
+      AppLocalizations transH, TextEditingController email) {
+    return Container(
+      height: height,
+      padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 30.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          SizedBox(
+            width: width,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: height * .02),
+                IconButton(
+                  onPressed: () {
+                    if (Navigator.canPop(context)) {
+                      Navigator.pop(context);
+                    } else {
+                      navigateReplacementNamed(context, AppRoutes.splashRoute);
+                    }
+                  },
+                  padding: const EdgeInsets.all(0),
+                  icon: Icon(
+                    Icons.arrow_back_ios,
+                    color: AppColors.primaryColor,
+                    size: 24.sp,
+                  ),
+                ),
+                SizedBox(height: height * .02),
+                Text(
+                  "${transH.forgetPass}?".capitalizeFirst.toString(),
+                  style: TextStyle(
+                    color: AppColors.primaryColor,
+                    fontSize: 24.sp,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: AppFonts.actionFont,
+                  ),
+                ),
+                SizedBox(height: 10.h),
+                Text(
+                  transH.forgottenPassMessage,
+                  style: TextStyle(
+                    color: AppColors.greyColor,
+                    fontSize: 14.sp,
+                  ),
+                ),
+                SizedBox(height: 30.h),
+                FormInput(
+                  width,
+                  controller: email,
+                  hintText: transH.enterEmail.capitalizeFirst.toString(),
+                  isPassword: false,
+                  isLast: true,
+                ),
+                SizedBox(height: 20.h),
+                Align(
+                  alignment: Alignment.center,
+                  child: CustomBtn(
+                    width: width * .3,
+                    onPressed: () {
+                      ref
+                          .read(buttonLoadingNotifierProvider.notifier)
+                          .changeIndex(true);
+                      ref.read(currentPageProvider.notifier).changePage(0);
+                      sendPasswordOTP(
+                        email.text,
+                        transH,
+                      );
+                    },
+                    // width: width ,
+                    btnColor: AppColors.primaryColor,
+                    fontSize: 16.sp,
+                    text: transH.sendCode.capitalizeAll(),
+                    textColor: AppColors.whiteColor,
+                    actionBtn: true,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          FittedBox(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  "${transH.rememberPass.capitalizeFirst.toString()}?",
+                  style: TextStyle(
+                    color: AppColors.primaryColor,
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    if (Navigator.canPop(context)) {
+                      Navigator.pop(context);
+                    } else {
+                      navigateReplacementNamed(context, AppRoutes.splashRoute);
+                    }
+                  },
+                  child: Text(
+                    transH.loginNow.capitalizeAll(),
+                    style: TextStyle(
+                      color: AppColors.primaryColor.withOpacity(.7),
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
       ),
     );
   }

@@ -34,133 +34,274 @@ class HeroCard extends ConsumerWidget {
     final amountObsecure = ref.watch(amountObsecureNotifierProvider);
     return Padding(
       padding: const EdgeInsets.all(2.0),
-      child: Container(
-        width: width,
-        decoration: BoxDecoration(
-          color: AppColors.primaryColor,
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Stack(
-          children: [
-            Positioned.fill(
-              child: Image.asset(
-                'assets/images/vector.png',
+      child: LayoutBuilder(builder: (context, constraints) {
+        if (constraints.maxWidth > 600) {
+          return tabletLayout(context, amountObsecure, ref, transH);
+        } else {
+          return mobileLayout(context, amountObsecure, ref, transH);
+        }
+      }),
+    );
+  }
+
+  Container tabletLayout(BuildContext context, bool amountObsecure,
+      WidgetRef ref, AppLocalizations transH) {
+    return Container(
+      width: width,
+      decoration: BoxDecoration(
+        color: AppColors.primaryColor,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Stack(
+        children: [
+          Positioned.fill(
+            child: Image.asset(
+              'assets/images/vector.png',
+            ),
+          ),
+          Positioned(
+            top: 10.0,
+            left: 10.0,
+            child: IconButton(
+              onPressed: () {
+                AppWidgetsUtlis.homeCurrencyPicker(context);
+              },
+              icon: const Icon(
+                Icons.currency_exchange_rounded,
+                color: AppColors.whiteColor,
               ),
             ),
-            Positioned(
-              top: 10.0,
-              left: 10.0,
-              child: IconButton(
-                onPressed: () {
-                  AppWidgetsUtlis.homeCurrencyPicker(context);
-                },
-                icon: const Icon(
-                  Icons.currency_exchange_rounded,
-                  color: AppColors.whiteColor,
-                ),
-              ),
-            ),
-            Positioned(
-              bottom: 20.0,
-              left: 20.0,
-              right: 20.0,
-              child: Column(
-                children: <Widget>[
-                  SizedBox(
-                    width: width,
-                    child: Column(
-                      children: <Widget>[
-                        Text(
-                          messae,
-                          style: TextStyle(
-                            color: AppColors.whiteColor,
-                            fontSize: 14.sp,
-                          ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Text(
-                              moneyCommaTwo(totalAmount,
-                                  currency: currency, obSecure: amountObsecure),
-                              style: TextStyle(
-                                color: AppColors.whiteColor,
-                                fontSize: 34.sp,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            IconButton(
-                              onPressed: () {
-                                ref
-                                    .read(
-                                        amountObsecureNotifierProvider.notifier)
-                                    .change(!amountObsecure);
-                              },
-                              icon: Icon(
-                                !amountObsecure
-                                    ? Icons.visibility_outlined
-                                    : Icons.visibility_off_outlined,
-                                color: AppColors.whiteColor,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 20.h),
-                  Column(
+          ),
+          Positioned(
+            bottom: 20.0,
+            left: 20.0,
+            right: 20.0,
+            child: Column(
+              children: <Widget>[
+                SizedBox(
+                  width: width,
+                  child: Column(
                     children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text(
-                            transH.overdue.capitalizeFirst.toString(),
-                            style: TextStyle(
-                              color: AppColors.whiteColor,
-                              fontSize: 14.sp,
-                              fontFamily: AppFonts.actionFont,
-                            ),
-                          ),
-                          Text(
-                            moneyCommaTwo(dueAmount,
-                                currency: currency, obSecure: amountObsecure),
-                            style: TextStyle(
-                              color: AppColors.whiteColor,
-                              fontSize: 14.sp,
-                            ),
-                          ),
-                        ],
+                      Text(
+                        messae,
+                        style: TextStyle(
+                          color: AppColors.whiteColor,
+                          fontSize: 10.sp,
+                        ),
                       ),
-                      SizedBox(height: 10.h),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            transH.pending.capitalizeFirst.toString(),
-                            style: TextStyle(
-                              color: AppColors.whiteColor,
-                              fontSize: 14.sp,
-                              fontFamily: AppFonts.actionFont,
-                            ),
-                          ),
-                          Text(
-                            moneyCommaTwo(pendingAmount,
+                            moneyCommaTwo(totalAmount,
                                 currency: currency, obSecure: amountObsecure),
                             style: TextStyle(
                               color: AppColors.whiteColor,
-                              fontSize: 14.sp,
+                              fontSize: 24.sp,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              ref
+                                  .read(amountObsecureNotifierProvider.notifier)
+                                  .change(!amountObsecure);
+                            },
+                            icon: Icon(
+                              !amountObsecure
+                                  ? Icons.visibility_outlined
+                                  : Icons.visibility_off_outlined,
+                              color: AppColors.whiteColor,
                             ),
                           ),
                         ],
                       ),
                     ],
                   ),
-                ],
+                ),
+                SizedBox(height: 10.h),
+                Column(
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          transH.overdue.capitalizeFirst.toString(),
+                          style: TextStyle(
+                            color: AppColors.whiteColor,
+                            fontSize: 8.sp,
+                            fontFamily: AppFonts.actionFont,
+                          ),
+                        ),
+                        Text(
+                          moneyCommaTwo(dueAmount,
+                              currency: currency, obSecure: amountObsecure),
+                          style: TextStyle(
+                            color: AppColors.whiteColor,
+                            fontSize: 8.sp,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10.h),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          transH.pending.capitalizeFirst.toString(),
+                          style: TextStyle(
+                            color: AppColors.whiteColor,
+                            fontSize: 8.sp,
+                            fontFamily: AppFonts.actionFont,
+                          ),
+                        ),
+                        Text(
+                          moneyCommaTwo(pendingAmount,
+                              currency: currency, obSecure: amountObsecure),
+                          style: TextStyle(
+                            color: AppColors.whiteColor,
+                            fontSize: 8.sp,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Container mobileLayout(BuildContext context, bool amountObsecure,
+      WidgetRef ref, AppLocalizations transH) {
+    return Container(
+      width: width,
+      decoration: BoxDecoration(
+        color: AppColors.primaryColor,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Stack(
+        children: [
+          Positioned.fill(
+            child: Image.asset(
+              'assets/images/vector.png',
+            ),
+          ),
+          Positioned(
+            top: 10.0,
+            left: 10.0,
+            child: IconButton(
+              onPressed: () {
+                AppWidgetsUtlis.homeCurrencyPicker(context);
+              },
+              icon: const Icon(
+                Icons.currency_exchange_rounded,
+                color: AppColors.whiteColor,
               ),
             ),
-          ],
-        ),
+          ),
+          Positioned(
+            bottom: 20.0,
+            left: 20.0,
+            right: 20.0,
+            child: Column(
+              children: <Widget>[
+                SizedBox(
+                  width: width,
+                  child: Column(
+                    children: <Widget>[
+                      Text(
+                        messae,
+                        style: TextStyle(
+                          color: AppColors.whiteColor,
+                          fontSize: 14.sp,
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            moneyCommaTwo(totalAmount,
+                                currency: currency, obSecure: amountObsecure),
+                            style: TextStyle(
+                              color: AppColors.whiteColor,
+                              fontSize: 34.sp,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              ref
+                                  .read(amountObsecureNotifierProvider.notifier)
+                                  .change(!amountObsecure);
+                            },
+                            icon: Icon(
+                              !amountObsecure
+                                  ? Icons.visibility_outlined
+                                  : Icons.visibility_off_outlined,
+                              color: AppColors.whiteColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 20.h),
+                Column(
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          transH.overdue.capitalizeFirst.toString(),
+                          style: TextStyle(
+                            color: AppColors.whiteColor,
+                            fontSize: 14.sp,
+                            fontFamily: AppFonts.actionFont,
+                          ),
+                        ),
+                        Text(
+                          moneyCommaTwo(dueAmount,
+                              currency: currency, obSecure: amountObsecure),
+                          style: TextStyle(
+                            color: AppColors.whiteColor,
+                            fontSize: 14.sp,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10.h),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          transH.pending.capitalizeFirst.toString(),
+                          style: TextStyle(
+                            color: AppColors.whiteColor,
+                            fontSize: 14.sp,
+                            fontFamily: AppFonts.actionFont,
+                          ),
+                        ),
+                        Text(
+                          moneyCommaTwo(pendingAmount,
+                              currency: currency, obSecure: amountObsecure),
+                          style: TextStyle(
+                            color: AppColors.whiteColor,
+                            fontSize: 14.sp,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
