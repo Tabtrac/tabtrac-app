@@ -35,7 +35,7 @@ class OverViewCredit extends ConsumerWidget {
               Text(
                 transH.all.capitalizeAll(),
                 style: TextStyle(
-                  fontSize: 16.sp,
+                  fontSize: isTablet() ? 12.sp : 16.sp,
                   fontWeight: FontWeight.w600,
                   fontFamily: AppFonts.actionFont,
                 ),
@@ -52,7 +52,7 @@ class OverViewCredit extends ConsumerWidget {
                   child: Text(
                     transH.seeAll,
                     style: TextStyle(
-                      fontSize: 14.sp,
+                      fontSize: isTablet() ? 10.sp : 14.sp,
                       color: AppColors.greyColor,
                       fontFamily: AppFonts.actionFont,
                     ),
@@ -77,7 +77,7 @@ class OverViewCredit extends ConsumerWidget {
                 Text(
                   transH.overdue.capitalizeAll(),
                   style: TextStyle(
-                    fontSize: 16.sp,
+                    fontSize: isTablet() ? 12.sp : 16.sp,
                     fontWeight: FontWeight.w600,
                     fontFamily: AppFonts.actionFont,
                   ),
@@ -94,7 +94,7 @@ class OverViewCredit extends ConsumerWidget {
                     child: Text(
                       transH.seeAll,
                       style: TextStyle(
-                        fontSize: 14.sp,
+                        fontSize: isTablet() ? 10.sp : 14.sp,
                         color: AppColors.greyColor,
                         fontFamily: AppFonts.actionFont,
                       ),
@@ -122,7 +122,7 @@ class OverViewCredit extends ConsumerWidget {
                 Text(
                   transH.pending.capitalizeAll(),
                   style: TextStyle(
-                    fontSize: 16.sp,
+                    fontSize: isTablet() ? 12.sp : 16.sp,
                     fontWeight: FontWeight.w600,
                     fontFamily: AppFonts.actionFont,
                   ),
@@ -139,7 +139,7 @@ class OverViewCredit extends ConsumerWidget {
                     child: Text(
                       transH.seeAll,
                       style: TextStyle(
-                        fontSize: 14.sp,
+                        fontSize: isTablet() ? 10.sp : 14.sp,
                         color: AppColors.greyColor,
                         fontFamily: AppFonts.actionFont,
                       ),
@@ -167,7 +167,7 @@ class OverViewCredit extends ConsumerWidget {
                 Text(
                   transH.paid.capitalizeAll(),
                   style: TextStyle(
-                    fontSize: 16.sp,
+                    fontSize: isTablet() ? 12.sp : 16.sp,
                     fontWeight: FontWeight.w600,
                     fontFamily: AppFonts.actionFont,
                   ),
@@ -184,7 +184,7 @@ class OverViewCredit extends ConsumerWidget {
                     child: Text(
                       transH.seeAll,
                       style: TextStyle(
-                        fontSize: 14.sp,
+                        fontSize: isTablet() ? 10.sp : 14.sp,
                         color: AppColors.greyColor,
                         fontFamily: AppFonts.actionFont,
                       ),

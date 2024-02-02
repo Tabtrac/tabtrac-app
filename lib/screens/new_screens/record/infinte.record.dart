@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -33,7 +34,7 @@ class _InfiniteRecordState extends ConsumerState<InfiniteRecord> {
       recordController = RecordController(ref: ref, context: context);
       String type = data['type'];
       String section = data['section'];
-      
+
       // Clear values
       ref.read(currentLoadCount.notifier).change(1);
       ref.read(nextIntProvider.notifier).change('');
@@ -105,11 +106,11 @@ class _InfiniteRecordState extends ConsumerState<InfiniteRecord> {
                     Navigator.pop(context);
                   }
                 },
-                padding: const EdgeInsets.all(0),
+                padding: isTablet() ? const EdgeInsets.only(left: 10) : const EdgeInsets.all(0),
                 icon: Icon(
                   Icons.arrow_back_ios,
                   color: AppColors.primaryColor,
-                  size: 24.sp,
+                  size: isTablet() ? 16.sp : 24.sp,
                 ),
               )
             : null,
@@ -119,15 +120,17 @@ class _InfiniteRecordState extends ConsumerState<InfiniteRecord> {
           style: TextStyle(
             color: AppColors.primaryColor,
             fontWeight: FontWeight.bold,
-            fontSize: 18.sp,
+            fontSize: isTablet() ? 12.sp : 18.sp,
             fontFamily: AppFonts.actionFont,
           ),
         ),
       ),
       body: infiniteRecordList.isEmpty
-          ? const Center(child: CircularProgressIndicator())
+          ? const Center(child: CupertinoActivityIndicator())
           : Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              padding: EdgeInsets.symmetric(
+                horizontal: isTablet() ? 30.w : 10.0,
+              ),
               child: ListView.builder(
                 controller: _scrollController,
                 itemCount: infiniteRecordList.length,
@@ -153,8 +156,7 @@ class _InfiniteRecordState extends ConsumerState<InfiniteRecord> {
                     isDue: isDue,
                     width: width,
                     onTap: () {
-                      navigateNamed(
-                          context, AppRoutes.detailedRecord, type);
+                      navigateNamed(context, AppRoutes.detailedRecord, type);
                       ref
                           .read(currentRecordProvider.notifier)
                           .change(infiniteRecordList[index]);

@@ -67,11 +67,13 @@ class _ClientDetailsState extends ConsumerState<ClientDetails> {
                     Navigator.pop(context);
                   }
                 },
-                padding: const EdgeInsets.all(0),
+                padding: isTablet()
+                    ? const EdgeInsets.only(left: 10)
+                    : const EdgeInsets.all(0),
                 icon: Icon(
                   Icons.arrow_back_ios,
                   color: AppColors.primaryColor,
-                  size: 24.sp,
+                  size: isTablet() ? 16.sp : 24.sp,
                 ),
               )
             : null,
@@ -81,7 +83,7 @@ class _ClientDetailsState extends ConsumerState<ClientDetails> {
           style: TextStyle(
             color: AppColors.primaryColor,
             fontWeight: FontWeight.bold,
-            fontSize: 18.sp,
+            fontSize: isTablet() ? 12.sp : 18.sp,
             fontFamily: AppFonts.actionFont,
           ),
         ),
@@ -96,7 +98,7 @@ class _ClientDetailsState extends ConsumerState<ClientDetails> {
                 HeroIcons.pencilSquare,
                 style: HeroIconStyle.outline,
                 color: AppColors.primaryColor,
-                size: 20.sp,
+                size: isTablet() ? 10.sp : 20.sp,
               ),
             ).animate().fade(delay: 500.ms, curve: Curves.ease)
           else
@@ -111,7 +113,7 @@ class _ClientDetailsState extends ConsumerState<ClientDetails> {
                 HeroIcons.trash,
                 style: HeroIconStyle.outline,
                 color: AppColors.primaryColor,
-                size: 20.sp,
+                size: isTablet() ? 10.sp : 20.sp,
               ),
             ).animate().fade(delay: 500.ms, curve: Curves.ease)
           else
@@ -125,7 +127,8 @@ class _ClientDetailsState extends ConsumerState<ClientDetails> {
               child: deletePlaceholderWidget(transH, width, height),
             )
           : Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              padding:
+                  EdgeInsets.symmetric(horizontal: isTablet() ? 40.w : 20.0),
               width: width,
               height: height,
               child: Column(
@@ -152,7 +155,7 @@ class _ClientDetailsState extends ConsumerState<ClientDetails> {
                                       style: TextStyle(
                                         fontFamily: AppFonts.actionFont,
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 16.sp,
+                                        fontSize: isTablet() ? 10.sp : 16.sp,
                                       ),
                                     ),
                                     SizedBox(height: 5.h),
@@ -165,7 +168,7 @@ class _ClientDetailsState extends ConsumerState<ClientDetails> {
                                         style: TextStyle(
                                           fontFamily: AppFonts.actionFont,
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 16.sp,
+                                          fontSize: isTablet() ? 10.sp : 16.sp,
                                           color: AppColors.primaryColor,
                                         ),
                                         overflow: TextOverflow.ellipsis,
@@ -196,7 +199,8 @@ class _ClientDetailsState extends ConsumerState<ClientDetails> {
                                             style: TextStyle(
                                               fontFamily: AppFonts.actionFont,
                                               fontWeight: FontWeight.bold,
-                                              fontSize: 14.sp,
+                                              fontSize:
+                                                  isTablet() ? 10.sp : 16.sp,
                                             ),
                                           ),
                                           SizedBox(height: 5.h),
@@ -210,7 +214,8 @@ class _ClientDetailsState extends ConsumerState<ClientDetails> {
                                               style: TextStyle(
                                                 fontFamily: AppFonts.actionFont,
                                                 fontWeight: FontWeight.bold,
-                                                fontSize: 14.sp,
+                                                fontSize:
+                                                    isTablet() ? 10.sp : 16.sp,
                                                 color: AppColors.primaryColor,
                                               ),
                                               overflow: TextOverflow.ellipsis,
@@ -240,7 +245,8 @@ class _ClientDetailsState extends ConsumerState<ClientDetails> {
                                             style: TextStyle(
                                               fontFamily: AppFonts.actionFont,
                                               fontWeight: FontWeight.bold,
-                                              fontSize: 14.sp,
+                                              fontSize:
+                                                  isTablet() ? 10.sp : 16.sp,
                                             ),
                                           ),
                                           SizedBox(height: 5.h),
@@ -259,7 +265,9 @@ class _ClientDetailsState extends ConsumerState<ClientDetails> {
                                                     fontFamily:
                                                         AppFonts.actionFont,
                                                     fontWeight: FontWeight.bold,
-                                                    fontSize: 14.sp,
+                                                    fontSize: isTablet()
+                                                        ? 10.sp
+                                                        : 16.sp,
                                                     color:
                                                         AppColors.primaryColor,
                                                   ),
@@ -307,7 +315,8 @@ class _ClientDetailsState extends ConsumerState<ClientDetails> {
                                             style: TextStyle(
                                               fontFamily: AppFonts.actionFont,
                                               fontWeight: FontWeight.bold,
-                                              fontSize: 14.sp,
+                                              fontSize:
+                                                  isTablet() ? 10.sp : 16.sp,
                                             ),
                                           ),
                                           SizedBox(height: 5.h),
@@ -327,7 +336,9 @@ class _ClientDetailsState extends ConsumerState<ClientDetails> {
                                                     fontFamily:
                                                         AppFonts.actionFont,
                                                     fontWeight: FontWeight.bold,
-                                                    fontSize: 14.sp,
+                                                    fontSize: isTablet()
+                                                        ? 10.sp
+                                                        : 16.sp,
                                                     color:
                                                         AppColors.primaryColor,
                                                   ),
@@ -372,14 +383,17 @@ class _ClientDetailsState extends ConsumerState<ClientDetails> {
                                     style: TextStyle(
                                       color: AppColors.primaryColor,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 16.sp,
+                                      fontSize: isTablet() ? 10.sp : 16.sp,
                                       fontFamily: AppFonts.actionFont,
                                     ),
                                   ),
                                 ),
                                 SizedBox(height: 10.h),
-                                CustomTabWidget(
-                                  width: width,
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: CustomTabWidget(
+                                    width: width * .7,
+                                  ),
                                 ),
                                 SizedBox(height: 20.h),
                                 if (currentTab == "debt")

@@ -27,7 +27,6 @@ class DepositeScreen extends ConsumerStatefulWidget {
 class _DepositeScreenState extends ConsumerState<DepositeScreen> {
   late ActionController actionController;
   pickDate() async {
-    String currentLocale = getCurrentLocale(context).toString();
     DateTime? pickedDate = await showDatePicker(
         context: context,
         initialDate: DateTime.now(),
@@ -89,11 +88,13 @@ class _DepositeScreenState extends ConsumerState<DepositeScreen> {
                     Navigator.pop(context);
                   }
                 },
-                padding: const EdgeInsets.all(0),
+                padding: isTablet()
+                    ? const EdgeInsets.only(left: 10)
+                    : const EdgeInsets.all(0),
                 icon: Icon(
                   Icons.arrow_back_ios,
                   color: AppColors.primaryColor,
-                  size: 24.sp,
+                  size: isTablet() ? 16.sp : 24.sp,
                 ),
               )
             : null,
@@ -105,14 +106,15 @@ class _DepositeScreenState extends ConsumerState<DepositeScreen> {
           style: TextStyle(
             color: AppColors.primaryColor,
             fontWeight: FontWeight.bold,
-            fontSize: 18.sp,
+            fontSize: isTablet() ? 12.sp : 18.sp,
             fontFamily: AppFonts.actionFont,
           ),
         ),
       ),
       body: SingleChildScrollView(
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+          padding: EdgeInsets.symmetric(
+              horizontal: isTablet() ? 40.w : 20.0, vertical: 10.0),
           width: width,
           height: height * .89,
           child: Column(
@@ -126,7 +128,7 @@ class _DepositeScreenState extends ConsumerState<DepositeScreen> {
                     transH.nextPaymentDate.capitalizeFirst.toString(),
                     style: TextStyle(
                       fontFamily: AppFonts.actionFont,
-                      fontSize: 14.sp,
+                      fontSize: isTablet() ? 8.sp : 14.sp,
                       color: Theme.of(context)
                           .textTheme
                           .bodyMedium!
@@ -162,7 +164,7 @@ class _DepositeScreenState extends ConsumerState<DepositeScreen> {
                                   ? AppColors.darkThemeColor
                                   : AppColors.lightThemeColor,
                               fontWeight: FontWeight.w700,
-                              fontSize: 14.sp,
+                              fontSize: isTablet() ? 8.sp : 14.sp,
                             ),
                             decoration: InputDecoration(
                               hintText:
@@ -172,7 +174,7 @@ class _DepositeScreenState extends ConsumerState<DepositeScreen> {
                                     ? AppColors.darkThemeColor
                                     : AppColors.lightThemeColor,
                                 fontWeight: FontWeight.w400,
-                                fontSize: 14.sp,
+                                fontSize: isTablet() ? 8.sp : 14.sp,
                               ),
                             ),
                           ),
@@ -186,7 +188,7 @@ class _DepositeScreenState extends ConsumerState<DepositeScreen> {
                             color: isDarkMode
                                 ? AppColors.darkThemeColor
                                 : AppColors.lightThemeColor,
-                            size: 14.sp,
+                            size: isTablet() ? 8.sp : 14.sp,
                           ),
                         ),
                       ],
@@ -197,7 +199,7 @@ class _DepositeScreenState extends ConsumerState<DepositeScreen> {
                     transH.currentAmount.capitalizeFirst.toString(),
                     style: TextStyle(
                       fontFamily: AppFonts.actionFont,
-                      fontSize: 14.sp,
+                      fontSize: isTablet() ? 8.sp : 14.sp,
                       color: Theme.of(context)
                           .textTheme
                           .bodyMedium!
@@ -222,7 +224,7 @@ class _DepositeScreenState extends ConsumerState<DepositeScreen> {
                       moneyComma(currentRecord!.amount, currentRecord.currency),
                       style: TextStyle(
                         color: Theme.of(context).textTheme.bodyMedium!.color,
-                        fontSize: 16.sp,
+                        fontSize: isTablet() ? 10.sp : 16.sp,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -232,7 +234,7 @@ class _DepositeScreenState extends ConsumerState<DepositeScreen> {
                     transH.amountDeposited.capitalizeFirst.toString(),
                     style: TextStyle(
                       fontFamily: AppFonts.actionFont,
-                      fontSize: 14.sp,
+                      fontSize: isTablet() ? 8.sp : 14.sp,
                       color: Theme.of(context)
                           .textTheme
                           .bodyMedium!
@@ -260,12 +262,11 @@ class _DepositeScreenState extends ConsumerState<DepositeScreen> {
                           child: Text(
                             returnCurrency(currencies),
                             style: TextStyle(
-                                color: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .color,
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.bold),
+                              color:
+                                  Theme.of(context).textTheme.bodyMedium!.color,
+                              fontSize: isTablet() ? 10.sp : 16.sp,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                         Expanded(
@@ -279,7 +280,7 @@ class _DepositeScreenState extends ConsumerState<DepositeScreen> {
                                     ? AppColors.darkThemeColor
                                     : AppColors.lightThemeColor,
                                 fontWeight: FontWeight.w700,
-                                fontSize: 16.sp,
+                                fontSize: isTablet() ? 10.sp : 16.sp,
                               ),
                               keyboardType: TextInputType.number,
                               textInputAction: TextInputAction.next,
@@ -291,7 +292,7 @@ class _DepositeScreenState extends ConsumerState<DepositeScreen> {
                                       ? AppColors.darkThemeColor
                                       : AppColors.lightThemeColor,
                                   fontWeight: FontWeight.w400,
-                                  fontSize: 16.sp,
+                                  fontSize: isTablet() ? 10.sp : 16.sp,
                                 ),
                               ),
                             ),
@@ -305,7 +306,7 @@ class _DepositeScreenState extends ConsumerState<DepositeScreen> {
                     transH.description.capitalizeFirst.toString(),
                     style: TextStyle(
                       fontFamily: AppFonts.actionFont,
-                      fontSize: 14.sp,
+                      fontSize: isTablet() ? 8.sp : 14.sp,
                       color: Theme.of(context)
                           .textTheme
                           .bodyMedium!
@@ -332,7 +333,7 @@ class _DepositeScreenState extends ConsumerState<DepositeScreen> {
                             ? AppColors.darkThemeColor
                             : AppColors.lightThemeColor,
                         fontWeight: FontWeight.w700,
-                        fontSize: 14.sp,
+                        fontSize: isTablet() ? 8.sp : 14.sp,
                       ),
                       maxLines: 5,
                       minLines: 5,
@@ -345,7 +346,7 @@ class _DepositeScreenState extends ConsumerState<DepositeScreen> {
                               ? AppColors.darkThemeColor
                               : AppColors.lightThemeColor,
                           fontWeight: FontWeight.w400,
-                          fontSize: 14.sp,
+                          fontSize: isTablet() ? 8.sp : 14.sp,
                         ),
                       ),
                     ),
@@ -356,7 +357,7 @@ class _DepositeScreenState extends ConsumerState<DepositeScreen> {
                 text: transH.deposite.capitalizeFirst.toString(),
                 textColor: AppColors.whiteColor,
                 btnColor: AppColors.primaryColor,
-                fontSize: 16.sp,
+                fontSize: isTablet() ? 10.sp : 16.sp,
                 actionBtn: true,
                 borderRadius: BorderRadius.circular(10.0),
                 onPressed: () async {

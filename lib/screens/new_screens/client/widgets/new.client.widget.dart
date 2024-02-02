@@ -72,7 +72,7 @@ class _NewClientWidgetState extends ConsumerState<NewClientWidget> {
             ),
             SizedBox(height: 20.h),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              padding:  EdgeInsets.symmetric(horizontal: isTablet() ? 30.w : 15.0),
               child: Column(
                 // mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -116,7 +116,7 @@ class _NewClientWidgetState extends ConsumerState<NewClientWidget> {
                     text: transH.addNewClient.capitalizeAll(),
                     textColor: AppColors.whiteColor,
                     btnColor: AppColors.primaryColor,
-                    fontSize: 16.sp,
+                    fontSize: isTablet() ? 10.sp : 16.sp,
                     actionBtn: true,
                     onPressed: () async {
                       ref

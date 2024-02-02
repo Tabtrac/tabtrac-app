@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../constants/colors.dart';
+import '../helpers/functions.dart';
 
 class RecordActivityShimmer extends StatelessWidget {
   const RecordActivityShimmer({
@@ -27,8 +28,8 @@ class RecordActivityShimmer extends StatelessWidget {
       child: Row(
         children: <Widget>[
           Container(
-            width: 50.w,
-            height: 50.w,
+            width: isTablet() ? 25.w : 50.w,
+            height: isTablet() ? 25.w : 50.w,
             decoration: BoxDecoration(
               color: AppColors.greyColor.withOpacity(.5),
               borderRadius: BorderRadius.circular(99),

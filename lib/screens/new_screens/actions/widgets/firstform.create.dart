@@ -24,10 +24,8 @@ class FirstFormCreate extends ConsumerStatefulWidget {
 }
 
 class _FirstFormCreateState extends ConsumerState<FirstFormCreate> {
-
   @override
   Widget build(BuildContext context) {
-    final nameController = ref.watch(nameControllerProvider);
     final phoneNumberController = ref.watch(phoneNumberControllerProvider);
     final emailController = ref.watch(emailControllerProvider);
     final isDarkMode = ref.watch(isDarkModeProvider);
@@ -45,9 +43,10 @@ class _FirstFormCreateState extends ConsumerState<FirstFormCreate> {
         Text(
           transH.clientInfo.capitalizeAll(),
           style: TextStyle(
-              fontFamily: AppFonts.actionFont,
-              color: AppColors.primaryColor,
-              fontSize: 16.sp),
+            fontFamily: AppFonts.actionFont,
+            color: AppColors.primaryColor,
+            fontSize: isTablet() ? 10.sp : 16.sp,
+          ),
         ),
         SizedBox(height: 5.h),
         Container(
@@ -61,7 +60,7 @@ class _FirstFormCreateState extends ConsumerState<FirstFormCreate> {
           transH.client.capitalizeFirst.toString(),
           style: TextStyle(
             fontFamily: AppFonts.actionFont,
-            fontSize: 14.sp,
+            fontSize: isTablet() ? 8.sp : 14.sp,
             color:
                 Theme.of(context).textTheme.bodyMedium!.color!.withOpacity(.7),
           ),
@@ -97,19 +96,20 @@ class _FirstFormCreateState extends ConsumerState<FirstFormCreate> {
                     // controller: controller,
                     style: TextStyle(
                       color: AppColors.blackColor,
-                      fontSize: 14.sp,
+                      fontSize: isTablet() ? 8.sp : 14.sp,
                     ),
                     enabled: false,
                     textInputAction: TextInputAction.next,
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.all(0),
-                      hintText: transH.searchClientList.capitalizeFirst.toString(),
+                      hintText:
+                          transH.searchClientList.capitalizeFirst.toString(),
                       enabledBorder: InputBorder.none,
                       disabledBorder: InputBorder.none,
                       focusedBorder: InputBorder.none,
                       hintStyle: TextStyle(
                         color: AppColors.greyColor,
-                        fontSize: 14.sp,
+                        fontSize: isTablet() ? 8.sp : 14.sp,
                       ),
                     ),
                   ),
@@ -128,7 +128,7 @@ class _FirstFormCreateState extends ConsumerState<FirstFormCreate> {
                   transH.addNew.capitalizeFirst.toString(),
                   style: TextStyle(
                     color: AppColors.primaryColor,
-                    fontSize: 14.sp,
+                    fontSize: isTablet() ? 8.sp : 14.sp,
                   ),
                 ),
               ),
@@ -150,7 +150,7 @@ class _FirstFormCreateState extends ConsumerState<FirstFormCreate> {
                         "${transH.clientName.capitalizeAll()}:",
                         style: TextStyle(
                           fontFamily: AppFonts.actionFont,
-                          fontSize: 14.sp,
+                          fontSize: isTablet() ? 8.sp : 14.sp,
                           color: AppColors.whiteColor,
                         ),
                       ),
@@ -162,7 +162,7 @@ class _FirstFormCreateState extends ConsumerState<FirstFormCreate> {
                           client.name,
                           style: TextStyle(
                             fontFamily: AppFonts.actionFont,
-                            fontSize: 14.sp,
+                            fontSize: isTablet() ? 8.sp : 14.sp,
                             color: AppColors.whiteColor,
                           ),
                           overflow: TextOverflow.ellipsis,
@@ -178,7 +178,7 @@ class _FirstFormCreateState extends ConsumerState<FirstFormCreate> {
           transH.clientEmail.capitalizeFirst.toString(),
           style: TextStyle(
             fontFamily: AppFonts.actionFont,
-            fontSize: 14.sp,
+            fontSize: isTablet() ? 8.sp : 14.sp,
             color:
                 Theme.of(context).textTheme.bodyMedium!.color!.withOpacity(.7),
           ),
@@ -198,7 +198,7 @@ class _FirstFormCreateState extends ConsumerState<FirstFormCreate> {
           transH.clientPhonenumber.capitalizeFirst.toString(),
           style: TextStyle(
             fontFamily: AppFonts.actionFont,
-            fontSize: 14.sp,
+            fontSize: isTablet() ? 8.sp : 14.sp,
             color:
                 Theme.of(context).textTheme.bodyMedium!.color!.withOpacity(.7),
           ),

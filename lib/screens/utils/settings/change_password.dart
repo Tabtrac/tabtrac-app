@@ -48,11 +48,13 @@ class _ChangePasswordState extends ConsumerState<ChangePassword> {
                     Navigator.pop(context);
                   }
                 },
-                padding: const EdgeInsets.all(0),
+                padding: isTablet()
+                    ? const EdgeInsets.only(left: 10)
+                    : const EdgeInsets.all(0),
                 icon: Icon(
                   Icons.arrow_back_ios,
                   color: AppColors.primaryColor,
-                  size: 24.sp,
+                  size: isTablet() ? 16.sp : 24.sp,
                 ),
               )
             : null,
@@ -62,13 +64,13 @@ class _ChangePasswordState extends ConsumerState<ChangePassword> {
           style: TextStyle(
             color: AppColors.primaryColor,
             fontWeight: FontWeight.bold,
-            fontSize: 18.sp,
+            fontSize: isTablet() ? 12.sp : 18.sp,
             fontFamily: AppFonts.actionFont,
           ),
         ),
       ),
       body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: EdgeInsets.symmetric(horizontal: isTablet() ? 30.w : 20),
         width: width,
         height: height * .9,
         child: Column(
@@ -78,7 +80,7 @@ class _ChangePasswordState extends ConsumerState<ChangePassword> {
               transH.changePassMessage.capitalizeFirst.toString(),
               style: TextStyle(
                   fontFamily: AppFonts.primaryFont2,
-                  fontSize: 14.sp,
+                  fontSize: isTablet() ? 8.sp : 14.sp,
                   fontStyle: FontStyle.italic),
             ),
             SizedBox(height: height * .02),
@@ -86,7 +88,7 @@ class _ChangePasswordState extends ConsumerState<ChangePassword> {
               transH.oldPassword.capitalizeAll(),
               style: TextStyle(
                 fontFamily: AppFonts.primaryFont2,
-                fontSize: 14.sp,
+                fontSize: isTablet() ? 8.sp : 14.sp,
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -110,7 +112,7 @@ class _ChangePasswordState extends ConsumerState<ChangePassword> {
                       controller: oldPassword,
                       style: TextStyle(
                         color: bodyColor,
-                        fontSize: 14.sp,
+                        fontSize: isTablet() ? 8.sp : 14.sp,
                         fontWeight: FontWeight.w600,
                       ),
                       textInputAction: TextInputAction.next,
@@ -122,7 +124,7 @@ class _ChangePasswordState extends ConsumerState<ChangePassword> {
                         focusedBorder: InputBorder.none,
                         hintStyle: TextStyle(
                           color: bodyColor,
-                          fontSize: 14.sp,
+                          fontSize: isTablet() ? 8.sp : 14.sp,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -148,7 +150,7 @@ class _ChangePasswordState extends ConsumerState<ChangePassword> {
               transH.newPassword.capitalizeAll(),
               style: TextStyle(
                 fontFamily: AppFonts.primaryFont2,
-                fontSize: 14.sp,
+                fontSize: isTablet() ? 8.sp : 14.sp,
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -172,7 +174,7 @@ class _ChangePasswordState extends ConsumerState<ChangePassword> {
                       controller: newPassword,
                       style: TextStyle(
                         color: bodyColor,
-                        fontSize: 14.sp,
+                        fontSize: isTablet() ? 8.sp : 14.sp,
                         fontWeight: FontWeight.w600,
                       ),
                       textInputAction: TextInputAction.go,
@@ -184,7 +186,7 @@ class _ChangePasswordState extends ConsumerState<ChangePassword> {
                         focusedBorder: InputBorder.none,
                         hintStyle: TextStyle(
                           color: bodyColor,
-                          fontSize: 14.sp,
+                          fontSize: isTablet() ? 8.sp : 14.sp,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -230,9 +232,9 @@ class _ChangePasswordState extends ConsumerState<ChangePassword> {
                     }
                   }
                 },
-                width: width * .5,
+                width: isTablet() ? width * .35 : width * .5,
                 btnColor: AppColors.primaryColor,
-                fontSize: 14.sp,
+                fontSize: isTablet() ? 8.sp : 14.sp,
                 text: transH.changePassword.capitalizeAll(),
                 textColor: AppColors.whiteColor,
                 actionBtn: true,

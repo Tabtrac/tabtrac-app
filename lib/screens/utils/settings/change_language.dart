@@ -42,11 +42,13 @@ class _ChangelanguageState extends ConsumerState<Changelanguage> {
                     Navigator.pop(context);
                   }
                 },
-                padding: const EdgeInsets.all(0),
+                padding: isTablet()
+                    ? const EdgeInsets.only(left: 10)
+                    : const EdgeInsets.all(0),
                 icon: Icon(
                   Icons.arrow_back_ios,
                   color: AppColors.primaryColor,
-                  size: 24.sp,
+                  size: isTablet() ? 16.sp : 24.sp,
                 ),
               )
             : null,
@@ -56,7 +58,7 @@ class _ChangelanguageState extends ConsumerState<Changelanguage> {
           style: TextStyle(
             color: AppColors.primaryColor,
             fontWeight: FontWeight.bold,
-            fontSize: 18.sp,
+            fontSize: isTablet() ? 12.sp : 18.sp,
             fontFamily: AppFonts.actionFont,
           ),
         ),

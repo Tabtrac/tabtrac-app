@@ -54,10 +54,11 @@ class _ClientWidgetState extends ConsumerState<ClientWidget> {
                 child: Text(
                   transH.clientManagement.capitalizeAll(),
                   style: TextStyle(
-                      color: AppColors.primaryColor,
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.w600,
-                      fontFamily: AppFonts.actionFont),
+                    color: AppColors.primaryColor,
+                    fontSize: isTablet() ? 12.sp : 18.sp,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: AppFonts.actionFont,
+                  ),
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
@@ -81,7 +82,7 @@ class _ClientWidgetState extends ConsumerState<ClientWidget> {
                         HeroIcons.magnifyingGlass,
                         style: HeroIconStyle.outline,
                         color: AppColors.primaryColor,
-                        size: 20.sp,
+                        size: isTablet() ? 10.sp : 20.sp,
                       ),
                     ),
                   ),
@@ -102,7 +103,7 @@ class _ClientWidgetState extends ConsumerState<ClientWidget> {
                         HeroIcons.userPlus,
                         style: HeroIconStyle.outline,
                         color: AppColors.primaryColor,
-                        size: 20.sp,
+                        size: isTablet() ? 10.sp : 20.sp,
                       ),
                     ),
                   ),
@@ -111,7 +112,6 @@ class _ClientWidgetState extends ConsumerState<ClientWidget> {
             ],
           ),
           SizedBox(height: 20.h),
-          
           if (allClientLoading)
             Flexible(
               child: Shimmer.fromColors(
@@ -130,7 +130,10 @@ class _ClientWidgetState extends ConsumerState<ClientWidget> {
               child: clientList.isEmpty
                   ? NoActivity(width: widget.width)
                   : SingleChildScrollView(
-                      child: ClientsWidget(width: widget.width),
+                      child: Padding(
+                        padding: isTablet() ? EdgeInsets.symmetric(horizontal: 30.w) : const EdgeInsets.all(0),
+                        child: ClientsWidget(width: widget.width),
+                      ),
                     ),
             ).animate().fade(),
         ],

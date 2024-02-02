@@ -35,21 +35,29 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: const Icon(
-            CupertinoIcons.arrow_left,
-            color: AppColors.primaryColor,
-          ),
-        ),
+        leading: Navigator.canPop(context)
+            ? IconButton(
+                onPressed: () {
+                  if (Navigator.canPop(context)) {
+                    Navigator.pop(context);
+                  }
+                },
+                padding: isTablet()
+                    ? const EdgeInsets.only(left: 10)
+                    : const EdgeInsets.all(0),
+                icon: Icon(
+                  Icons.arrow_back_ios,
+                  color: AppColors.primaryColor,
+                  size: isTablet() ? 16.sp : 24.sp,
+                ),
+              )
+            : null,
         title: FittedBox(
           child: Text(
             transH.termsAndConditions.capitalizeAll(),
             style: TextStyle(
               color: AppColors.primaryColor,
-              fontSize: 18.sp,
+              fontSize: isTablet() ? 12.sp : 18.sp,
               fontWeight: FontWeight.w600,
             ),
           ),

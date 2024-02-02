@@ -8,6 +8,7 @@ import 'package:fundz_app/models/record.model.dart';
 
 import '../constants/colors.dart';
 import '../helpers/app_fonts.dart';
+import '../helpers/functions.dart';
 import '../screens/new_screens/client/controller/client.controller.dart';
 import '../screens/new_screens/client/providers/provider.client.dart';
 import '../screens/new_screens/record/controller/record.controller.dart';
@@ -79,7 +80,8 @@ class AppWidgetsUtlis {
     );
   }
 
-  static void showRecordActionsDialog(BuildContext contextT, String type, WidgetRef ref) {
+  static void showRecordActionsDialog(
+      BuildContext contextT, String type, WidgetRef ref) {
     showDialog(
       context: contextT,
       builder: (context) {
@@ -105,9 +107,11 @@ class AppWidgetsUtlis {
         return AlertDialog(
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           title: Text(
-            "${transH.delete} ${transH.client} ${transH.record}".capitalizeFirst.toString(),
+            "${transH.delete} ${transH.client} ${transH.record}"
+                .capitalizeFirst
+                .toString(),
             style: TextStyle(
-              fontSize: 20.sp,
+              fontSize: isTablet() ? 10.sp : 20.sp,
               fontFamily: AppFonts.actionFont,
               color: AppColors.primaryColor,
             ),
@@ -118,7 +122,7 @@ class AppWidgetsUtlis {
                 Text(
                   transH.clientDeleteConfirmation.capitalizeFirst.toString(),
                   style: TextStyle(
-                    fontSize: 16.sp,
+                    fontSize: isTablet() ? 10.sp : 16.sp,
                     fontFamily: AppFonts.actionFont,
                   ),
                 )
@@ -134,7 +138,7 @@ class AppWidgetsUtlis {
                 transH.cancel.capitalizeFirst.toString(),
                 style: TextStyle(
                   color: Theme.of(context).textTheme.bodyMedium!.color,
-                  fontSize: 14.sp,
+                  fontSize: isTablet() ? 10.sp: 14.sp,
                 ),
               ),
             ),
@@ -148,7 +152,7 @@ class AppWidgetsUtlis {
                 transH.delete.capitalizeFirst.toString(),
                 style: TextStyle(
                   color: AppColors.dangerColor,
-                  fontSize: 14.sp,
+                  fontSize: isTablet() ? 10.sp: 14.sp,
                 ),
               ),
             ),
@@ -174,7 +178,7 @@ class AppWidgetsUtlis {
           title: Text(
             transH.notice.capitalizeFirst.toString(),
             style: TextStyle(
-              fontSize: 20.sp,
+              fontSize: isTablet() ? 10.sp : 20.sp,
               fontFamily: AppFonts.actionFont,
               color: AppColors.primaryColor,
             ),
@@ -185,7 +189,7 @@ class AppWidgetsUtlis {
                 Text(
                   transH.markAsPaidConfirmation.capitalizeFirst.toString(),
                   style: TextStyle(
-                    fontSize: 16.sp,
+                    fontSize: isTablet() ? 10.sp : 16.sp,
                     fontFamily: AppFonts.actionFont,
                   ),
                 )
@@ -201,7 +205,7 @@ class AppWidgetsUtlis {
                 transH.cancel.capitalizeFirst.toString(),
                 style: TextStyle(
                   color: Theme.of(context).textTheme.bodyMedium!.color,
-                  fontSize: 14.sp,
+                  fontSize: isTablet() ? 8.sp : 14.sp,
                 ),
               ),
             ),
@@ -215,7 +219,7 @@ class AppWidgetsUtlis {
                 transH.paid.capitalizeFirst.toString(),
                 style: TextStyle(
                   color: AppColors.primaryColor,
-                  fontSize: 14.sp,
+                  fontSize: isTablet() ? 8.sp : 14.sp,
                 ),
               ),
             ),
@@ -241,7 +245,7 @@ class AppWidgetsUtlis {
           title: Text(
             transH.notice.capitalizeFirst.toString(),
             style: TextStyle(
-              fontSize: 20.sp,
+              fontSize: isTablet() ? 10.sp : 20.sp,
               fontFamily: AppFonts.actionFont,
               color: AppColors.primaryColor,
             ),
@@ -252,7 +256,7 @@ class AppWidgetsUtlis {
                 Text(
                   transH.deleteConfirmation.capitalizeFirst.toString(),
                   style: TextStyle(
-                    fontSize: 16.sp,
+                    fontSize: isTablet() ? 10.sp : 16.sp,
                     fontFamily: AppFonts.actionFont,
                   ),
                 )
@@ -268,7 +272,7 @@ class AppWidgetsUtlis {
                 transH.cancel.capitalizeFirst.toString(),
                 style: TextStyle(
                   color: Theme.of(context).textTheme.bodyMedium!.color,
-                  fontSize: 14.sp,
+                  fontSize: isTablet() ? 8.sp : 14.sp,
                 ),
               ),
             ),
@@ -282,7 +286,7 @@ class AppWidgetsUtlis {
                 transH.delete.capitalizeFirst.toString(),
                 style: TextStyle(
                   color: AppColors.dangerColor,
-                  fontSize: 14.sp,
+                  fontSize: isTablet() ? 8.sp : 14.sp,
                 ),
               ),
             ),

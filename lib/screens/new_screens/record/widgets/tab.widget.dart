@@ -7,6 +7,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:custom_sliding_segmented_control/custom_sliding_segmented_control.dart';
 
 import '../../../../constants/colors.dart';
+import '../../../../helpers/functions.dart';
 import '../../../../providers/providers.dart';
 
 final currentTabProvider =
@@ -45,7 +46,7 @@ class _CustomTabWidgetState extends ConsumerState<CustomTabWidget> {
               color: currentTab == 'debt'
                   ? AppColors.whiteColor
                   : Theme.of(context).textTheme.bodyMedium!.color,
-              fontSize: 14.sp,
+              fontSize: isTablet() ? 10.sp : 14.sp,
             ),
           ),
           2: Text(
@@ -54,7 +55,7 @@ class _CustomTabWidgetState extends ConsumerState<CustomTabWidget> {
               color: currentTab == 'credit'
                   ? AppColors.whiteColor
                   : Theme.of(context).textTheme.bodyMedium!.color,
-              fontSize: 14.sp,
+              fontSize: isTablet() ? 10.sp : 14.sp,
             ),
           ),
         },
@@ -62,12 +63,12 @@ class _CustomTabWidgetState extends ConsumerState<CustomTabWidget> {
         decoration: BoxDecoration(
           color:
               isDarkmode ? AppColors.darkThemeShade : AppColors.lightThemeShade,
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(99),
         ),
         fixedWidth: widget.width * .4,
         thumbDecoration: BoxDecoration(
           color: AppColors.primaryColor,
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(99),
           boxShadow: [
             BoxShadow(
               color: AppColors.primaryColorLight.withOpacity(.3),

@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../constants/colors.dart';
 import '../../helpers/app_fonts.dart';
@@ -44,7 +45,7 @@ class _PrivacyPolicyState extends ConsumerState<PrivacyPolicy> {
       body: Container(
         width: width,
         height: height,
-        padding: const EdgeInsets.symmetric(horizontal: 10),
+        padding:  EdgeInsets.symmetric(horizontal: isTablet() ? 40.w : 20),
         child: SingleChildScrollView(
           physics: const ClampingScrollPhysics(),
           child: Column(

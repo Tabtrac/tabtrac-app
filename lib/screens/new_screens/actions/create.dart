@@ -59,11 +59,13 @@ class _CreateScreenState extends ConsumerState<CreateScreen> {
                       Navigator.pop(context);
                     }
                   },
-                  padding: const EdgeInsets.all(0),
+                  padding: isTablet()
+                      ? const EdgeInsets.only(left: 10)
+                      : const EdgeInsets.all(0),
                   icon: Icon(
                     Icons.arrow_back_ios,
                     color: AppColors.primaryColor,
-                    size: 24.sp,
+                    size: isTablet() ? 16.sp : 24.sp,
                   ),
                 )
               : null,
@@ -75,13 +77,13 @@ class _CreateScreenState extends ConsumerState<CreateScreen> {
             style: TextStyle(
               color: AppColors.primaryColor,
               fontWeight: FontWeight.bold,
-              fontSize: 18.sp,
+              fontSize: isTablet() ? 10.sp : 18.sp,
               fontFamily: AppFonts.actionFont,
             ),
           ),
         ),
         body: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: EdgeInsets.symmetric(horizontal: isTablet() ? 40.w : 20),
           width: width,
           height: height * .9,
           child: Column(
@@ -98,7 +100,7 @@ class _CreateScreenState extends ConsumerState<CreateScreen> {
                         ? AppColors.darkThemeShade
                         : AppColors.lightThemeShade,
                   ),
-                  SizedBox(height: 30.h),
+                  SizedBox(height: isTablet() ? 15.h : 30.h),
                   SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -129,7 +131,7 @@ class _CreateScreenState extends ConsumerState<CreateScreen> {
                           btnColor: isDarkMode
                               ? AppColors.darkThemeShade
                               : AppColors.lightThemeShade,
-                          fontSize: 16.sp,
+            fontSize: isTablet() ? 10.sp : 16.sp,
                           borderRadius: BorderRadius.circular(10.0),
                           onPressed: () {
                             ref.read(currentStageProvider.notifier).removeStage(
@@ -154,7 +156,7 @@ class _CreateScreenState extends ConsumerState<CreateScreen> {
                         : transH.next.capitalizeFirst.toString(),
                     textColor: AppColors.whiteColor,
                     btnColor: AppColors.primaryColor,
-                    fontSize: 16.sp,
+                    fontSize: isTablet() ? 10.sp : 16.sp,
                     actionBtn: true,
                     borderRadius: BorderRadius.circular(10.0),
                     onPressed: () {

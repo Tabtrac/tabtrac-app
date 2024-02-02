@@ -76,7 +76,7 @@ class _CreateRecordPopUpState extends ConsumerState<CreateRecordPopUp> {
                         transH.debt.capitalizeFirst.toString(),
                         style: TextStyle(
                           color: Theme.of(context).textTheme.bodyMedium!.color,
-                          fontSize: 16.sp,
+                          fontSize: isTablet() ? 10.sp : 16.sp,
                         ),
                       ),
                     ),
@@ -98,7 +98,7 @@ class _CreateRecordPopUpState extends ConsumerState<CreateRecordPopUp> {
                         transH.credit.capitalizeFirst.toString(),
                         style: TextStyle(
                           color: Theme.of(context).textTheme.bodyMedium!.color,
-                          fontSize: 16.sp,
+                          fontSize: isTablet() ? 10.sp : 16.sp,
                         ),
                       ),
                     ),

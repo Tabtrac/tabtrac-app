@@ -31,9 +31,10 @@ class _ThirdFormCreateState extends ConsumerState<ThirdFormCreate> {
         Text(
           transH.recordDetail.capitalizeAll(),
           style: TextStyle(
-              fontFamily: AppFonts.actionFont,
-              color: AppColors.primaryColor,
-              fontSize: 16.sp),
+            fontFamily: AppFonts.actionFont,
+            color: AppColors.primaryColor,
+            fontSize: isTablet() ? 10.sp : 16.sp,
+          ),
         ),
         SizedBox(height: 5.h),
         Container(
@@ -60,7 +61,7 @@ class _ThirdFormCreateState extends ConsumerState<ThirdFormCreate> {
                   ? AppColors.darkThemeColor
                   : AppColors.lightThemeColor,
               fontWeight: FontWeight.w700,
-              fontSize: 14.sp,
+            fontSize: isTablet() ? 8.sp : 14.sp,
             ),
             maxLines: 5,
             minLines: 5,
@@ -73,7 +74,7 @@ class _ThirdFormCreateState extends ConsumerState<ThirdFormCreate> {
                     ? AppColors.darkThemeColor
                     : AppColors.lightThemeColor,
                 fontWeight: FontWeight.w400,
-                fontSize: 14.sp,
+            fontSize: isTablet() ? 8.sp : 14.sp,
               ),
             ),
           ),

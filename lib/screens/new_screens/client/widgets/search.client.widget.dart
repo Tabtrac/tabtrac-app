@@ -87,7 +87,7 @@ class _SearchClientWidgetState extends ConsumerState<SearchClientWidget> {
           topRight: Radius.circular(20.0),
         ),
       ),
-      padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+      padding:  EdgeInsets.symmetric(vertical: 10.0, horizontal: isTablet() ? 25.w : 15.0),
       child: Column(
         children: <Widget>[
           SizedBox(height: 5.h),
@@ -126,7 +126,7 @@ class _SearchClientWidgetState extends ConsumerState<SearchClientWidget> {
                     controller: _textEditingController,
                     style: TextStyle(
                       color: Theme.of(context).textTheme.bodyMedium!.color,
-                      fontSize: 14.sp,
+                      fontSize: isTablet() ? 8.sp : 14.sp,
                     ),
                     textInputAction: TextInputAction.search,
                     onChanged: (value) {
@@ -145,7 +145,7 @@ class _SearchClientWidgetState extends ConsumerState<SearchClientWidget> {
                       focusedBorder: InputBorder.none,
                       hintStyle: TextStyle(
                         color: AppColors.greyColor,
-                        fontSize: 14.sp,
+                        fontSize: isTablet() ? 8.sp : 14.sp,
                       ),
                     ),
                   ),

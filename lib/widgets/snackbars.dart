@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../constants/colors.dart';
+import '../helpers/functions.dart';
 
 errorSnackBar({
   BuildContext? context,
@@ -16,7 +17,7 @@ errorSnackBar({
     timeInSecForIosWeb: 1,
     backgroundColor: Colors.red,
     textColor: Colors.white,
-    fontSize: 14.sp,
+                      fontSize: isTablet() ? 8.sp : 14.sp,
   );
 }
 
@@ -32,6 +33,6 @@ successSnackBar({
     timeInSecForIosWeb: 1,
     backgroundColor: AppColors.success,
     textColor: Colors.white,
-    fontSize: 14.sp,
+                      fontSize: isTablet() ? 8.sp : 14.sp,
   );
 }

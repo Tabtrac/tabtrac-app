@@ -54,7 +54,7 @@ class _RecordWidgetState extends ConsumerState<RecordWidget> {
                     transH.recordManagement.capitalizeAll(),
                     style: TextStyle(
                       color: AppColors.primaryColor,
-                      fontSize: 16.sp,
+                      fontSize: isTablet() ? 12.sp : 16.sp,
                       fontWeight: FontWeight.w600,
                       fontFamily: AppFonts.actionFont,
                     ),
@@ -90,18 +90,28 @@ class _RecordWidgetState extends ConsumerState<RecordWidget> {
                             height: ScreenUtil().screenHeight * .65,
                             child: NoActivity(width: widget.width),
                           )
-                        : OverViewDebt(width: widget.width)
-                            .animate()
-                            .fade(delay: 300.ms)
+                        : Padding(
+                            padding: isTablet()
+                                ? EdgeInsets.symmetric(horizontal: 30.w)
+                                : const EdgeInsets.all(0),
+                            child: OverViewDebt(width: widget.width)
+                                .animate()
+                                .fade(delay: 300.ms),
+                          )
                     : allCreditRecords.isEmpty
                         ? SizedBox(
                             width: ScreenUtil().screenWidth,
                             height: ScreenUtil().screenHeight * .65,
                             child: NoActivity(width: widget.width),
                           )
-                        : OverViewCredit(width: widget.width)
-                            .animate()
-                            .fade(delay: 300.ms),
+                        : Padding(
+                            padding: isTablet()
+                                ? EdgeInsets.symmetric(horizontal: 30.w)
+                                : const EdgeInsets.all(0),
+                            child: OverViewCredit(width: widget.width)
+                                .animate()
+                                .fade(delay: 300.ms),
+                          ),
               ),
             ),
         ],

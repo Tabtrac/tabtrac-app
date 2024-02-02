@@ -38,19 +38,19 @@ class EachClient extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Container(
-              width: 40.w,
-              height: 35.h,
+              width: isTablet() ? 25.w : 50.w,
+              height: isTablet() ? 25.w : 50.w,
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: AppColors.greyColor.withOpacity(.5),
-                borderRadius: BorderRadius.circular(30),
+                borderRadius: BorderRadius.circular(99),
               ),
               child: Text(
                 name.substring(0, 1).toUpperCase(),
                 style: TextStyle(
                   color: Theme.of(context).textTheme.bodyMedium!.color,
                   fontFamily: AppFonts.actionFont,
-                  fontSize: 18.sp,
+                  fontSize: isTablet() ? 14.sp : 18.sp,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -67,7 +67,7 @@ class EachClient extends ConsumerWidget {
                       Text(
                         name.capitalizeAll(),
                         style: TextStyle(
-                          fontSize: 16.sp,
+                          fontSize: isTablet() ? 10.sp : 16.sp,
                         ),
                       ),
                       if (phoneNumber != null &&
@@ -77,7 +77,7 @@ class EachClient extends ConsumerWidget {
                         Text(
                           phoneNumber.toString(),
                           style: TextStyle(
-                            fontSize: 12.sp,
+                            fontSize: isTablet() ? 8.sp : 12.sp,
                             color: AppColors.greyColor,
                           ),
                         )
@@ -85,7 +85,7 @@ class EachClient extends ConsumerWidget {
                         Text(
                           phoneNumber.toString(),
                           style: TextStyle(
-                            fontSize: 12.sp,
+                            fontSize: isTablet() ? 8.sp : 12.sp,
                             color: AppColors.greyColor,
                           ),
                         )
@@ -93,7 +93,7 @@ class EachClient extends ConsumerWidget {
                         Text(
                           email.toString(),
                           style: TextStyle(
-                            fontSize: 12.sp,
+                            fontSize: isTablet() ? 8.sp : 12.sp,
                             color: AppColors.greyColor,
                           ),
                         )

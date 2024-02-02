@@ -83,7 +83,7 @@ class _EditClientWidgetState extends ConsumerState<EditClientWidget> {
             ),
             SizedBox(height: 20.h),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              padding:  EdgeInsets.symmetric(horizontal: isTablet() ? 30.w : 15.0),
               child: Column(
                 // mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -127,7 +127,7 @@ class _EditClientWidgetState extends ConsumerState<EditClientWidget> {
                     text: transH.edit.capitalizeAll(),
                     textColor: AppColors.whiteColor,
                     btnColor: AppColors.primaryColor,
-                    fontSize: 16.sp,
+                    fontSize: isTablet() ? 12.sp : 16.sp,
                     actionBtn: true,
                     onPressed: () async {
                       if (!buttonLoading) {

@@ -25,7 +25,6 @@ class SecondFormCreate extends ConsumerStatefulWidget {
 
 class _SecondFormCreateState extends ConsumerState<SecondFormCreate> {
   pickDate() async {
-    String currentLocale = getCurrentLocale(context).toString();
     DateTime? pickedDate = await showDatePicker(
         context: context,
         initialDate: DateTime.now(),
@@ -59,9 +58,10 @@ class _SecondFormCreateState extends ConsumerState<SecondFormCreate> {
         Text(
           transH.recordInfo.capitalizeAll(),
           style: TextStyle(
-              fontFamily: AppFonts.actionFont,
-              color: AppColors.primaryColor,
-              fontSize: 16.sp),
+            fontFamily: AppFonts.actionFont,
+            color: AppColors.primaryColor,
+            fontSize: isTablet() ? 10.sp : 16.sp,
+          ),
         ),
         SizedBox(height: 5.h),
         Container(
@@ -75,7 +75,7 @@ class _SecondFormCreateState extends ConsumerState<SecondFormCreate> {
           transH.paymentDate.capitalizeFirst.toString(),
           style: TextStyle(
             fontFamily: AppFonts.actionFont,
-            fontSize: 14.sp,
+            fontSize: isTablet() ? 8.sp : 14.sp,
             color:
                 Theme.of(context).textTheme.bodyMedium!.color!.withOpacity(.7),
           ),
@@ -107,7 +107,7 @@ class _SecondFormCreateState extends ConsumerState<SecondFormCreate> {
                         ? AppColors.darkThemeColor
                         : AppColors.lightThemeColor,
                     fontWeight: FontWeight.w700,
-                    fontSize: 14.sp,
+                    fontSize: isTablet() ? 8.sp : 14.sp,
                   ),
                   decoration: InputDecoration(
                     hintText: transH.paymentDate.capitalizeFirst.toString(),
@@ -116,7 +116,7 @@ class _SecondFormCreateState extends ConsumerState<SecondFormCreate> {
                           ? AppColors.darkThemeColor
                           : AppColors.lightThemeColor,
                       fontWeight: FontWeight.w400,
-                      fontSize: 14.sp,
+                      fontSize: isTablet() ? 8.sp : 14.sp,
                     ),
                   ),
                 ),
@@ -141,7 +141,7 @@ class _SecondFormCreateState extends ConsumerState<SecondFormCreate> {
           transH.price.capitalizeFirst.toString(),
           style: TextStyle(
             fontFamily: AppFonts.actionFont,
-            fontSize: 14.sp,
+            fontSize: isTablet() ? 8.sp : 14.sp,
             color:
                 Theme.of(context).textTheme.bodyMedium!.color!.withOpacity(.7),
           ),
@@ -174,7 +174,7 @@ class _SecondFormCreateState extends ConsumerState<SecondFormCreate> {
                         style: TextStyle(
                             color:
                                 Theme.of(context).textTheme.bodyMedium!.color,
-                            fontSize: 20.sp,
+                            fontSize: isTablet() ? 10.sp : 20.sp,
                             fontWeight: FontWeight.bold),
                       ),
                       Icon(
@@ -194,7 +194,7 @@ class _SecondFormCreateState extends ConsumerState<SecondFormCreate> {
                         ? AppColors.darkThemeColor
                         : AppColors.lightThemeColor,
                     fontWeight: FontWeight.w700,
-                    fontSize: 16.sp,
+                    fontSize: isTablet() ? 8.sp : 14.sp,
                   ),
                   keyboardType: TextInputType.number,
                   textInputAction: TextInputAction.next,
@@ -205,7 +205,7 @@ class _SecondFormCreateState extends ConsumerState<SecondFormCreate> {
                           ? AppColors.darkThemeColor
                           : AppColors.lightThemeColor,
                       fontWeight: FontWeight.w400,
-                      fontSize: 16.sp,
+                      fontSize: isTablet() ? 8.sp : 14.sp,
                     ),
                   ),
                 ),
