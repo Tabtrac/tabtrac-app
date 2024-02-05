@@ -106,6 +106,7 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
               SizedBox(height: height * .02),
               Container(
                 padding: const EdgeInsets.symmetric(vertical: 10),
+                margin: EdgeInsets.only(bottom: 5.h),
                 width: width,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -132,7 +133,7 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
                         } else {
                           controller.nextPage(
                               duration: const Duration(milliseconds: 500),
-                              curve: Curves.bounceInOut);
+                              curve: Curves.ease);
                         }
                       },
                       shape: const CircleBorder(),
@@ -145,7 +146,6 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
                   ],
                 ),
               ),
-              SizedBox(height: height * .02),
             ],
           ),
         ),
@@ -170,8 +170,8 @@ class MobileLayout extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         SizedBox(
-          width: 350.w,
-          height: 350.h,
+          width: 300.h,
+          height: 300.h,
           child: SvgPicture.asset(
             data.svg,
             semanticsLabel: data.title,

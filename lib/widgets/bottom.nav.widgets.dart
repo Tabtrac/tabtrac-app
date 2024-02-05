@@ -344,7 +344,6 @@ class MobileLayout extends StatelessWidget {
     return FittedBox(
       child: Container(
         width: width,
-        height: height * .1,
         decoration: BoxDecoration(
           color: Theme.of(context).scaffoldBackgroundColor,
           border: Border(

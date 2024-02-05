@@ -22,7 +22,7 @@ class SplashScreen extends ConsumerStatefulWidget {
 }
 
 class _SplashScreenState extends ConsumerState<SplashScreen> {
-  // final UtlController _utlController = Get.put(UtlController());
+  
   late Timer k;
   @override
   void initState() {
@@ -86,8 +86,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
             .read(languageNotifierProvider.notifier)
             .setLocale(const Locale('en'));
     }
-    // navigateToPage(context, const RootHome());
-    // navigateNamed(context, AppRoutes.settingsRoute);
+    
     if (loggedIn == 'null' && onBoardingShown == 'null') {
       navigateReplacementNamed(context, AppRoutes.onBoardingRoute);
     } else if (loggedIn == 'null') {

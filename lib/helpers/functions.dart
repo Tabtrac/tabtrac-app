@@ -495,10 +495,16 @@ void launchEmail(String to, String subject, String body) async {
   await launch(emailLaunchUri.toString());
 }
 
-bool isTablet() {
-  final double shortestSide = ui.window.physicalSize.shortestSide;
 
-  return shortestSide > 600;
+bool isTablet() {
+  final double screenWidth =
+      ui.window.physicalSize.width / ui.window.devicePixelRatio;
+  final double screenHeight =
+      ui.window.physicalSize.height / ui.window.devicePixelRatio;
+
+  final double diagonalSize = 0.5 * (screenWidth + screenHeight);
+
+  return diagonalSize >= 800;
 }
 
 void launchPhoneCall(String phoneNumber) async {
